@@ -19,8 +19,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'app',
+        'apm',
+        'carrera',
+        'matricula',
+        'direccion',
+        'genero',
         'email',
         'password',
+        'rol_id'
     ];
 
     /**
@@ -42,4 +49,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function Roles() {
+        return $this->belongsTo(Roles::class,'rol_id');
+    }
+
+    public function Prestamolibros() {
+        return $this->hasMany(Prestamolibros::class,'usuario_id', 'id');
+    }
+
+    public function Rentamaquinas() {
+        return $this->hasMany(Rentamaquinas::class,'usuario_id', 'id');
+    }
 }
