@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//  Primer Pagina
 Route::get('/', function () {
-    return view('welcome');
+    return view('login.login');
+})->name('login');
+
+
+//  Login
+Route::get('/login', [AuthController::class, 'show']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [LogoutController::class, 'logout']);
+
+//  Acceso a rutas mientras el usuario este autenticado
+Route::middleware('auth')->group(function () {
+    Route::get('/home', function () {
+        return view('welcome');
+    });
 });
