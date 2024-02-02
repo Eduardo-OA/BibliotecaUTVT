@@ -2,13 +2,13 @@ body{
     background-color: #F4F4F4F4;
 }
 
-.contenedor{
+.container{
 padding-top: 100px;
 }
 
 .log{
     margin: 0 auto;
-    width: 25%;
+    width: 500px;
     border-radius: 5px 5px 10px 10px;
     padding: 70px;
     padding-top: 40px;

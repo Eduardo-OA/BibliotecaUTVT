@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <div class="contenedor">
+    <div class="container">
         <div class="log">
             <div class="cuervo"></div>
         <form action="/login" method="post">
