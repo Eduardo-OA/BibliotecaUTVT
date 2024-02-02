@@ -28,7 +28,7 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 
 //  Acceso a rutas mientras el usuario este autenticado
 Route::middleware('auth')->group(function () {
-    Route::get('/home', function () {
+    Route::get('/inicio', function () {
         return view('welcome');
     });
 });
