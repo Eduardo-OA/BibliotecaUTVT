@@ -36,7 +36,8 @@
     <script>
         document.querySelector('form').addEventListener('submit', function () {
         var button = document.querySelector('.raise');
-        button.classList.add('loader');
+        button.style.paddingLeft = "5.8rem";
+        button.innerHTML = '<div class="loader"></div>';
         }); 
     </script>
 </body>
