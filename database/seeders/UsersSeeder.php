@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class UsuariosSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,8 +19,8 @@ class UsuariosSeeder extends Seeder
         //intyeccion
         DB::table('users')->insert([
             'name' => 'Administrador',
-            'app' => '_',
-            'apm' => 'ADMIN',
+            'app' => '',
+            'apm' => '',
             'carrera' => 'Carrera1',
             'matricula' => 123456,
             'direccion' => 'barcelona city',

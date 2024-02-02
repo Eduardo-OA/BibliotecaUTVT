@@ -15,20 +15,20 @@ class RolesSeeder extends Seeder
     {
         // Insertar datos de prueba en la tabla 'roles'
         DB::table('roles')->insert([
-            'name' => 'Admin',
+            'name' => 'Administrador',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Usuario',
+            'name' => 'Usuario1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Puedes agregar más registros según sea necesario
         DB::table('roles')->insert([
-            'name' => 'Otro Rol',
+            'name' => 'Usuario1',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
