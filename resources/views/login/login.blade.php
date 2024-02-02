@@ -30,5 +30,14 @@
         </form>
         </div>
     </div>
+
+
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function () {
+        var button = document.querySelector('.raise');
+        button.classList.add('loader');
+        }); 
+    </script>
 </body>
 </html>

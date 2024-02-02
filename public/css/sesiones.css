@@ -25,6 +25,23 @@ padding-top: 100px;
   margin-bottom: 50px;
 }
 
+
+
+
+/*ESTO LE PERTENECE AL BOTON*/
+.raise {  
+  border-color: #6ca261;
+  background-color: #6ca261;
+  transition: 0.25s;
+  
+  &:hover,
+  &:focus { 
+    border-color: var(--hover);
+    border-color: #276e37;
+    background-color: #276e37;
+  }
+}
+
 .raise:hover,
 .raise:focus {
   box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
@@ -35,19 +52,6 @@ padding-top: 100px;
   box-shadow: inset 0 -3.25em 0 0 var(--hover);
 }
 
-.raise {  
-    border-color: #6ca261;
-    background-color: #6ca261;
-    transition: 0.25s;
-    
-    &:hover,
-    &:focus { 
-      border-color: var(--hover);
-      border-color: #276e37;
-      background-color: #276e37;
-    }
-  }
-
   button {
     background: none;
     border: 2px solid;
@@ -57,4 +61,31 @@ padding-top: 100px;
     padding: 1em 2em;
     color: white;
     border-radius: 2px;
+    width: 250px;
   }
+
+/*ANIMACION DE CARGA*/
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 220px; /* Ancho del botón */
+  height: 50px; /* Altura del botón */
+  aspect-ratio: 250/60; /* Relación de aspecto del botón */
+  --_g: no-repeat radial-gradient(circle closest-side, #6ca261 90%, #0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1s infinite linear;
+  border: 2px solid #6ca261;
+  border-radius: 2px;
+  overflow: hidden; /* Evita que la animación se salga del margen del botón */
+}
+
+@keyframes l3 {
+  20% { background-position: 0%   0%, 50%  50%, 100%  50%; }
+  40% { background-position: 0% 100%, 50%   0%, 100%  50%; }
+  60% { background-position: 0%  50%, 50% 100%, 100%   0%; }
+  80% { background-position: 0%  50%, 50%  50%, 100% 100%; }
+}
+
