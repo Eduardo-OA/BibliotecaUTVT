@@ -3,7 +3,7 @@ body{
 }
 
 .contenedor{
-padding-top: 40px;
+padding-top: 100px;
 }
 
 .log{
@@ -11,8 +11,18 @@ padding-top: 40px;
     width: 25%;
     border-radius: 5px 5px 10px 10px;
     padding: 70px;
+    padding-top: 40px;
     background-color: white;
-    box-shadow: -2px -2px 10px 5px #9E9E9C;
+    box-shadow: 0px 0px 10px 5px #9E9E9C;
+}
+
+.cuervo{
+  background-image:url(../img/logos/ravenbook.png);
+  width: 120px;
+  height: 150px;
+  background-size: cover;
+  margin: 0 auto;
+  margin-bottom: 50px;
 }
 
 .raise:hover,

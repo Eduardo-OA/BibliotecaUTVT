@@ -12,23 +12,24 @@
 <body>
     <div class="contenedor">
         <div class="log">
+            <div class="cuervo"></div>
         <form action="/login" method="post">
             @csrf
 
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico:</label>
-                <input type="email" name="email" id="email" class="form-control">
+                <input type="email" name="email" id="email" class="form-control" placeholder="example@example.com" required>
             </div>
             
               <br>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Contraseña:</label>
-                <input type="password" name="password" id="password" class="form-control">
+                <input type="password" name="password" id="password" class="form-control" placeholder="********" required>
             </div>
               <br>
 
-            <button class="raise" type="submit" value="Iniciar Sesión">Iniciar Sesion</button>
+            <center><button class="raise" type="submit" value="Iniciar Sesión">Iniciar Sesion</button></center>
         </form>
         </div>
     </div>
