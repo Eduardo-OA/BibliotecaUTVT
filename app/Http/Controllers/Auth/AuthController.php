@@ -19,7 +19,7 @@ class AuthController extends Controller
     public function login(LoginRequest $request) {
         $credentials = $request->getCredentials();
         if(!Auth::validate($credentials)) {
-            return redirect()->to('/login')->withErrors('auth.failed');
+            return redirect()->to('/login')->withErrors('Error en alguno de los campos, intente nuevamente.');
         }
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
@@ -29,7 +29,7 @@ class AuthController extends Controller
             Auth::login($user);
             return $this->authenticated($request, $user);   
         }else{
-            return redirect()->to('/login')->withErrors('auth.failed');
+            return redirect()->to('/login')->withErrors('Este usuario no tiene los permisos para ingresar al sistema. Pruebe con otro correo.');
         }
     }
 

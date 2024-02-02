@@ -15,20 +15,17 @@
             <div class="cuervo"></div>
         <form action="/login" method="post">
             @csrf
-
+            @include('layout.components.alert')
             <div class="mb-3">
                 <label for="email" class="form-label">Correo electrónico:</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="example@example.com" required>
+                <input type="email" name="email" id="email" class="form-control" placeholder="correo@correo.com" required>
             </div>
-            
               <br>
-
             <div class="mb-3">
                 <label for="email" class="form-label">Contraseña:</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="********" required>
             </div>
               <br>
-
             <center><button class="raise" type="submit" value="Iniciar Sesión">Iniciar Sesion</button></center>
         </form>
         </div>
