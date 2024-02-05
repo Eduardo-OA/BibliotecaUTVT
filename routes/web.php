@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +34,9 @@ Route::middleware('auth')->group(function () {
         return view('welcome');
     });
 });
+
+//usuarios 
+Route::resource('usuarios', UsuariosController::class); 
+Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
+Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
