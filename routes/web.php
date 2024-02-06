@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UsuariosController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,12 +20,16 @@ use Illuminate\Support\Facades\Route;
 
 //  Primer Pagina
 Route::get('/', function () {
-    return view('login.login');
-})->name('login');
+    if(Auth::user()){
+        return view('welcome');
+    }else{
+        return view('login.login');
+    }
+})->name('/');
 
 
 //  Login
-Route::get('/login', [AuthController::class, 'show']);
+Route::get('/login', [AuthController::class, 'show'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [LogoutController::class, 'logout']);
 
@@ -33,10 +38,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/inicio', function () {
         return view('welcome');
     });
-});
 
-//usuarios 
-Route::resource('usuarios', UsuariosController::class); 
-Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
-Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+    //  Resourse usuarios 
+    Route::resource('usuarios', UsuariosController::class);
+    Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
+    Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
+    Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+
+    //  Vista Libros -> cambiar a resourse
+    Route::get('/libros', function () {
+        return view('libros.index');
+    });
+});

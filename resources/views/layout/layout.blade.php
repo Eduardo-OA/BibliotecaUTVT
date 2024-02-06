@@ -56,7 +56,7 @@ Coded by www.creative-tim.com
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li id="inicio">
-                        <a href="javascript:;">
+                        <a href="/">
                             <i class="bi bi-building-fill"></i>
                             <p>Inicio</p>
                         </a>
@@ -74,7 +74,7 @@ Coded by www.creative-tim.com
                         </a>
                     </li>
                     <li id="libros">
-                        <a href="javascript:;">
+                        <a href="/libros">
                             <i class="bi bi-journal-bookmark-fill"></i>
                             <p>Libros</p>
                         </a>
@@ -131,7 +131,7 @@ Coded by www.creative-tim.com
                     <div class="row">
                         <nav class="footer-nav">
                             <ul>
-                                <li><a href="#" target="_blank">BIBLIOTECA UTVT</a></li>
+                                <li><a href="/" target="_blank">BIBLIOTECA UTVT</a></li>
                             </ul>
                         </nav>
                         <div class="credits ml-auto">

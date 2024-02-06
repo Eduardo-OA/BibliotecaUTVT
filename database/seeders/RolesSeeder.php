@@ -21,14 +21,14 @@ class RolesSeeder extends Seeder
         ]);
 
         DB::table('roles')->insert([
-            'name' => 'Usuario1',
+            'name' => 'Auxiliar Biblioteca',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
 
         // Puedes agregar más registros según sea necesario
         DB::table('roles')->insert([
-            'name' => 'Usuario1',
+            'name' => 'Estudiante',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
