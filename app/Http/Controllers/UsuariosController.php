@@ -24,8 +24,8 @@ class UsuariosController extends Controller
 
     public function store(Request $request)
     {
-        
 
+        //  Validaciones
        
         $usuario = new User([
             'nombre' => $request->input('nombre'),
@@ -36,21 +36,21 @@ class UsuariosController extends Controller
             'carrera' => $request->input('carrera'),
             'matricula' => $request->input('matricula'),
             'direccion' => $request->input('direccion'),
-            'celular' => $request->input('celular'),
+            'celular' => $request->input('celular'),    //  No registra celular
             'email' => $request->input('email'),
             'pasword' => $request->input('pasword'),
-            
-            
         ]);
-        $usuario->save();
 
-       
+        $usuario->save();
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente');
     }
 
     public function update(Request $request, $id)
     {
-    
+
+        //  Validaciones
+
+        // dd($request->all());
         $user = User::find($id);
 
         if ($user) {
@@ -59,39 +59,35 @@ class UsuariosController extends Controller
             $user->app = $request->input('app');
             $user->apm = $request->input('apm');
             $user->genero = $request->input('genero');
-            $user->rol_id = $request->input('rol_id');
 
             // Actualiza campos específicos según el rol
-            if ($request->input('rol_id') == 1) { // Admin
+            if ($user->rol_id == 1 || $user->rol_id == 2) { // Admin y auxiliar
+                // dd("Registro de tipo Auxiliar o admin", $user->rol_id);
                 $user->email = $request->input('email');
                 $user->password = bcrypt($request->input('password'));
-            } elseif ($request->input('rol_id') == 2) { // Estudiante
-                $user->carrera = $request->input('carrera');
+            } elseif ($user->rol_id == 3) { // Estudiante
+                // dd("Registro de tipo estudiante", $user->rol_id);
+                // $user->carrera = $request->input('carrera');
                 $user->matricula = $request->input('matricula');
                 $user->direccion = $request->input('direccion');
                 $user->celular = $request->input('celular');
             }
 
             $user->save();
-
-           
             return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
+
         } else {
-            
             return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
         }
     }
     public function destroy($id)
     {
-    
         $user = User::find($id);
 
         if ($user) {
             $user->delete();
-
             return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');
         } else {
-            
             return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
         }
     }

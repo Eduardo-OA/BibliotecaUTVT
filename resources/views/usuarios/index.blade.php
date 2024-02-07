@@ -23,11 +23,11 @@
 						<th>Apellido Paterno</th>
 						<th>Apellido Materno</th>
 						<th>Cargo</th>
+						<th>Genero</th>
 						<th>Carrera</th>
 						<th>Matricula</th>
 						<th>Direccion</th>
 						<th>Celular</th>
-						<th>Genero</th>
 						<th>E-mail</th>
 						<th class="text-center" colspan="2">Acciones</th>
 					</thead>
@@ -38,19 +38,29 @@
 							<td>{{$user->nombre}}</td>
 							<td>{{$user->app}}</td>
 							<td>{{$user->apm}}</td>
-							<td>{{$user->rol_id}}</td>
-							<td>{{$user->carrera}}</td>
-							<td>{{$user->matricula}}</td>
-							<td>{{$user->direccion}}</td>
-							<td>{{$user->celular}}</td>
 							<td>
-								@if($user -> genero == 'M')
-								Masculino
-								@elseif($user->genero == 'F')
-								Femenino
+								@if($user->rol_id == 1)
+								Administrador
+								@elseif($user->rol_id == 2)
+								Auxiliar Biblioteca
+								@elseif($user->rol_id == 3)
+								Estudiante
+								@else
+								{{$user->rol_id}}
 								@endif
 							</td>
-							<td>{{$user->email}}</td>
+							<td>
+								@if($user -> genero == 'M')
+								Hombre
+								@elseif($user->genero == 'F')
+								Mujer
+								@endif
+							</td>
+							<td>{{$user->carrera !== null ? $user->carrera : 'Sin dato'}}</td>
+							<td>{{$user->matricula !== null ? $user->matricula : 'Sin dato'}}</td>
+							<td>{{$user->direccion !== null ? $user->direccion : 'Sin dato'}}</td>
+							<td>{{$user->celular !== null ? $user->celular : 'Sin dato'}}</td>
+							<td>{{$user->email !== null ? $user->email : 'Sin dato'}}</td>
 							<td>
 								<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editmodal{{ $user->id }}">
 									Editar
@@ -88,14 +98,18 @@
 
 		document.getElementById("formularioAdmin").style.display = "none";
 		document.getElementById("formularioEstudiante").style.display = "none";
-		document.getElementById("formularioDocente").style.display = "none";
+		// document.getElementById("formularioDocente").style.display = "none";
 
-		if (seleccion === "1") {
+		if (seleccion === "1" || seleccion === "2") {
 			document.getElementById("formularioAdmin").style.display = "block";
-		} else if (seleccion === "2") {
-			document.getElementById("formularioEstudiante").style.display = "block";
+			let textoRegistro = document.querySelector("#texto_registro");
+			if(seleccion == "2"){
+				textoRegistro.textContent = "Ingrese datos adicionales para registrar un nuevo auxiliar de biblioteca.";
+			}else if (seleccion == "1") {
+				textoRegistro.textContent = "Ingrese datos adicionales para registrar un nuevo administrador.";
+			}
 		} else if (seleccion === "3") {
-			document.getElementById("formularioDocente").style.display = "block";
+			document.getElementById("formularioEstudiante").style.display = "block";
 		}
 
 	}
