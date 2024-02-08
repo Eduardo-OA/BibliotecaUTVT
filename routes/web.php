@@ -49,4 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/libros', function () {
         return view('libros.index');
     });
+
+    //  Vista Maquinas -> cambiar ruta de controlador
+    Route::get('/maquinas', function () {
+        return view('maquinas.index');
+    });
 });

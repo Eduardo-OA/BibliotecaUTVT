@@ -68,7 +68,7 @@ Coded by www.creative-tim.com
                         </a>
                     </li>
                     <li id="maquinas">
-                        <a href="javascript:;">
+                        <a href="/maquinas">
                             <i class="bi bi-pc-display"></i>
                             <p>Maquinas</p>
                         </a>
