@@ -13,19 +13,28 @@
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Nombre:</label>
-							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre...">
+							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{old('nombre')}}">
+							@error('nombre')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Paterno:</label>
-							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p...">
+							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p..." value="{{old('app')}}">
+							@error('app')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Materno:</label>
-							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m...">
+							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m..." value="{{old('apm')}}">
+							@error('apm')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
@@ -57,10 +66,16 @@
 								<label for="email">Correo electrónico:</label>
 								<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
 								<small id="emailHelp" class="form-text text-muted">Ingrese el correo del administrador o auxiliar.</small>
+								@error('email')
+                                  <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="password">Contraseña</label>
 								<input type="password" class="form-control" id="password" name="password">
+								@error('password')
+                                  <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 						</div>
 
@@ -90,18 +105,30 @@
 									<option value="LIC. Innovación de Negocios y Mercadotecnica.">LIC. Innovación de Negocios y Mercadotecnica.</option>
 									<option value="LIC. Enfermería">LIC. Enfermería</option>
 								</select>
+								@error('carrera')
+                                   <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="matricula">Matricula del estudiante:</label>
-								<input type="number" class="form-control" id="matricula" name="matricula" placeholder="222XXXXXX">
+								<input type="number" class="form-control" id="matricula" name="matricula" placeholder="222XXXXXX" value="{{old('matricula')}}">
+								@error('matricula')
+                                 <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="direccion">Dirección del estudiante:</label>
-								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc...">
+								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{old('direccion')}}">
+								@error('direccion')
+                                 <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="celular">Número de teléfono del estudiante:</label>
-								<input type="text" class="form-control" id="celular" name="celular" placeholder="72XXXXXXXX">
+								<input type="text" class="form-control" id="celular" name="celular" placeholder="72XXXXXXXX" value="{{old('celuar')}}">
+								@error('celular')
+                                 <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 						</div>
 
@@ -137,18 +164,27 @@
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Nombre:</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{ $user->nombre }}">
+							@error('nombre')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Paterno:</label>
 							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p..." value="{{ $user->app }}">
+							@error('app')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Materno:</label>
 							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m..." value="{{ $user->apm }}">
+							@error('apm')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
@@ -184,10 +220,16 @@
 								<label for="email">Correo electrónico:</label>
 								<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{ $user->email }}">
 								<small id="emailHelp" class="form-text text-muted">Ingrese el nuevo correo del administrador o auxiliar.</small>
+								@error('email')
+                                   <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="password">Contraseña</label>
 								<input type="password" class="form-control" id="password" name="password">
+								@error('password')
+                                  <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 						</div>
 					</div>
@@ -221,18 +263,27 @@
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Nombre:</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{ $user->nombre }}">
+							@error('nombre')
+                              <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Paterno:</label>
 							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p..." value="{{ $user->app }}">
+							@error('app')
+                             <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Materno:</label>
 							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m..." value="{{ $user->apm }}">
+							@error('apm')
+                              <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
@@ -245,6 +296,9 @@
 							<input type="radio" id="generoH" name="genero" class="custom-control-input" value="M" {{ $user->genero == 'M' ? 'checked' : '' }}>
 							<label class="custom-control-label" for="generoH">Hombre</label>
 						</div>
+						@error('genero')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
 					</div>
 					<div class="col-12 pt-2">
 						<fieldset disabled>
@@ -286,19 +340,31 @@
 										<option value="LIC. Innovación de Negocios y Mercadotecnica" {{ $user->carrera == 'LIC. Innovación de Negocios y Mercadotecnica' ? 'selected' : '' }}>LIC. Innovación de Negocios y Mercadotecnica.</option>
 										<option value="LIC. Enfermería" {{ $user->carrera == 'LIC. Enfermería' ? 'selected' : '' }}>LIC. Enfermería.</option>
 									</select>
+									@error('carrera')
+                                      <small class="form-text text-danger">{{$message}}</small>
+                                    @enderror
 								</div>
 							</fieldset>
 							<div class="form-group">
 								<label for="matricula">Matricula del estudiante:</label>
 								<input type="number" class="form-control" id="matricula" name="matricula" placeholder="222XXXXXX" value="{{ $user->matricula }}">
+								@error('matricula')
+                                 <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="direccion">Dirección del estudiante:</label>
 								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{ $user->direccion }}">
+								@error('direccion')
+                                  <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 							<div class="form-group">
 								<label for="celular">Número de teléfono del estudiante:</label>
 								<input type="text" class="form-control" id="celular" name="celular" placeholder="72XXXXXXXX" value="{{ $user->celular }}">
+								@error('celular')
+                                 <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
 							</div>
 						</div>
 					</div>
@@ -332,18 +398,27 @@
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Nombre:</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre...">
+							@error('nombre')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Paterno:</label>
 							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p...">
+							@error('app')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
 							<label for="exampleFormControlInput1">Apellido Materno:</label>
 							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m...">
+							@error('apm')
+                            <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
@@ -356,6 +431,9 @@
 							<input type="radio" id="generoH" name="genero" class="custom-control-input" value="M" {{ $user->genero === 'M' ? 'checked' : '' }}>
 							<label class="custom-control-label" for="generoH">Hombre</label>
 						</div>
+						@error('genero')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
 					</div>
 					<div class="col-12 pt-2">
 						<fieldset disabled>

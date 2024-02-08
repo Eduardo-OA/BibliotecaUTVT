@@ -26,6 +26,31 @@ class UsuariosController extends Controller
     {
 
         //  Validaciones
+        $messages = [
+            'nombre.required' => 'Es necesario colocar un nombre.',
+            'app.required' => 'Es necesario colocar el primer apellido.',
+            'apm.required' => 'Es necesario completar el campo.',
+            'genero.required' => 'Es necesario seleccionar una opción.',
+            'carrera.required' => 'Es necesario seleccionar una opción.',
+            'matricula.required' => 'Es necesario colocar la matricula.',
+            'direccion.required' => 'Es necesario colocar una dirección.',
+            'celular.required' => 'Es necesario proporcionar este contacto.',
+            'email.required' => 'Es necesario colocar un correo.',
+            'password.required' => 'Genere una contraseña',
+        ];
+
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:255'],
+            'app' => ['required', 'string', 'max:255'],
+            'apm' => ['required','string', 'max:255'],
+            'genero' => ['required', 'string'],
+            'carrera' => ['required', 'string'],
+            'matricula' => ['required', 'string'],
+            'direccion' => ['required', 'string'],
+            'celular' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:' . User::class],
+            'password' => ['required']
+        ], $messages);
        
         $usuario = new User([
             'nombre' => $request->input('nombre'),
@@ -49,6 +74,31 @@ class UsuariosController extends Controller
     {
 
         //  Validaciones
+        $messages = [
+            'nombre.required' => 'Es necesario colocar un nombre.',
+            'app.required' => 'Es necesario colocar el primer apellido.',
+            'apm.required' => 'Es necesario completar el campo.',
+            'genero.required' => 'Es necesario seleccionar una opción.',
+            'carrera.required' => 'Es necesario seleccionar una opción.',
+            'matricula.required' => 'Es necesario colocar la matricula.',
+            'direccion.required' => 'Es necesario colocar una dirección.',
+            'celular.required' => 'Es necesario proporcionar este contacto.',
+            'email.required' => 'Es necesario colocar un correo.',
+            'password.required' => 'Genere una contraseña',
+        ];
+
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:255'],
+            'app' => ['required', 'string', 'max:255'],
+            'apm' => ['required','string', 'max:255'],
+            'genero' => ['required', 'string'],
+            'carrera' => ['required', 'string'],
+            'matricula' => ['required', 'string'],
+            'direccion' => ['required', 'string'],
+            'celular' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:' . User::class],
+            'password' => ['required']
+        ], $messages);
 
         // dd($request->all());
         $user = User::find($id);
