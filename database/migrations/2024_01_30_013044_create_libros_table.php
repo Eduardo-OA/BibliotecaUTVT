@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('idioma');
             $table->integer('cantidad');
             $table->boolean('disponibilidad');
-            $table->string('ubicacion_fisica');
-            $table->date('fecha_ad');
+            $table->string('ubicacion');
+            $table->date('fechaadqui');
             $table->timestamps();
         });
     }
