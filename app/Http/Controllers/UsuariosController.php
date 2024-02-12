@@ -39,19 +39,28 @@ class UsuariosController extends Controller
             'password.required' => 'Genere una contraseña',
         ];
 
-        $request->validate([
-            'nombre' => ['required', 'string', 'max:255'],
-            'app' => ['required', 'string', 'max:255'],
-            'apm' => ['required','string', 'max:255'],
-            'genero' => ['required', 'string'],
-            'carrera' => ['required', 'string'],
-            'matricula' => ['required', 'string'],
-            'direccion' => ['required', 'string'],
-            'celular' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:' . User::class],
-            'password' => ['required']
-        ], $messages);
-       
+        if ($request->input('rol_id') == 1 || $request->input('rol_id') == 2) {
+            $request->validate([
+                'nombre' => ['required', 'string', 'max:255'],
+                'app' => ['required', 'string', 'max:255'],
+                'apm' => ['required', 'string', 'max:255'],
+                'genero' => ['required', 'string'],
+                'email' => ['required', 'email', 'unique:' . User::class],
+                'password' => ['required']
+            ], $messages);
+        } else if ($request->input('rol_id') == 3) {
+            $request->validate([
+                'nombre' => ['required', 'string', 'max:255'],
+                'app' => ['required', 'string', 'max:255'],
+                'apm' => ['required', 'string', 'max:255'],
+                'genero' => ['required', 'string'],
+                'carrera' => ['required', 'string'],
+                'matricula' => ['required', 'string'],
+                'direccion' => ['required', 'string'],
+                'celular' => ['required', 'string']
+            ], $messages);
+        }
+
         $usuario = new User([
             'nombre' => $request->input('nombre'),
             'app' => $request->input('app'),
@@ -61,7 +70,7 @@ class UsuariosController extends Controller
             'carrera' => $request->input('carrera'),
             'matricula' => $request->input('matricula'),
             'direccion' => $request->input('direccion'),
-            'celular' => $request->input('celular'),    //  No registra celular
+            'celular' => $request->input('celular'),
             'email' => $request->input('email'),
             'pasword' => $request->input('pasword'),
         ]);
@@ -73,7 +82,7 @@ class UsuariosController extends Controller
     public function update(Request $request, $id)
     {
 
-        //  Validaciones
+        //  Mensajes de validación
         $messages = [
             'nombre.required' => 'Es necesario colocar un nombre.',
             'app.required' => 'Es necesario colocar el primer apellido.',
@@ -87,23 +96,31 @@ class UsuariosController extends Controller
             'password.required' => 'Genere una contraseña',
         ];
 
-        $request->validate([
-            'nombre' => ['required', 'string', 'max:255'],
-            'app' => ['required', 'string', 'max:255'],
-            'apm' => ['required','string', 'max:255'],
-            'genero' => ['required', 'string'],
-            'carrera' => ['required', 'string'],
-            'matricula' => ['required', 'string'],
-            'direccion' => ['required', 'string'],
-            'celular' => ['required', 'string'],
-            'email' => ['required', 'email', 'unique:' . User::class],
-            'password' => ['required']
-        ], $messages);
-
-        // dd($request->all());
         $user = User::find($id);
 
         if ($user) {
+            //  Validaciones
+            if ($user->rol_id == 1 || $user->rol_id == 2) {  // Admin y auxiliar
+                $request->validate([
+                    'nombre' => ['required', 'string', 'max:255'],
+                    'app' => ['required', 'string', 'max:255'],
+                    'apm' => ['required', 'string', 'max:255'],
+                    'genero' => ['required', 'string'],
+                    'email' => ['email', 'unique:' . User::class],
+                ], $messages);
+            } elseif ($user->rol_id == 3) { // Estudiante
+                $request->validate([
+                    'nombre' => ['required', 'string', 'max:255'],
+                    'app' => ['required', 'string', 'max:255'],
+                    'apm' => ['required', 'string', 'max:255'],
+                    'genero' => ['required', 'string'],
+                    'carrera' => ['required', 'string'],
+                    'matricula' => ['required', 'string'],
+                    'direccion' => ['required', 'string'],
+                    'celular' => ['required', 'string'],
+                ], $messages);
+            }
+
             // Actualiza los campos del usuario
             $user->nombre = $request->input('nombre');
             $user->app = $request->input('app');
@@ -125,7 +142,6 @@ class UsuariosController extends Controller
 
             $user->save();
             return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado exitosamente.');
-
         } else {
             return redirect()->route('usuarios.index')->with('error', 'Usuario no encontrado.');
         }
@@ -133,7 +149,6 @@ class UsuariosController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-
         if ($user) {
             $user->delete();
             return redirect()->route('usuarios.index')->with('success', 'Usuario eliminado exitosamente.');

@@ -103,9 +103,9 @@
 		if (seleccion === "1" || seleccion === "2") {
 			document.getElementById("formularioAdmin").style.display = "block";
 			let textoRegistro = document.querySelector("#texto_registro");
-			if(seleccion == "2"){
+			if (seleccion == "2") {
 				textoRegistro.textContent = "Ingrese datos adicionales para registrar un nuevo auxiliar de biblioteca.";
-			}else if (seleccion == "1") {
+			} else if (seleccion == "1") {
 				textoRegistro.textContent = "Ingrese datos adicionales para registrar un nuevo administrador.";
 			}
 		} else if (seleccion === "3") {
