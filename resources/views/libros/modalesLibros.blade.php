@@ -8,7 +8,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="" method="" enctype="multipart/form-data">
+            <form action="{{ route('libros.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
@@ -62,7 +63,7 @@
                         <div class="col-12 pt-2">
                             <div class="form-group">
                                 <label for="fechaAdqui">Fecha de adquisición:</label>
-                                <input type="date" class="form-control" id="fechaAdqui" name="fechaAdqui" value="{{ old('fechaAdqui') }}">
+                                <input type="date" class="form-control" id="fechaadqui" name="fechaadqui" value="{{ old('fechaadqui') }}">
                             </div>
                         </div>
                     </div>

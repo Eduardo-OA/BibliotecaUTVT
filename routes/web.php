@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\LibrosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\MaquinasController;
 use Illuminate\Support\Facades\Auth;
@@ -46,10 +47,11 @@ Route::middleware('auth')->group(function () {
     Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
     Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
-    //  Vista Libros -> cambiar a resourse
-    Route::get('/libros', function () {
-        return view('libros.index');
-    });
+    // Resourse Libros
+    Route::resource('libros', LibrosController::class);
+    Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
+    //Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store');
+    Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy');
 
     //  Resource Maquinas
     Route::resource('maquinas', MaquinasController::class);

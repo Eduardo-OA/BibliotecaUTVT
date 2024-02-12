@@ -33,16 +33,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            @foreach ($libros as $libros)
+                                
+                            <td>{{$libros->id}}</td>
+                            <td>{{$libros->titulo}}</td>
+                            <td>{{$libros->autores}}</td>
+                            <td>{{$libros->genero}}</td>
+                            <td>{{$libros->editorial}}</td>
+                            <td>{{$libros->idioma}}</td>
+                            <td>{{$libros->cantidad}}</td>
+                            <td>{{$libros->disponibilidad}}</td>
+                            <td>{{$libros->ubicacion}}</td>
+                            <td>{{$libros->fechaadqui}}</td>
                             <td>
                                 <!-- Botón para editar registro de libros -->
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">
@@ -56,6 +58,7 @@
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
