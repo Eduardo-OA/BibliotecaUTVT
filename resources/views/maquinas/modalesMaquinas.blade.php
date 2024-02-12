@@ -85,41 +85,43 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <div class="form-group row">
-                    <label for="isla" class="col-sm-6 col-form-label">Isla a la que desea cambiar la maquina:</label>
             <form action="{{ route('maquinas.update', $maquina->id) }}" method="POST">
                 @method("PUT")
                 @csrf
-                    <div class="col-sm-6">
-                        <input type="number" class="form-control" id="isla" name="isla">
-                    </div>
-                </div>
-                <hr>
-                <fieldset class="form-group pt-2">
-                    <div class="row">
-                        <legend class="col-form-label col-sm-6 pt-3 px-2">Estatus inicial de la maquina:</legend>
+                <div class="modal-body">
+                    <div class="form-group row">
                         <div class="col-sm-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="estatus" id="statusD" value="D" checked>
-                                <label class="form-check-label" for="statusD">
-                                    Disponible
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="estatus" id="statusM" value="M">
-                                <label class="form-check-label" for="statusM">
-                                    En mantenimiento
-                                </label>
-                            </div>
+                            <label for="isla" class="form-label">Isla a la que desea cambiar la maquina:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="number" class="form-control" id="isla" name="isla" value="{{ $maquina->isla }}">
                         </div>
                     </div>
-                </fieldset>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="submit" class="btn btn-warning">Guardar cambios</button>
-            </div>
+                    <hr>
+                    <fieldset class="form-group pt-2">
+                        <div class="row">
+                            <legend class="col-form-label col-sm-6 pt-3 px-2">Estatus inicial de la maquina:</legend>
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="estatus" id="statusD" value="D" {{ $maquina->estatus == 'D' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="statusD">
+                                        Disponible
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="estatus" id="statusM" value="M" {{ $maquina->estatus == 'M' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="statusM">
+                                        En mantenimiento
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning">Guardar cambios</button>
+                </div>
             </form>
         </div>
     </div>

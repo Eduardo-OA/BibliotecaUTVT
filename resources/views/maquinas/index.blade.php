@@ -31,7 +31,15 @@
                             <td>{{$maquina->id}}</td>
                             <td>Maquina {{$maquina->id}}</td>
                             <td>{{$maquina->isla}}</td>
-                            <td>{{$maquina->estatus}}</td>
+                            <td>
+                                @if( $maquina->estatus == 'D' )
+                                Disponible
+                                @elseif( $maquina->estatus == 'M' )
+                                Mantenimiento
+                                @elseif( $maquina->estatus == 'O' )
+                                Ocupado
+                                @endif
+                            </td>
                             <td>
                                 <!-- Botón para editar registro de maquinas -->
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal{{$maquina->id}}">
