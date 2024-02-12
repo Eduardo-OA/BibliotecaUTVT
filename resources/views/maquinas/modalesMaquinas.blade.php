@@ -32,11 +32,12 @@
             </div>
             <div class="modal-body row">
                 <div class="col-12">
-                    <form>
+                    <form action="{{ route('maquinas.store') }}" method="POST">
+                        @csrf
                         <div class="form-group row">
                             <label for="isla" class="col-sm-6 col-form-label">Isla a la que pertenece la maquina:</label>
                             <div class="col-sm-6">
-                                <input type="number" class="form-control" id="isla" name="isla">
+                                <input type="number" class="form-control" id="isla" name="isla" class="isla">
                             </div>
                         </div>
                         <hr>
@@ -45,13 +46,13 @@
                                 <legend class="col-form-label col-sm-6 pt-3 px-2">Estatus inicial de la maquina:</legend>
                                 <div class="col-sm-6">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="statusD" value="D" checked>
-                                        <label class="form-check-label" for="status">
+                                        <input class="form-check-input" type="radio" name="estatus" id="statusD" value="D" checked>
+                                        <label class="form-check-label" for="statusD">
                                             Disponible
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gridRadios" id="statusM" value="M">
+                                        <input class="form-check-input" type="radio" name="estatus" id="statusM" value="M">
                                         <label class="form-check-label" for="statusM">
                                             En mantenimiento
                                         </label>
@@ -60,12 +61,12 @@
                             </div>
                         </fieldset>
                         <p>El estatus puede ser cambiado posteriormente en el botón de <strong>editar</strong> o si la maquina es rentada (y su estado inicial es disponible).</p>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Crear registro</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Crear registro</button>
             </div>
         </div>
     </div>
@@ -74,7 +75,8 @@
 
 
 <!-- Modal de actualización de maquinas START -->
-<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($maquinas as $maquina)
+<div class="modal fade" id="updateModal{{$maquina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -86,6 +88,9 @@
             <div class="modal-body">
                 <div class="form-group row">
                     <label for="isla" class="col-sm-6 col-form-label">Isla a la que desea cambiar la maquina:</label>
+            <form action="{{ route('maquinas.update', $maquina->id) }}" method="POST">
+                @method("PUT")
+                @csrf
                     <div class="col-sm-6">
                         <input type="number" class="form-control" id="isla" name="isla">
                     </div>
@@ -96,13 +101,13 @@
                         <legend class="col-form-label col-sm-6 pt-3 px-2">Estatus inicial de la maquina:</legend>
                         <div class="col-sm-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="statusD" value="D" checked>
-                                <label class="form-check-label" for="status">
+                                <input class="form-check-input" type="radio" name="estatus" id="statusD" value="D" checked>
+                                <label class="form-check-label" for="statusD">
                                     Disponible
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="gridRadios" id="statusM" value="M">
+                                <input class="form-check-input" type="radio" name="estatus" id="statusM" value="M">
                                 <label class="form-check-label" for="statusM">
                                     En mantenimiento
                                 </label>
@@ -113,15 +118,18 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-warning">Guardar cambios</button>
+                <button type="submit" class="btn btn-warning">Guardar cambios</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
+@endforeach
 <!-- Modal de actualización de maquinas END -->
 
 <!-- Modal de eliminar maquinas START -->
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@foreach ($maquinas as $maquina)
+<div class="modal fade" id="deleteModal{{$maquina->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -134,10 +142,15 @@
                 ¿Realmente desea eliminar el registro de la maquina?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger">Eliminar</button>
+                <form action="{{ route('maquinas.update', $maquina->id) }}" method="POST">
+                    @method("DELETE")
+                    @csrf
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
+@endforeach
 <!-- Modal de eliminar maquinas END -->

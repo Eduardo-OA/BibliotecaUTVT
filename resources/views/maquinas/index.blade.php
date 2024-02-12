@@ -26,24 +26,26 @@
                         <th colspan="2">Acciones</th>
                     </thead>
                     <tbody>
+                        @foreach ($maquinas as $maquina)
                         <tr class="text-center">
-                            <td>1</td>
-                            <td>Maquina 1</td>
-                            <td>Isla 2</td>
-                            <td>En mantenimiento</td>
+                            <td>{{$maquina->id}}</td>
+                            <td>Maquina {{$maquina->id}}</td>
+                            <td>{{$maquina->isla}}</td>
+                            <td>{{$maquina->estatus}}</td>
                             <td>
-                                <!-- Botón para editar registro de libros -->
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal">
+                                <!-- Botón para editar registro de maquinas -->
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal{{$maquina->id}}">
                                     Editar
                                 </button>
                             </td>
                             <td>
-                                <!-- Botón para borrar registro de libros -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                <!-- Botón para borrar registro de maquinas -->
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$maquina->id}}">
                                     Borrar
                                 </button>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

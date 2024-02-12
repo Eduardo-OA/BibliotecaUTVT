@@ -9,7 +9,7 @@ class Maquinas extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'status',
+        'estatus',
         'isla'
     ];
 
