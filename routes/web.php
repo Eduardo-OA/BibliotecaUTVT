@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\MaquinasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -50,8 +51,10 @@ Route::middleware('auth')->group(function () {
         return view('libros.index');
     });
 
-    //  Vista Maquinas -> cambiar ruta de controlador
-    Route::get('/maquinas', function () {
-        return view('maquinas.index');
-    });
+    //  Resource Maquinas
+    Route::resource('maquinas', MaquinasController::class);
+    Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
+    Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
+
+    
 });
