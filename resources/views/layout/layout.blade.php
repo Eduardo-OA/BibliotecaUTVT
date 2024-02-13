@@ -31,7 +31,7 @@ Coded by www.creative-tim.com
     <!-- CSS Files -->
     <!-- Bootstrap version 4.4 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="{{ asset('css/paper-dashboard.css?v=2.0.1') }}" rel="stylesheet" />
+    <link href="{{ asset('css/paper-dashboard.css') }}" rel="stylesheet" />
     
     @yield('css')
 </head>

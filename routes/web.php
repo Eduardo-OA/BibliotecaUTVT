@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\LibrosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\MaquinasController;
+use App\Http\Controllers\RentaMaquinasController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,9 +38,7 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 
 //  Acceso a rutas mientras el usuario este autenticado
 Route::middleware('auth')->group(function () {
-    Route::get('/inicio', function () {
-        return view('welcome');
-    });
+    Route::get('/', [RentaMaquinasController::class, 'index'])->name('/');
 
     //  Resourse usuarios 
     Route::resource('usuarios', UsuariosController::class);
