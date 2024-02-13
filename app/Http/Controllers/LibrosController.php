@@ -40,11 +40,10 @@ class LibrosController extends Controller
 
     public function update(Request $request, $id)
     {
-      
-        // Busca el libro a actualizar por su ID
+        
         $libro = Libros::findOrFail($id);
-
-        // Actualiza los campos del libro con los datos proporcionados
+    
+       
         $libro->titulo = $request->input('titulo');
         $libro->autores = $request->input('autores');
         $libro->genero = $request->input('genero');
@@ -53,10 +52,10 @@ class LibrosController extends Controller
         $libro->cantidad = $request->input('cantidad');
         $libro->disponibilidad = $request->input('disponibilidad');
         $libro->ubicacion = $request->input('ubicacion');
-        $libro->fechaAdqui = $request->input('fechaAdqui');
+        $libro->fechaadqui = $request->input('fechaadqui'); 
         $libro->save();
-
-        // Redirecciona a alguna ruta después de actualizar el libro
+    
+        
         return redirect()->route('libros.index');
     }
 

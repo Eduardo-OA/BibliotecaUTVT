@@ -33,27 +33,27 @@
                     </thead>
                     <tbody>
                         <tr>
-                            @foreach ($libros as $libros)
+                            @foreach ($libros as $libro)
                                 
-                            <td>{{$libros->id}}</td>
-                            <td>{{$libros->titulo}}</td>
-                            <td>{{$libros->autores}}</td>
-                            <td>{{$libros->genero}}</td>
-                            <td>{{$libros->editorial}}</td>
-                            <td>{{$libros->idioma}}</td>
-                            <td>{{$libros->cantidad}}</td>
-                            <td>{{$libros->disponibilidad}}</td>
-                            <td>{{$libros->ubicacion}}</td>
-                            <td>{{$libros->fechaadqui}}</td>
+                            <td>{{$libro->id}}</td>
+                            <td>{{$libro->titulo}}</td>
+                            <td>{{$libro->autores}}</td>
+                            <td>{{$libro->genero}}</td>
+                            <td>{{$libro->editorial}}</td>
+                            <td>{{$libro->idioma}}</td>
+                            <td>{{$libro->cantidad}}</td>
+                            <td>{{$libro->disponibilidad}}</td>
+                            <td>{{$libro->ubicacion}}</td>
+                            <td>{{$libro->fechaadqui}}</td>
                             <td>
                                 <!-- Botón para editar registro de libros -->
-                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal">
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{$libro->id}}">
                                     Editar
                                 </button>
                             </td>
                             <td>
                                 <!-- Botón para borrar registro de libros -->
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal{{$libro->id}}">
                                     Borrar
                                 </button>
                             </td>
