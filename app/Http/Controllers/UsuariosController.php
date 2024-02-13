@@ -48,6 +48,16 @@ class UsuariosController extends Controller
                 'email' => ['required', 'email', 'unique:' . User::class],
                 'password' => ['required']
             ], $messages);
+
+            $usuario = new User([
+                'nombre' => $request->input('nombre'),
+                'app' => $request->input('app'),
+                'apm' => $request->input('apm'),
+                'genero' => $request->input('genero'),
+                'rol_id' => $request->input('rol_id'),
+                'email' => $request->input('email'),
+                'pasword' => $request->input('pasword'),
+            ]);
         } else if ($request->input('rol_id') == 3) {
             $request->validate([
                 'nombre' => ['required', 'string', 'max:255'],
@@ -59,22 +69,23 @@ class UsuariosController extends Controller
                 'direccion' => ['required', 'string'],
                 'celular' => ['required', 'string']
             ], $messages);
+            $usuario = new User([
+                'nombre' => $request->input('nombre'),
+                'app' => $request->input('app'),
+                'apm' => $request->input('apm'),
+                'genero' => $request->input('genero'),
+                'rol_id' => $request->input('rol_id'),
+                'carrera' => $request->input('carrera'),
+                'matricula' => $request->input('matricula'),
+                'direccion' => $request->input('direccion'),
+                'celular' => $request->input('celular'),
+                'email' => $request->input('email'),
+                'pasword' => $request->input('pasword'),
+            ]);
+    
         }
 
-        $usuario = new User([
-            'nombre' => $request->input('nombre'),
-            'app' => $request->input('app'),
-            'apm' => $request->input('apm'),
-            'genero' => $request->input('genero'),
-            'rol_id' => $request->input('rol_id'),
-            'carrera' => $request->input('carrera'),
-            'matricula' => $request->input('matricula'),
-            'direccion' => $request->input('direccion'),
-            'celular' => $request->input('celular'),
-            'email' => $request->input('email'),
-            'pasword' => $request->input('pasword'),
-        ]);
-
+        
         $usuario->save();
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente');
     }
