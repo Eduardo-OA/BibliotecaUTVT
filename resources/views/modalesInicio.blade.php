@@ -9,6 +9,20 @@
                 </button>
             </div>
             <div class="modal-body row">
+                <div class="col-12 pt-2">
+                    <center>
+                        <p>Estados de las maquinas</p>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" style="color: green;"><i class="bi bi-pc-display" style="font-size: large;"></i> Disponible</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" style="color: red;"><i class="bi bi-pc-display" style="font-size: large;"></i> Ocupado</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" style="color: gray;"><i class="bi bi-pc-display" style="font-size: large;"></i> En mantenimiento</label>
+                        </div>
+                    </center>
+                </div>
                 <div class="col-12">
                     <center>
                         <p>
@@ -24,13 +38,21 @@
                     @foreach ( $islas as $isla )
                     <div class="collapse" id="collapseExample{{ $isla -> isla }}">
                         <div class="card card-body">
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 @foreach( $maquinas as $maquina )
-                                @if( $maquina->isla == $isla->isla )
-                                <div class="col-3">
-                                    <button class="boton-maquina" onclick="valoresRenta({{ $isla->isla }},{{ $maquina->id }})"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
-                                </div>
-                                @endif
+                                    @if( $maquina->isla == $isla->isla )
+                                        @if( $maquina->estatus == 'O' || $maquina->estatus == 'M')
+                                        <fieldset disabled>
+                                            <div class="col-3">
+                                                <button class="boton-maquina"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
+                                            </div>
+                                        </fieldset>
+                                        @else
+                                        <div class="col-3">
+                                            <button class="boton-maquina" onclick="valoresRenta({{ $isla->isla }},{{ $maquina->id }})"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
+                                        </div>
+                                        @endif
+                                    @endif
                                 @endforeach
                             </div>
                         </div>
@@ -56,7 +78,7 @@
                                     <label for="maquina" style="font-size: medium; color:black;">Maquina a rentar</label>
                                     <fieldset disabled>
                                         <input type="text" class="form-control" id="maquinaVista" name="maquinaVista" placeholder="Seleccione una maquina">
-                                        <input type="text" class="form-control" id="maquinaForm" name="maquina" style="display: none;">                                        
+                                        <input type="text" class="form-control" id="maquinaForm" name="maquina" style="display: none;">
                                     </fieldset>
                                 </div>
                             </div>
