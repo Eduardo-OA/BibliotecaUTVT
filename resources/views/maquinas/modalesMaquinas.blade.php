@@ -17,6 +17,9 @@
                             <div class="col-sm-6">
                                 <input type="number" class="form-control" id="isla" name="isla" class="isla">
                             </div>
+                            @error('isla')
+                                   <small class="form-text text-danger">{{$message}}</small>
+                             @enderror
                         </div>
                         <hr>
                         <fieldset class="form-group pt-2">
@@ -36,6 +39,9 @@
                                         </label>
                                     </div>
                                 </div>
+                                @error('estatus')
+                                   <small class="form-text text-danger">{{$message}}</small>
+                                @enderror
                             </div>
                         </fieldset>
                         <p>El estatus puede ser cambiado posteriormente en el botón de <strong>editar</strong> o si la maquina es rentada (y su estado inicial es disponible).</p>
@@ -74,6 +80,9 @@
                         <div class="col-sm-6">
                             <input type="number" class="form-control" id="isla" name="isla" value="{{ $maquina->isla }}">
                         </div>
+                        @error('isla')
+                            <small class="form-text text-danger">{{$message}}</small>
+                        @enderror
                     </div>
                     <hr>
                     <fieldset class="form-group pt-2">
@@ -93,6 +102,9 @@
                                     </label>
                                 </div>
                             </div>
+                            @error('estaus')
+                                   <small class="form-text text-danger">{{$message}}</small>
+                            @enderror
                         </div>
                     </fieldset>
                 </div>

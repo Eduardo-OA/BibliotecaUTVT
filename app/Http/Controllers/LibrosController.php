@@ -22,6 +22,33 @@ class LibrosController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'titulo' => 'required',
+            'autores' => 'required',
+            'genero' => 'required',
+            'editorial' => 'required',
+            'idioma' => 'required',
+            'cantidad'=> 'required',
+            'disponibilidad'=>'required',
+            'ubicacion' =>'required',
+            'fechaadqui' =>'required'
+
+        ];
+
+        $message = [
+            'titulo.required' => 'El titulo es requerido',
+            'autores.required' => 'Los autores son requeridos',
+            'genero.required' => 'El genero del libro es requerido',
+            'editorial.required' => 'La editorial es requerida',
+            'idioma.required' => 'El idioma es requerido',
+            'cantidad.required' => 'La cantidad de libros es requerida',
+            'disponibilidad.required' => 'La disponibilidad es requerida',
+            'ubicacion.required' => 'La ubicación es requerida',
+            'fechaadqui.required' => 'La fecha de adquisición es requerida',
+
+        ];
+
+        $this->validate($request, $rules, $message);
 
        
         $libro = new Libros();
@@ -40,6 +67,33 @@ class LibrosController extends Controller
 
     public function update(Request $request, $id)
     {
+        $rules = [
+            'titulo' => 'required',
+            'autores' => 'required',
+            'genero' => 'required',
+            'editorial' => 'required',
+            'idioma' => 'required',
+            'cantidad'=> 'required',
+            'disponibilidad'=>'required',
+            'ubicacion' =>'required',
+            'fechaadqui' =>'required'
+
+        ];
+
+        $message = [
+            'titulo.required' => 'El titulo es requerido',
+            'autores.required' => 'Los autores son requeridos',
+            'genero.required' => 'El genero del libro es requerido',
+            'editorial.required' => 'La editorial es requerida',
+            'idioma.required' => 'El idioma es requerido',
+            'cantidad.required' => 'La cantidad de libros es requerida',
+            'disponibilidad.required' => 'La disponibilidad es requerida',
+            'ubicacion.required' => 'La ubicación es requerida',
+            'fechaadqui.required' => 'La fecha de adquisición es requerida',
+
+        ];
+
+        $this->validate($request, $rules, $message);
         
         $libro = Libros::findOrFail($id);
     

@@ -16,6 +16,18 @@ class MaquinasController extends Controller
 
     public function store(Request $request)
     {
+        $rules = [
+            'isla' => 'required',
+            'estatus' => 'required',
+
+        ];
+        $message = [
+            'isla.required' => 'Asignación de la maquina a una isla es requerida',
+            'estatus.required' => 'El estatus es requerido',
+        ];
+
+        $this->validate($request, $rules, $message);
+
         $maquina = new Maquinas([
             'isla' => $request->input('isla'),
             'estatus' => $request->input('estatus', 'D')
@@ -27,6 +39,18 @@ class MaquinasController extends Controller
 
     public function update(Request $request, $id)
     {
+        $rules = [
+            'isla' => 'required',
+            'estatus' => 'required',
+
+        ];
+        $message = [
+            'isla.required' => 'Asignación de la maquina a una isla es requerida',
+            'estatus.required' => 'El estatus es requerido',
+        ];
+
+        $this->validate($request, $rules, $message);
+
         $maquina = Maquinas::find($id);
         //$maquina->update($request->all());
         $maquina->isla = $request->input('isla');
