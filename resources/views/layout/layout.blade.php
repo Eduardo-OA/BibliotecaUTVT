@@ -32,13 +32,13 @@ Coded by www.creative-tim.com
     <!-- Bootstrap version 4.4 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="{{ asset('css/paper-dashboard.css') }}" rel="stylesheet" />
-    
+
     @yield('css')
 </head>
 
 <body class="">
     <div class="wrapper ">
-        <div class="sidebar" data-color="white" data-active-color="danger">
+        <div class="sidebar" data-color="white" data-active-color="success">
             <div class="logo">
                 <a href="#" class="simple-text logo-mini">
                     <!-- <div class="logo-image-small">
@@ -82,7 +82,7 @@ Coded by www.creative-tim.com
                 </ul>
             </div>
         </div>
-        <div class="main-panel" style="height: 100vh;">
+        <div class="main-panel">
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
                 <div class="container-fluid">
@@ -126,16 +126,22 @@ Coded by www.creative-tim.com
                     @yield('content')
                 </div>
             </div>
-            <footer class="footer" style="position: absolute; bottom: 0; width: -webkit-fill-available;">
+            <footer class="footer footer-black  footer-white ">
                 <div class="container-fluid">
                     <div class="row">
                         <nav class="footer-nav">
                             <ul>
-                                <li><a href="/" target="_blank">BIBLIOTECA UTVT</a></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </nav>
                         <div class="credits ml-auto">
-                            <span class="copyright"></span>
+                            <span class="copyright">
+                                © <script>
+                                    document.write(new Date().getFullYear())
+                                </script>   Biblioteca UTVT
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -154,6 +160,6 @@ Coded by www.creative-tim.com
     <script src="{{ asset('./js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('./js/paper-dashboard.min.js') }}" type="text/javascript"></script>
-</body>
 @yield('modals')
+</body>
 </html>

@@ -18,8 +18,8 @@
                                 <input type="number" class="form-control" id="isla" name="isla" class="isla">
                             </div>
                             @error('isla')
-                                   <small class="form-text text-danger">{{$message}}</small>
-                             @enderror
+                                <small class="form-text text-danger px-4">{{$message}}</small>
+                            @enderror
                         </div>
                         <hr>
                         <fieldset class="form-group pt-2">

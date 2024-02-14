@@ -90,7 +90,6 @@ class LibrosController extends Controller
             'disponibilidad.required' => 'La disponibilidad es requerida',
             'ubicacion.required' => 'La ubicación es requerida',
             'fechaadqui.required' => 'La fecha de adquisición es requerida',
-
         ];
 
         $this->validate($request, $rules, $message);
