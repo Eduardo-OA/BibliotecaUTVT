@@ -34,6 +34,6 @@ class AuthController extends Controller
     }
 
     public function authenticated(Request $request, $user) {
-        return redirect('/inicio');
+        return redirect('/');
     }
 }
