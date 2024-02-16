@@ -18,15 +18,14 @@ class UsersSeeder extends Seeder
 
         //intyeccion
         DB::table('users')->insert([
-            'name' => 'Administrador',
+            'nombre' => 'Administrador',
             'app' => '',
             'apm' => '',
-            'carrera' => 'Carrera1',
+            'carrera' => 'UTVT',
             'matricula' => 123456,
-            'direccion' => 'barcelona city',
-            'genero' => 'Masculino',
+            'direccion' => 'Lerma México',
+            'genero' => 'M',
             'email' => 'admin@biblioteca.com',
-            'email_verified_at' => now(),
             'password' => Hash::make('admin'),
             'rol_id' => 1,
             'created_at' => now(),

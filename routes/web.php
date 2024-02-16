@@ -2,7 +2,13 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\LibrosController;
+use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\MaquinasController;
+use App\Http\Controllers\RentaMaquinasController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\RentaLibroController;
 
 /*
@@ -18,12 +24,16 @@ use App\Http\Controllers\RentaLibroController;
 
 //  Primer Pagina
 Route::get('/', function () {
-    return view('login.login');
-})->name('login');
+    if(Auth::user()){
+        return route('inicio');
+    }else{
+        return route('login');
+    }
+})->name('/');
 
 
 //  Login
-Route::get('/login', [AuthController::class, 'show']);
+Route::get('/login', [AuthController::class, 'show'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [LogoutController::class, 'logout']);
 
