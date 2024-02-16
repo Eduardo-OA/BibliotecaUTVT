@@ -24,9 +24,9 @@ use Illuminate\Support\Facades\Route;
 //  Primer Pagina
 Route::get('/', function () {
     if(Auth::user()){
-        return view('welcome');
+        return route('inicio');
     }else{
-        return view('login.login');
+        return route('login');
     }
 })->name('/');
 
@@ -38,7 +38,7 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 
 //  Acceso a rutas mientras el usuario este autenticado
 Route::middleware('auth')->group(function () {
-    Route::get('/', [RentaMaquinasController::class, 'index'])->name('/');
+    Route::get('/', [RentaMaquinasController::class, 'index'])->name('inicio');
 
     //  Resourse usuarios 
     Route::resource('usuarios', UsuariosController::class);

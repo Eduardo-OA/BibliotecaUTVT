@@ -40,19 +40,19 @@
                         <div class="card card-body">
                             <div class="row justify-content-center">
                                 @foreach( $maquinas as $maquina )
-                                    @if( $maquina->isla == $isla->isla )
-                                        @if( $maquina->estatus == 'O' || $maquina->estatus == 'M')
-                                        <fieldset disabled>
-                                            <div class="col-3">
-                                                <button class="boton-maquina"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
-                                            </div>
-                                        </fieldset>
-                                        @else
-                                        <div class="col-3">
-                                            <button class="boton-maquina" onclick="valoresRenta({{ $isla->isla }},{{ $maquina->id }})"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
-                                        </div>
-                                        @endif
-                                    @endif
+                                @if( $maquina->isla == $isla->isla )
+                                @if( $maquina->estatus == 'O' || $maquina->estatus == 'M')
+                                <fieldset disabled>
+                                    <div class="col-3">
+                                        <button class="boton-maquina"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
+                                    </div>
+                                </fieldset>
+                                @else
+                                <div class="col-3">
+                                    <button class="boton-maquina" onclick="valoresRenta({{ $isla->isla }},{{ $maquina->id }})"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
+                                </div>
+                                @endif
+                                @endif
                                 @endforeach
                             </div>
                         </div>
@@ -94,3 +94,49 @@
     </div>
 </div>
 <!-- Renta de Maquinas modal END -->
+
+<!-- Renta de Libros Modal START -->
+
+<div class="modal fade" id="modal-libros" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Renta de Libros</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="">
+                <div class="modal-body row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="libro">Seleccione el libro a prestar: </label>
+                            <select class="form-control" id="libro" name="libro">
+                                <option>Libro - Genero - Disponibilidad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="user">Seleccione al estudiante: </label>
+                            <select class="form-control" id="user" name="user">
+                                <option>Matricula - Nombre - Carrera</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="anotaciones">Anotaciones acerca del libro: </label>
+                            <textarea class="form-control" id="anotaciones" name="anotaciones" rows="5" placeholder="Ingrese el estado en el que se encuentra el libro antes del prestamo:"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Rentar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Renta de Libros Modal END -->

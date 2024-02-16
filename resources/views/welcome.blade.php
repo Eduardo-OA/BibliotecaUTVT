@@ -57,7 +57,7 @@
             <div class="stats">
                 <i class="bi bi-check"></i>
                 <!-- Extra large modal -->
-                <a href="#" type="button" data-toggle="modal" data-target=".bd-example-modal-xl">Nueva Renta</a>
+                <a href="#" type="button" data-toggle="modal" data-target="#modal-libros">Nueva Renta</a>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
-                    <thead class=" text-primary">
+                    <thead class=" text-danger">
                         <th>
                             Nombre del estudiante
                         </th>
@@ -102,6 +102,49 @@
                                 <div class="reloj">
                                     <span id="hora"></span>:<span id="minutos"></span>
                                 </div>
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-secondary">Terminar renta</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title"> Libros en renta</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class=" text-primary">
+                        <th>
+                            Nombre del estudiante
+                        </th>
+                        <th>
+                            Libro prestado
+                        </th>
+                        <th>
+                            Fecha inicio del prestamo
+                        </th>
+                        <th class="text-center">
+                            Acciones
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                222110811 - Jossue Alejandro Candelas Hernández
+                            </td>
+                            <td>
+                                Matemáticas para Ingenieria II
+                            </td>
+                            <td class="text-center">
+                                14 - Febrero - 2024
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-secondary">Terminar renta</button>
