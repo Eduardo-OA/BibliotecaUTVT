@@ -1,29 +1,43 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Libros;
 
 use Illuminate\Http\Request;
 use App\Models\Prestamolibros; // Asegúrate de importar el modelo Prestamolibros si aún no lo has hecho
-use App\Models\Prestamolibross;
+// use App\Models\Prestamolibross;
+
 
 class RentaLibroController extends Controller
 {
     // Método para mostrar todos los préstamos de libros
     public function index()
     {
-        $prestamos = Prestamolibros::all();
-        return view('prestamos.index', compact('prestamos'));
+        // $libros = Libros::all();
+        // return view('welcome', compact('libros'));
+        // $prestamos = Prestamolibros::all();
+        // return view('prestamos.index', compact('prestamos'));
     }
 
     // Método para mostrar el formulario de creación de un nuevo préstamo de libro
     public function create()
     {
-        return view('prestamos.create');
+
+            // Lógica para mostrar el formulario de creación de usuario
+            $libros = Libros::all();
+            return redirect()->route('inicio');
+            return view('welcome', compact('libros'));
+                // return view('modalesInicio')
+            // ->with(['libros' => $libros]);
+            // return view('libros.create');
+            // return view('libros.create');
+
     }
 
     // Método para almacenar un nuevo préstamo de libro en la base de datos
     public function store(Request $request)
     {
+
         // Validar la entrada de datos
         $request->validate([
             'libros_id' => 'required',
@@ -36,7 +50,7 @@ class RentaLibroController extends Controller
         // Crear un nuevo préstamo de libro
         Prestamolibros::create($request->all());
 
-        return redirect()->route('prestamos.index')->with('success', 'Préstamo de libro creado exitosamente.');
+        return redirect()->route('inicio')->with('success', 'Préstamo de libro creado exitosamente.');
     }
 
     // Método para mostrar los detalles de un préstamo de libro específico

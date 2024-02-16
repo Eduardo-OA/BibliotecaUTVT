@@ -6,6 +6,9 @@
 
 <!-- Contenido de la página START -->
 @section('content')
+
+
+
 <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
         <div class="card-body ">
@@ -35,6 +38,11 @@
     </div>
 </div>
 <div class="col-lg-3 col-md-6 col-sm-6">
+    @if(session('success'))
+<div id="success-message" class="alert alert-success" style="display: none;">
+    {{ session('success') }}
+</div>
+@endif
     <div class="card card-stats">
         <div class="card-body ">
             <div class="row">
@@ -195,7 +203,18 @@
         minutosElemento.textContent = minutos < 10 ? '0' + minutos : minutos;
     }
     setInterval(actualizarReloj, 1000);
+
+
 </script>
+
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#success-message').fadeIn().delay(2000).fadeOut();
+    });
+</script>
+
 @endsection
 
 @section('modals')

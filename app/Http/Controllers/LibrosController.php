@@ -17,7 +17,12 @@ class LibrosController extends Controller
     public function create()
     {
         // Lógica para mostrar el formulario de creación de usuario
-        return view('libros.create');
+        $libros = Libros::all();
+        // return view('modalesInicio', compact('libros'));
+            // return view('modalesInicio')
+        // ->with(['libros' => $libros]);
+        // return view('libros.create');
+        // return view('libros.create');
     }
 
     public function store(Request $request)
@@ -50,7 +55,7 @@ class LibrosController extends Controller
 
         $this->validate($request, $rules, $message);
 
-       
+
         $libro = new Libros();
         $libro->titulo = $request->input('titulo');
         $libro->autores = $request->input('autores');
@@ -93,10 +98,10 @@ class LibrosController extends Controller
         ];
 
         $this->validate($request, $rules, $message);
-        
+
         $libro = Libros::findOrFail($id);
-    
-       
+
+
         $libro->titulo = $request->input('titulo');
         $libro->autores = $request->input('autores');
         $libro->genero = $request->input('genero');
@@ -105,10 +110,10 @@ class LibrosController extends Controller
         $libro->cantidad = $request->input('cantidad');
         $libro->disponibilidad = $request->input('disponibilidad');
         $libro->ubicacion = $request->input('ubicacion');
-        $libro->fechaadqui = $request->input('fechaadqui'); 
+        $libro->fechaadqui = $request->input('fechaadqui');
         $libro->save();
-    
-        
+
+
         return redirect()->route('libros.index');
     }
 
