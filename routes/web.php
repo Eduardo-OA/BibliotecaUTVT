@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RentaLibroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,6 @@ Route::middleware('auth')->group(function () {
         return view('welcome');
     });
 });
+//RUTAS D LIBROS
+Route::resource('renta-libros', RentaLibroController::class);
+
