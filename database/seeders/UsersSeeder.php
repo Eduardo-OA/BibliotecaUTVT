@@ -31,5 +31,43 @@ class UsersSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('users')->insert([
+            'nombre' => 'Auxiliar',
+            'app' => '-',
+            'apm' => 'Biblioteca',
+            'genero' => 'M',
+            'email' => 'auxiliar@biblioteca.com',
+            'password' => Hash::make('auxiliar'),
+            'rol_id' => 2, 
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'nombre' => 'Miguel Emanuel',
+            'app' => 'Arriola',
+            'apm' => 'Ortega',
+            'carrera' => 'UTVT',
+            'matricula' => 123456,
+            'direccion' => 'Xonacatlan, Edo. de México',
+            'genero' => 'H',
+            'rol_id' => 3, 
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('users')->insert([
+            'nombre' => 'Jimena',
+            'app' => 'Diaz',
+            'apm' => 'de los Santos',
+            'carrera' => 'UTVT',
+            'matricula' => 123456,
+            'direccion' => 'Xonacatlan, Edo. de México',
+            'genero' => 'H',
+            'rol_id' => 3, 
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

@@ -23,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 //  Primer Pagina
 Route::get('/', function () {
-    if(Auth::user()){
+    if (Auth::user()) {
         return route('inicio');
-    }else{
+    } else {
         return route('login');
     }
 })->name('/');
@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
     // Resourse Libros
     Route::resource('libros', LibrosController::class);
     Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
-    //Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store');
+    Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store');
     Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy');
 
     //  Resource Maquinas
@@ -57,5 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
     Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
 
-    
+    //Renta de maquinas
+    Route::name('rentarmaquina')->post('rentarmaquina', [RentaMaquinasController::class, 'rentarmaquina']);
+    Route::put('rentaMaquina.update/{id}', [RentaMaquinasController::class, 'update'])->name('rentaMaquina.update');
 });

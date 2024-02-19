@@ -21,6 +21,9 @@
                         <div class="form-check form-check-inline">
                             <label class="form-check-label" style="color: gray;"><i class="bi bi-pc-display" style="font-size: large;"></i> En mantenimiento</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label" style="color: #17a2b8;"><i class="bi bi-pc-display" style="font-size: large;"></i> Maquina Seleccionada</label>
+                        </div>
                     </center>
                 </div>
                 <div class="col-12">
@@ -44,12 +47,12 @@
                                 @if( $maquina->estatus == 'O' || $maquina->estatus == 'M')
                                 <fieldset disabled>
                                     <div class="col-3">
-                                        <button class="boton-maquina"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
+                                        <button class="boton-maquina"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'M' ) color: gray; @elseif( $maquina->estatus == 'O' ) color:red; @endif"></i></button>
                                     </div>
                                 </fieldset>
                                 @else
                                 <div class="col-3">
-                                    <button class="boton-maquina" onclick="valoresRenta({{ $isla->isla }},{{ $maquina->id }})"><i class="bi bi-pc-display" style="font-size: 4rem; @if( $maquina->estatus == 'D' ) color: green; @elseif( $maquina->estatus == 'M' ) color: gray; @else color:red; @endif"></i></button>
+                                    <button class="boton-maquina" onclick="valoresRenta({{ $isla->isla }},{{ $maquina->id }}), seleccionada(this)"><i class="bi bi-pc-display maquina-icon @if( $maquina->estatus == 'D' ) maquina-disponible @endif" style="font-size: 4rem;"></i></button>
                                 </div>
                                 @endif
                                 @endif
@@ -61,39 +64,72 @@
                 </div>
                 <div class="col-6">
                     <div class="card card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <h3>Formulario de Prestamo</h3>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="usuarios" style="font-size: medium; color:black;">Seleccione un estudiante</label>
-                                    <select class="form-control" id="usuarios" name="usuarios">
-                                        <option>222110811 - Jossue Alejandro Candelas Hernández - IDGS</option>
-                                    </select>
+                        <form action="{{ route('rentarmaquina') }}" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field()}}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="usuarios" style="font-size: medium; color:black;">Seleccione un estudiante</label>
+                                        <select class="form-control" id="usuarios" name="usuario_id">
+                                            @foreach($usuarios as $usuario)
+                                            <option value="{{ $usuario->id }}">{{ $usuario->matricula .' - '. $usuario->nombre .' '. $usuario->app .' '. $usuario->apm .' - '. $usuario->carrera }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="maquina" style="font-size: medium; color:black;">Maquina a rentar</label>
+                                        <fieldset disabled>
+                                            <input type="text" class="form-control" id="maquinaVista" name="maquinaVista" placeholder="Seleccione una maquina">
+                                        </fieldset>
+                                        <input type="text" class="form-control" id="maquinaForm" name="maquina_id" style="display: none;">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="maquina" style="font-size: medium; color:black;">Maquina a rentar</label>
-                                    <fieldset disabled>
-                                        <input type="text" class="form-control" id="maquinaVista" name="maquinaVista" placeholder="Seleccione una maquina">
-                                        <input type="text" class="form-control" id="maquinaForm" name="maquina" style="display: none;">
-                                    </fieldset>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Rentar</button>
+                <button type="submit" class="btn btn-primary">Rentar</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <!-- Renta de Maquinas modal END -->
+
+<!-- Finalizar Renta START -->
+@foreach($rentas as $renta)
+<div class="modal fade" id="createModal{{ $renta->id }}" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">¿Desea Terminar el prestamo?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body row">
+                <div class="col-12">
+                    Confirme el termino de uso de la maquina.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <form action="{{ route('rentaMaquina.update', $renta->id) }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    {{ method_field('PUT')}}
+                    <input type="text" name="maquina_id" value="{{ $renta->maquina_id }}" style="display: none;">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Confirmar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
+<!-- Finalizar Renta END -->
 
 <!-- Renta de Libros Modal START -->
 

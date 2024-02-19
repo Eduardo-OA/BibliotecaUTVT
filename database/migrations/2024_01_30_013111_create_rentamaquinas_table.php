@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('usuario_id')->constrained('users');
             $table->foreignId('maquina_id')->constrained('maquinas');
             $table->time('hora_inicio');
-            $table->time('hora_final');
+            $table->time('hora_final')->nullable();
             $table->timestamps();
         });
     }

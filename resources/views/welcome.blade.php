@@ -70,7 +70,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table">
-                    <thead class=" text-danger">
+                    <thead class=" text-danger text-center">
                         <th>
                             Nombre del estudiante
                         </th>
@@ -87,26 +87,37 @@
                             Acciones
                         </th>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
+                        @foreach($rentas as $renta)
                         <tr>
                             <td>
-                                222110811 - Jossue Alejandro Candelas Hernández
+                                {{ $renta -> usuario_id }}
                             </td>
                             <td>
-                                Isla 1 - Maquina 2
+                                {{ $renta -> maquina_id }}
                             </td>
                             <td class="text-center">
-                                14:00
+                                {{ $renta -> hora_inicio }}
                             </td>
+                            @if( $renta->hora_final !== NULL )
+                            <td>
+                                {{ $renta->hora_final }}
+                            </td>
+                            <td class="text-danger">
+                                Renta Finalizada
+                            </td>
+                            @else
                             <td class="text-center">
                                 <div class="reloj">
-                                    <span id="hora"></span>:<span id="minutos"></span>
+                                    <span class="hora"></span>:<span class="minutos"></span>:<span class="segundos"></span>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-secondary">Terminar renta</button>
+                                <button class="btn btn-secondary" data-toggle="modal" data-target="#createModal{{ $renta->id }}">Terminar renta</button>
                             </td>
+                            @endif
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -171,28 +182,49 @@
 </script>
 
 <script>
+    //  Funcion para colorear una maquina que fue selecciona
+    function seleccionada(selected) {
+        const allMachines = document.querySelectorAll('.maquina-icon');
+
+        allMachines.forEach(e => {
+            if (e.classList.contains('maquina-seleccionada')) {
+                e.classList.remove('maquina-seleccionada');
+                e.classList.add('maquina-disponible');
+            }
+        });
+
+        let maquinaSelected = selected.lastElementChild;
+        maquinaSelected.classList.remove('maquina-disponible');
+        maquinaSelected.classList.add('maquina-seleccionada');
+    }
+
+    //  Funcion para mostrar que isla y que maquina fueron seleccionadas así como el envio de controlador del valor de la mquina 
     function valoresRenta(isla, maquina) {
         const inputMaquinaVista = document.querySelector('#maquinaVista');
         const inputMaquinaForm = document.querySelector('#maquinaForm');
         inputMaquinaForm.value = maquina;
         inputMaquinaVista.value = `Isla ${isla} - Maquina ${maquina}`;
-        console.log(inputMaquinaForm);
     }
 </script>
 
 <script>
     //  Mostrar hora final en tiempo real
     function actualizarReloj() {
-        const relojElemento = document.getElementById('reloj');
-        const horaElemento = document.getElementById('hora');
-        const minutosElemento = document.getElementById('minutos');
+        const relojElemento = document.querySelectorAll('.reloj');
+        const horaElemento = document.querySelectorAll('.hora');
+        const minutosElemento = document.querySelectorAll('.minutos');
+        const segundosElemento = document.querySelectorAll('.segundos');
 
         const ahora = new Date();
         const hora = ahora.getHours();
         const minutos = ahora.getMinutes();
+        const segundos = ahora.getSeconds();
 
-        horaElemento.textContent = hora < 10 ? '0' + hora : hora;
-        minutosElemento.textContent = minutos < 10 ? '0' + minutos : minutos;
+        relojElemento.forEach((e, i) => { //  e = elemento | i = index
+            horaElemento[i].textContent = hora < 10 ? '0' + hora : hora;
+            minutosElemento[i].textContent = minutos < 10 ? '0' + minutos : minutos;
+            segundosElemento[i].textContent = segundos < 10 ? '0' + segundos : segundos;
+        });
     }
     setInterval(actualizarReloj, 1000);
 </script>

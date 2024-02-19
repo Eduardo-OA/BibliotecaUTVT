@@ -4,3 +4,11 @@
     background-color: transparent;
     border: none;
 }
+
+.maquina-seleccionada {
+    color: #17a2b8;
+}
+
+.maquina-disponible {
+    color: #28a745;
+}
