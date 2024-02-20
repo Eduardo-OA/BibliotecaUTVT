@@ -40,6 +40,7 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 //  Acceso a rutas mientras el usuario este autenticado
 Route::middleware('auth')->group(function () {
     Route::get('/', [RentaMaquinasController::class, 'index'])->name('inicio');
+    // Route::get('/', [RentalibroController::class, 'index'])->name('inicio');
 
     //  Resourse usuarios
     Route::resource('usuarios', UsuariosController::class);
