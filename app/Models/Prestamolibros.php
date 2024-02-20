@@ -15,11 +15,17 @@ class Prestamolibros extends Model
         'fecha_devo',
         'notas'
     ];
-    public function Libros() {
+    public function Libro() {
         return $this->belongsTo(Libros::class,'libros_id');
     }
 
     public function User() {
         return $this->belongsTo(User::class,'usuario_id');
     }
+    public function Devolucion($fecha_devo)
+    {
+        $this->fecha_devo = $fecha_devo;
+        $this->save();
+    }
+
 }

@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Libros;
+use App\Models\User;
+use App\Models\Maquinas;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 use App\Models\Prestamolibros; // Asegúrate de importar el modelo Prestamolibros si aún no lo has hecho
@@ -10,27 +14,32 @@ use App\Models\Prestamolibros; // Asegúrate de importar el modelo Prestamolibro
 
 class RentaLibroController extends Controller
 {
+
+
+
+
+
+
+
     // Método para mostrar todos los préstamos de libros
     public function index()
     {
-        // $libros = Libros::all();
-        // return view('welcome', compact('libros'));
-        // $prestamos = Prestamolibros::all();
-        // return view('prestamos.index', compact('prestamos'));
+
+        return redirect()->route('inicio')->with('success', 'Préstamo de libro eliminado exitosamente.');
     }
 
     // Método para mostrar el formulario de creación de un nuevo préstamo de libro
     public function create()
     {
 
-            // Lógica para mostrar el formulario de creación de usuario
-            $libros = Libros::all();
-            return redirect()->route('inicio');
-            return view('welcome', compact('libros'));
-                // return view('modalesInicio')
-            // ->with(['libros' => $libros]);
-            // return view('libros.create');
-            // return view('libros.create');
+        // Lógica para mostrar el formulario de creación de usuario
+        $libros = Libros::all();
+        return redirect()->route('inicio');
+        return view('welcome', compact('libros'));
+        // return view('modalesInicio')
+        // ->with(['libros' => $libros]);
+        // return view('libros.create');
+        // return view('libros.create');
 
     }
 
@@ -56,6 +65,7 @@ class RentaLibroController extends Controller
     // Método para mostrar los detalles de un préstamo de libro específico
     public function show($id)
     {
+
         $prestamo = Prestamolibros::findOrFail($id);
         return view('prestamos.show', compact('prestamo'));
     }
@@ -91,7 +101,20 @@ class RentaLibroController extends Controller
     {
         $prestamo = Prestamolibros::findOrFail($id);
         $prestamo->delete();
-
-        return redirect()->route('prestamos.index')->with('success', 'Préstamo de libro eliminado exitosamente.');
+// return view('welcome');
+        return redirect()->route('inicio')->with('success', 'Préstamo de libro eliminado exitosamente.');
     }
+
+
+
+
+// public function marcarComoDevuelto(Request $request)
+// {
+//     $prestamo = Prestamolibros::findOrFail($request->prestamo_id);
+//     $prestamo->fecha_devo = now();
+//     $prestamo->save();
+
+//     return response()->json(['message' => 'Préstamo marcado como devuelto correctamente']);
+// }
+
 }

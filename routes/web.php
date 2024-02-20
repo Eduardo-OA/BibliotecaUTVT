@@ -70,3 +70,6 @@ Route::resource('renta-libros', RentaLibroController::class)->names([
     'update' => 'renta-libros.update',
     'destroy' => 'renta-libros.destroy',
 ]);
+
+
+

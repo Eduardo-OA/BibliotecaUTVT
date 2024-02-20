@@ -78,6 +78,7 @@ Coded by www.creative-tim.com
                             <i class="bi bi-journal-bookmark-fill"></i>
                             <p>Libros</p>
                         </a>
+
                     </li>
                 </ul>
             </div>
@@ -160,6 +161,13 @@ Coded by www.creative-tim.com
     <script src="{{ asset('./js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('./js/paper-dashboard.min.js') }}" type="text/javascript"></script>
+{{-- AXXIOS --}}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<!-- SweetAlert2 JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @yield('modals')
 </body>
 </html>
