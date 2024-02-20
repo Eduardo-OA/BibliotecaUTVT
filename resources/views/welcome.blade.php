@@ -259,7 +259,8 @@
             Swal.fire({
                 icon: 'warning',
                 title: 'Próximas devoluciones:',
-                html: '<div class="alert alert-warning"><h4>Próximas devoluciones:</h4><ul>{{ $htmlLibrosDevolver }}</ul></div>',
+                html: '<div class="alert alert-warning"><h4>Próximas devoluciones:</h4><ul>@foreach($librosDevolver as $libro)<div>{{ $libro->libro->titulo }} - Devolver el {{ Carbon\Carbon::parse($libro->fecha_devo)->toDateString() }}</div><br>@endforeach</ul></div>',
+
                 timer: 5000, // Duración en milisegundos (en este caso, 5 segundos)
                 timerProgressBar: true,
                 showConfirmButton: true,
