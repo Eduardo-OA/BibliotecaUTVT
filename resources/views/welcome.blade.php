@@ -1,5 +1,4 @@
 @extends('layout.layout')
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/islas.css') }}">
 @endsection
@@ -37,6 +36,7 @@
         </div>
     </div>
 </div>
+
 <div class="col-lg-3 col-md-6 col-sm-6">
     @if(session('success'))
 <div id="success-message" class="alert alert-success" style="display: none;">
@@ -157,6 +157,24 @@
                             <td class="text-center">
                                 <button class="btn btn-secondary">Terminar renta</button>
                             </td>
+                            @foreach ($librosAlquilados as $prestamo)
+    <tr>
+        <td> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}</td>
+        <td>{{ $prestamo->libro->titulo }}</td>
+        <td class="text-center">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $prestamo->fecha_pres)->format('d - F - Y') }}</td>
+
+        {{-- <td class="text-center">{{ $prestamo->fecha_pres->format('d - F - Y') }}</td> --}}
+        <td class="text-center">
+            <form action="{{ route('renta-libros.destroy',['renta_libro' => $prestamo->id])}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-secondary" onclick="return confirm('¿Estás seguro de que quieres marcar este préstamo como devuelto?')">Devolver</button>
+            </form>
+            {{-- <button class="btn btn-secondary" onclick="devolverPrestamo({{ $prestamo->id }})">Terminar renta</button> --}}
+        </td>
+    </tr>
+@endforeach
+
                         </tr>
                     </tbody>
                 </table>
@@ -214,6 +232,43 @@
         $('#success-message').fadeIn().delay(2000).fadeOut();
     });
 </script>
+
+{{-- MARCAR LA DEVOLUCION A DB  --}}
+<script>
+    function devolverPrestamo(prestamoId) {
+        // Confirmar si el usuario realmente quiere devolver el préstamo
+        if (confirm('¿Estás seguro de que quieres marcar este préstamo como devuelto?')) {
+            // Enviar una solicitud AJAX al servidor para marcar el préstamo como devuelto
+            axios.post('/devolver-prestamo', {
+                prestamo_id: prestamoId
+            })
+            .then(function (response) {
+                // Recargar la página o actualizar la lista de préstamos después de marcar el préstamo como devuelto
+                location.reload();
+            })
+            .catch(function (error) {
+                console.error('Error al marcar el préstamo como devuelto:', error);
+            });
+        }
+    }
+</script>
+
+    <script>
+        // Mostrar el mensaje emergente al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Próximas devoluciones:',
+                html: '<div class="alert alert-warning"><h4>Próximas devoluciones:</h4><ul>{{ $htmlLibrosDevolver }}</ul></div>',
+                timer: 5000, // Duración en milisegundos (en este caso, 5 segundos)
+                timerProgressBar: true,
+                showConfirmButton: true,
+                position: 'top',
+                toast: true,
+            });
+            console.log(html);
+        });
+    </script>
 
 @endsection
 
