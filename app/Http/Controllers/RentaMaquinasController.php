@@ -48,14 +48,13 @@ class RentaMaquinasController extends Controller
                 ->get();
 
 
-        // Generar HTML para los libros a devolver
-        $htmlLibrosDevolver = '';
-        foreach ($librosDevolver as $libro) {
-            $fechaDevoCarbon = Carbon::parse($libro->fecha_devo);
-            $htmlLibrosDevolver .= 'El libro:       '.  $libro->libro->titulo . ' - Devolver el ' . $fechaDevoCarbon->toDateString();
-        }
-
-        // dd($librosDevolver);
+                // Generar HTML para los libros a devolver
+                $htmlLibrosDevolver = '';
+                foreach ($librosDevolver as $libro) {
+                    $fechaDevoCarbon = Carbon::parse($libro->fecha_devo);
+                    $htmlLibrosDevolver .= 'El libro:       '.  $libro->libro->titulo . ' - Devolver el ' . $fechaDevoCarbon->toDateString();
+                }
+                // dd($librosDevolver);
         return view('welcome', compact(
             'islas',
             'maquinas',
@@ -72,11 +71,11 @@ class RentaMaquinasController extends Controller
         // Obtener la fecha actual
         $fechaActual = Carbon::now();
 
-        // Obtener los libros que deben ser devueltos hoy o en los próximos días
+        // Obtener los libros que deben ser devueltos h oy o en los próximos días
         $librosDevolver = Prestamolibros::where('fecha_devo', '>=', $fechaActual)
             ->where('fecha_devo', '<=', $fechaActual->addDays(3))
             ->get();
-
+// dd($_request->all());
         return view('welcome', ['librosDevolver' => $librosDevolver]);
     }
 }

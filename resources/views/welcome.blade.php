@@ -165,12 +165,12 @@
 
         {{-- <td class="text-center">{{ $prestamo->fecha_pres->format('d - F - Y') }}</td> --}}
         <td class="text-center">
-            <form action="{{ route('renta-libros.destroy',['renta_libro' => $prestamo->id])}}" method="POST">
+            <form id="confirmForm" action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-secondary" onclick="return confirm('¿Estás seguro de que quieres marcar este préstamo como devuelto?')">Devolver</button>
-            </form>
-            {{-- <button class="btn btn-secondary" onclick="devolverPrestamo({{ $prestamo->id }})">Terminar renta</button> --}}
+                <button id="openModalButton" type="button" class="btn btn-secondary">Devolver</button>
+              </form>
+
         </td>
     </tr>
 @endforeach
@@ -186,6 +186,8 @@
 <!-- Contenido de la página END -->
 
 @section('js')
+
+
 <script>
     // Selector de la sección en el navbar
     var navbar = document.querySelector('#inicio');
@@ -256,6 +258,8 @@
     <script>
         // Mostrar el mensaje emergente al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
+            @if($librosDevolver->isNotEmpty())
+
             Swal.fire({
                 icon: 'warning',
                 title: 'Próximas devoluciones:',
@@ -268,6 +272,7 @@
                 toast: true,
             });
             console.log(html);
+            @endif
         });
     </script>
 
@@ -275,4 +280,18 @@
 
 @section('modals')
 @include('modalesInicio')
+<script>
+    // Captura el clic en el botón "Devolver"
+    document.getElementById('openModalButton').addEventListener('click', function() {
+      // Abre el modal de confirmación
+      var myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+      myModal.show();
+
+      // Cuando se haga clic en el botón "Confirmar" en el modal
+      document.getElementById('confirmButton').addEventListener('click', function() {
+        // Envía el formulario
+        document.getElementById('confirmForm').submit();
+      });
+    });
+  </script>
 @endsection

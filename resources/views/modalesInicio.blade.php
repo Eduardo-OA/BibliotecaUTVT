@@ -149,7 +149,7 @@
                             <textarea class="form-control" id="notas" name="notas" rows="5" placeholder="Ingrese el estado en el que se encuentra el libro antes del prestamo:"></textarea>
                         </div>
                     </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -161,3 +161,27 @@
     </div>
 
     <!-- Renta de Libros Modal END -->
+
+
+
+  <!-- Finalizar renta  INICIO -->
+
+    <td class="text-center">
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  ¿Estás seguro de que quieres marcar este préstamo como devuelto?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button id="confirmButton" type="button" class="btn btn-primary">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+  <!-- Finalizar renta END -->
