@@ -71,19 +71,29 @@
                                     <div class="form-group">
                                         <label for="usuarios" style="font-size: medium; color:black;">Seleccione un estudiante</label>
                                         <select class="form-control" id="usuarios" name="usuario_id">
+                                            <option value="">Seleccionar estudiante</option>
                                             @foreach($usuarios as $usuario)
-                                            <option value="{{ $usuario->id }}">{{ $usuario->matricula .' - '. $usuario->nombre .' '. $usuario->app .' '. $usuario->apm .' - '. $usuario->carrera }}</option>
+                                            <option value="{{ $usuario->id }}" {{ $usuario->id == old('usuario_id') ? 'selected' : '' }}>{{ $usuario->matricula .' - '. $usuario->nombre .' '. $usuario->app .' '. $usuario->apm .' - '. $usuario->carrera }}</option>
                                             @endforeach
                                         </select>
+                                        @error('usuario_id')
+                                        <br>
+                                        <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-12 pt-2">
                                     <div class="form-group">
                                         <label for="maquina" style="font-size: medium; color:black;">Maquina a rentar</label>
                                         <fieldset disabled>
-                                            <input type="text" class="form-control" id="maquinaVista" name="maquinaVista" placeholder="Seleccione una maquina">
+                                            <input type="text" class="form-control" id="maquinaVista" name="maquinaVista" placeholder="Seleccione una maquina" value="{{ 'Isla '.old('isla_id') .'- Maquina '.old('maquina_id') }}">
                                         </fieldset>
-                                        <input type="text" class="form-control" id="maquinaForm" name="maquina_id" style="display: none;">
+                                        <input type="text" class="form-control" id="maquinaForm" name="maquina_id" style="display: none;" value="{{ old('maquina_id') }}">
+                                        <input type="text" class="form-control" id="islaForm" name="isla_id" style="display: none;" value="{{ old('isla_id') }}">
+                                        @error('maquina_id')
+                                        <br>
+                                        <span class="text-danger pt-2">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

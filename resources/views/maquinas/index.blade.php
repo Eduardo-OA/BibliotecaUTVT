@@ -72,6 +72,36 @@
     var titulo = document.querySelector('#titulo');
     titulo.innerHTML = 'Maquinas';
 </script>
+
+<!-- Alertas -->
+<script>
+	$(document).ready(function() {
+		@if(session('success'))
+		$.notify({
+			message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
+		}, {
+			type: 'success',
+			timer: 8000,
+			placement: {
+				from: 'top',
+				align: 'center'
+			}
+		});
+		@endif
+		@if( isset($errors) && count($errors) > 0 )
+		$.notify({
+			message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
+		}, {
+			type: 'danger',
+			timer: 8000,
+			placement: {
+				from: 'top',
+				align: 'center'
+			}
+		});
+		@endif
+	});
+</script>
 @endsection
 
 @section('modals')

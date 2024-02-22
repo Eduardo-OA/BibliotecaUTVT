@@ -7,6 +7,7 @@ use App\Models\Rentamaquinas;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+
 date_default_timezone_set('America/Mexico_City');
 
 class RentaMaquinasController extends Controller
@@ -18,12 +19,34 @@ class RentaMaquinasController extends Controller
         $maquinas = Maquinas::all();
         $rentas = RentaMaquinas::all();
         $usuarios = User::all()->where('rol_id', 3);
-        return view('welcome', compact('islas', 'maquinas', 'rentas', 'usuarios'));
+
+        //  Consulta que se muestra unicamente en la tabla de 'Maquinas en renta'
+        $rentaTable = \DB::SELECT('SELECT usuario.nombre, usuario.app, usuario.apm, usuario.matricula, maquina.isla, maquina.id AS maquina_id, renta.id, renta.hora_inicio, renta.hora_final 
+        FROM rentamaquinas AS renta 
+            INNER JOIN users AS usuario ON renta.usuario_id = usuario.id
+            INNER JOIN maquinas AS maquina ON renta.maquina_id = maquina.id
+        WHERE DATE(renta.updated_at) = CURDATE() ORDER BY renta.hora_inicio DESC');
+
+        //  Consulta que se muestra como la cantidad de rentas activas
+        $cantidadMaquinasRenta = count(Rentamaquinas::whereNull('hora_final')->get());
+
+        return view('welcome', compact('islas', 'maquinas', 'rentas', 'usuarios', 'rentaTable', 'cantidadMaquinasRenta'));
     }
 
     public function rentarmaquina(Request $request)
     {
         // dd($request->all());
+
+        //  Validaciones
+        $messages = [
+            'usuario_id.required' => 'Es necesario seleccionar un usuario.',
+            'maquina_id.required' => 'Es necesario seleccionar una maquina.',
+        ];
+
+        $request->validate([
+            'usuario_id' => ['required', 'string'],
+            'maquina_id' => ['required', 'string'],
+        ], $messages);
 
         RentaMaquinas::create(array(
             'usuario_id' => $request->input('usuario_id'),
@@ -35,7 +58,7 @@ class RentaMaquinasController extends Controller
         $maquina->estatus = 'O';
         $maquina->save();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Renta exitosa');
     }
 
     public function update(RentaMaquinas $id, Request $request)
@@ -51,6 +74,6 @@ class RentaMaquinasController extends Controller
         $query->estatus = 'D';
         $query->save();
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Termino de renta exitosa');
     }
 }

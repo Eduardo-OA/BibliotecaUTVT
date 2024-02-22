@@ -18,7 +18,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Rentas de maquinas</p>
-                        <p class="card-title">10
+                        <p class="card-title">{{ $cantidadMaquinasRenta }}
                         <p>
                     </div>
                 </div>
@@ -88,13 +88,13 @@
                         </th>
                     </thead>
                     <tbody class="text-center">
-                        @foreach($rentas as $renta)
+                        @foreach($rentaTable as $renta)
                         <tr>
                             <td>
-                                {{ $renta -> usuario_id }}
+                                {{ $renta->matricula.' - '.$renta->nombre .' '. $renta->app .' '. $renta->apm }}
                             </td>
                             <td>
-                                {{ $renta -> maquina_id }}
+                                {{ 'Isla '.$renta->isla.' - Maquina '.$renta -> maquina_id }}
                             </td>
                             <td class="text-center">
                                 {{ $renta -> hora_inicio }}
@@ -202,7 +202,9 @@
     function valoresRenta(isla, maquina) {
         const inputMaquinaVista = document.querySelector('#maquinaVista');
         const inputMaquinaForm = document.querySelector('#maquinaForm');
+        const islaForm = document.querySelector('#islaForm');
         inputMaquinaForm.value = maquina;
+        islaForm.value = isla;
         inputMaquinaVista.value = `Isla ${isla} - Maquina ${maquina}`;
     }
 </script>
@@ -227,6 +229,35 @@
         });
     }
     setInterval(actualizarReloj, 1000);
+</script>
+<!-- Alertas -->
+<script>
+	$(document).ready(function() {
+		@if(session('success'))
+		$.notify({
+			message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
+		}, {
+			type: 'success',
+			timer: 8000,
+			placement: {
+				from: 'top',
+				align: 'center'
+			}
+		});
+		@endif
+		@if( isset($errors) && count($errors) > 0 )
+		$.notify({
+			message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
+		}, {
+			type: 'danger',
+			timer: 8000,
+			placement: {
+				from: 'top',
+				align: 'center'
+			}
+		});
+		@endif
+	});
 </script>
 @endsection
 

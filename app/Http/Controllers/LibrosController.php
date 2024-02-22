@@ -62,7 +62,7 @@ class LibrosController extends Controller
         $libro->ubicacion = $request->input('ubicacion');
         $libro->fechaadqui = $request->input('fechaadqui');
         $libro->save();
-        return redirect()->route('libros.index')->with('success', 'Usuario creado exitosamente');
+        return redirect()->route('libros.index')->with('success', 'Libro agregado exitosamente');
     }
 
     public function update(Request $request, $id)
@@ -118,9 +118,9 @@ class LibrosController extends Controller
 
         if ($libro) {
             $libro->delete();
-            return redirect()->route('libros.index')->with('success', 'Usuario eliminado exitosamente.');
+            return redirect()->route('libros.index')->with('success', 'Libro eliminado exitosamente.');
         } else {
-            return redirect()->route('libros.index')->with('error', 'Usuario no encontrado.');
+            return redirect()->route('libros.index')->with('error', 'Libro no encontrado.');
         }
     }
 }
