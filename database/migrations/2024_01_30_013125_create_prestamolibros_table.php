@@ -18,6 +18,8 @@ return new class extends Migration
             $table->date('fecha_pres');
             $table->date('fecha_devo');
             $table->string('notas');
+            // $table->enum('status', ['rentado', 'disponible'])->default('disponible');
+            $table->enum('status', ['rentado', 'disponible'])->default('rentado');
             $table->timestamps();
         });
     }

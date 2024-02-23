@@ -157,21 +157,61 @@
                             <td class="text-center">
                                 <button class="btn btn-secondary">Terminar renta</button>
                             </td>
-                            @foreach ($librosAlquilados as $prestamo)
+                        @foreach ($librosRentados as $prestamo)
     <tr>
         <td> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}</td>
         <td>{{ $prestamo->libro->titulo }}</td>
         <td class="text-center">{{ \Carbon\Carbon::createFromFormat('Y-m-d', $prestamo->fecha_pres)->format('d - F - Y') }}</td>
 
         {{-- <td class="text-center">{{ $prestamo->fecha_pres->format('d - F - Y') }}</td> --}}
-        <td class="text-center">
-            <form id="confirmForm" action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST">
+
+
+              <!-- Finalizar renta   INICIO -->
+
+    <td class="text-center">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-devolucion-libros" data-id="{{ $prestamo->id }}">
+            Devolver
+        </button>
+
+
+
+<!-- Devolución de Libros Modal START -->
+
+<div class="modal fade" id="modal-devolucion-libros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Devolución de Libros</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button id="openModalButton" type="button" class="btn btn-secondary">Devolver</button>
-              </form>
+                <div class="modal-body">
+                    @foreach ($librosRentados as $prestamo)
+                    <p class="text-center" style="font-size: 18px;">¿Estás seguro de finalizar la renta del libro: <br>
+                        <b>  {{ $prestamo->libro->titulo }}<br></b>
+                            alquilado por:<br>
+                        <b>  <i> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}</i>
+                       </b>
+                    </p>
+                    @endforeach
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" style="margin-right: 2%" class="btn btn-secondary" data-dismiss="modal" style="font-size: 16px;">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" style="font-size: 16px;">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
-        </td>
+<!-- Devolución de Libros Modal END -->
+
+    </td>
+    <!-- Finalizar renta   END -->
     </tr>
 @endforeach
 
@@ -280,18 +320,5 @@
 
 @section('modals')
 @include('modalesInicio')
-<script>
-    // Captura el clic en el botón "Devolver"
-    document.getElementById('openModalButton').addEventListener('click', function() {
-      // Abre el modal de confirmación
-      var myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-      myModal.show();
 
-      // Cuando se haga clic en el botón "Confirmar" en el modal
-      document.getElementById('confirmButton').addEventListener('click', function() {
-        // Envía el formulario
-        document.getElementById('confirmForm').submit();
-      });
-    });
-  </script>
 @endsection

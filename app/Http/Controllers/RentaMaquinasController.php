@@ -22,11 +22,13 @@ class RentaMaquinasController extends Controller
         $usuarios = User::all();
         $maquinas = Maquinas::all();
         // Obtener los IDs de los libros que están alquilados actualmente
-        $librosAlquilados = DB::table('prestamolibros')->pluck('libros_id')->all();
-
-        // Obtener todos los libros que no están en la lista de libros alquilados
-        $libros = Libros::whereNotIn('id', $librosAlquilados)->get();
-
+        $librosAlquilados = Prestamolibros::where('status', 'rentado')->pluck('libros_id');
+        $librosRentados = Prestamolibros::where('status', 'rentado')->get();
+        // Obtener los libros que no están alquilados, tienen cantidad mayor que 0 y disponibilidad true
+        $librosDisponibles = Libros::whereNotIn('id', $librosAlquilados)
+                                   ->where('cantidad', '>', 0)
+                                //    ->where('disponibilidad', true)
+                                   ->get();
         // Obtener los préstamos de libros activos (es decir, no devueltos)
         $prestamos = Prestamolibros::whereNull('fecha_devo')->get();
 
@@ -36,7 +38,8 @@ class RentaMaquinasController extends Controller
         // Obtener los libros que no están en la lista de libros prestados
         $libros_Stock = Libros::whereNotIn('id', $alquilados)->get();
 
-        $librosAlquilados = Prestamolibros::with('Libro', 'User')->get();
+        // $librosAlquilados = Prestamolibros::with('Libro', 'User')->get();
+        $librosPrestados = Prestamolibros::where('status', 'rentado')->get();
 
         //////********************DEVOLVER******************************** */
         // Obtener la fecha actual
@@ -54,15 +57,18 @@ class RentaMaquinasController extends Controller
                     $fechaDevoCarbon = Carbon::parse($libro->fecha_devo);
                     $htmlLibrosDevolver .= 'El libro:       '.  $libro->libro->titulo . ' - Devolver el ' . $fechaDevoCarbon->toDateString();
                 }
-                // dd($librosDevolver);
+                // dd($librosRentados);
         return view('welcome', compact(
             'islas',
             'maquinas',
+            'librosRentados',
             'librosDevolver',
+            'librosDisponibles',
             'librosAlquilados',
-            'libros',
+            // 'libros',
             'usuarios',
-            'htmlLibrosDevolver'
+            'htmlLibrosDevolver',
+            'librosPrestados'
         ));
     }
 

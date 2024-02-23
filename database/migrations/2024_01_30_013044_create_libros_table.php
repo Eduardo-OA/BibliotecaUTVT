@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('disponibilidad');
             $table->string('ubicacion');
             $table->date('fechaadqui');
+            // $table->enum('status', ['rentado', 'disponible'])->default('disponible');
             $table->timestamps();
         });
     }

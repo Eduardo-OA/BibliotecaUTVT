@@ -40,37 +40,27 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 //  Acceso a rutas mientras el usuario este autenticado
 Route::middleware('auth')->group(function () {
     Route::get('/', [RentaMaquinasController::class, 'index'])->name('inicio');
-    // Route::get('/', [RentalibroController::class, 'index'])->name('inicio');
 
     //  Resourse usuarios
     Route::resource('usuarios', UsuariosController::class);
     Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-    Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
-    Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+    // Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
+    // Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
     // Resourse Libros
     Route::resource('libros', LibrosController::class);
     Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
     //Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store');
-    Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy');
+    // Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy');
 
     //  Resource Maquinas
     Route::resource('maquinas', MaquinasController::class);
-    Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
-    Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
+    // Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
+    // Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
 
 
 });
 //RUTAS D renta LIBROS
-Route::resource('renta-libros', RentaLibroController::class)->names([
-    'index' => 'renta-libros.index',
-    'create' => 'renta-libros.create',
-    'store' => 'renta-libros.store',
-    'show' => 'renta-libros.show',
-    'edit' => 'renta-libros.edit',
-    'update' => 'renta-libros.update',
-    'destroy' => 'renta-libros.destroy',
-]);
-
+Route::resource('renta-libros', RentaLibroController::class);
 
 
