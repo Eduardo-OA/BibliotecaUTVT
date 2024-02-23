@@ -58,8 +58,8 @@ class RentaLibroController extends Controller
           $libros = Libros::findOrFail($request->libros_id);
          $libros->cantidad -= 1;
          $libros->save();
-        return view('welcome');
-        // return redirect()->route('inicio')->with('success', 'Préstamo de libro creado exitosamente.');
+        // return view('welcome');
+        return redirect()->route('inicio')->with('success', 'Préstamo de libro creado exitosamente.');
     }
 
 
@@ -102,10 +102,17 @@ class RentaLibroController extends Controller
 {
     $prestamo = Prestamolibros::findOrFail($id);
 
+    // Obtener el libro asociado al préstamo
+    $libro = $prestamo->libro;
+
     // Actualizar el estado del libro devuelto a "disponible"
-    // $libro = $prestamo->libro;
     $prestamo->status = 'disponible';
     $prestamo->save();
+
+    // Aumentar la cantidad de libros en 1
+    $libro->cantidad++;
+    $libro->save();
+
 
     // Ahora puedes decidir si quieres mantener el registro de préstamo en la base de datos o eliminarlo.
     // Si deseas mantener el registro, puedes comentar la línea siguiente.
@@ -116,6 +123,3 @@ class RentaLibroController extends Controller
 }
 
 }
-
-
-

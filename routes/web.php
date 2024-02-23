@@ -62,5 +62,7 @@ Route::middleware('auth')->group(function () {
 });
 //RUTAS D renta LIBROS
 Route::resource('renta-libros', RentaLibroController::class);
+Route::get('/mostrar-aviso-devolucion', [RentaMaquinasController::class, 'mostrarAvisoDevolucion'])->name('mostrar.aviso.devolucion');
+
 
 

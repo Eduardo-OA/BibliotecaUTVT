@@ -157,7 +157,7 @@
                             <td class="text-center">
                                 <button class="btn btn-secondary">Terminar renta</button>
                             </td>
-                        @foreach ($librosRentados as $prestamo)
+                        @foreach ($librosAlquilados as $prestamo)
     <tr>
         <td> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}</td>
         <td>{{ $prestamo->libro->titulo }}</td>
@@ -168,52 +168,52 @@
 
               <!-- Finalizar renta   INICIO -->
 
-    <td class="text-center">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-devolucion-libros" data-id="{{ $prestamo->id }}">
-            Devolver
-        </button>
-
-
-
-<!-- Devolución de Libros Modal START -->
-
-<div class="modal fade" id="modal-devolucion-libros" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Devolución de Libros</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+              <td class="text-center">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-devolucion-libros{{ $prestamo->id }}">
+                    Devolver
                 </button>
-            </div>
-            <form action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <div class="modal-body">
-                    @foreach ($librosRentados as $prestamo)
-                    <p class="text-center" style="font-size: 18px;">¿Estás seguro de finalizar la renta del libro: <br>
-                        <b>  {{ $prestamo->libro->titulo }}<br></b>
-                            alquilado por:<br>
-                        <b>  <i> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}</i>
-                       </b>
-                    </p>
-                    @endforeach
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" style="margin-right: 2%" class="btn btn-secondary" data-dismiss="modal" style="font-size: 16px;">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" style="font-size: 16px;">Confirmar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+            </td>
 
+            <!-- Devolución de Libros Modal START -->
+            <div class="modal fade" id="modal-devolucion-libros{{ $prestamo->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"> Devolución de Libros</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                <p class="text-center" style="font-size: 18px;">¿Estás seguro de finalizar la renta del libro: <br>
+                                    <b>  {{ $prestamo->libro->titulo }}<br></b>
+                                        alquilado por:<br>
+                                    <b>  <i> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}</i>
+                                   </b>
+                                </p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" style="margin-right: 2%" class="btn btn-secondary" data-dismiss="modal" style="font-size: 16px;">Cancelar</button>
+                                <button type="submit" class="btn btn-primary" style="font-size: 16px;">Confirmar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+                console.log({{ $prestamo->id }});
+            </script>
+
+            <!-- Devolución de Libros Modal END -->
+@endforeach
 <!-- Devolución de Libros Modal END -->
 
     </td>
     <!-- Finalizar renta   END -->
     </tr>
-@endforeach
 
                         </tr>
                     </tbody>
@@ -298,7 +298,6 @@
     <script>
         // Mostrar el mensaje emergente al cargar la página
         document.addEventListener('DOMContentLoaded', function() {
-            @if($librosDevolver->isNotEmpty())
 
             Swal.fire({
                 icon: 'warning',
@@ -312,7 +311,6 @@
                 toast: true,
             });
             console.log(html);
-            @endif
         });
     </script>
 

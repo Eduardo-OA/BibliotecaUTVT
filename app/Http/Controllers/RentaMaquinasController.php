@@ -21,27 +21,22 @@ class RentaMaquinasController extends Controller
         // $libros = Libros::all();
         $usuarios = User::all();
         $maquinas = Maquinas::all();
-        // Obtener los IDs de los libros que están alquilados actualmente
-        $librosAlquilados = Prestamolibros::where('status', 'rentado')->pluck('libros_id');
-        $librosRentados = Prestamolibros::where('status', 'rentado')->get();
-        // Obtener los libros que no están alquilados, tienen cantidad mayor que 0 y disponibilidad true
-        $librosDisponibles = Libros::whereNotIn('id', $librosAlquilados)
-                                   ->where('cantidad', '>', 0)
-                                //    ->where('disponibilidad', true)
-                                   ->get();
-        // Obtener los préstamos de libros activos (es decir, no devueltos)
-        $prestamos = Prestamolibros::whereNull('fecha_devo')->get();
+// Consulta para obtener los libros disponibles
+$librosDisponibles = Libros::where('cantidad', '>',  0)->get();
 
-        // Obtener los IDs de los libros que están actualmente prestados
-        $alquilados = DB::table('prestamolibros')->pluck('libros_id')->all();
+// Consulta para obtener los libros alquilados
+$librosAlquilados = Prestamolibros::where('status', 'rentado')->get();
 
-        // Obtener los libros que no están en la lista de libros prestados
-        $libros_Stock = Libros::whereNotIn('id', $alquilados)->get();
+// Puedes acceder a los detalles de los libros disponibles y alquilados de la siguiente manera:
+// foreach ($librosDisponibles as $libro) {
+//     echo "Título: " . $libro->titulo . ", Autores: " . $libro->autores . ", Género: " . $libro->genero . ", Editorial: " . $libro->editorial . "\n";
+// }
 
-        // $librosAlquilados = Prestamolibros::with('Libro', 'User')->get();
-        $librosPrestados = Prestamolibros::where('status', 'rentado')->get();
-
-        //////********************DEVOLVER******************************** */
+// foreach ($librosAlquilados as $prestamo) {
+//     $libro = $prestamo->libro;
+//     echo "Título: " . $libro->titulo . ", Autores: " . $libro->autores . ", Género: " . $libro->genero . ", Editorial: " . $libro->editorial . "\n";
+// }
+        //////*DEVOLVER******************************* */
         // Obtener la fecha actual
         $fechaActual = Carbon::now();
 
@@ -61,14 +56,14 @@ class RentaMaquinasController extends Controller
         return view('welcome', compact(
             'islas',
             'maquinas',
-            'librosRentados',
+            // 'librosRentados',
             'librosDevolver',
             'librosDisponibles',
             'librosAlquilados',
             // 'libros',
             'usuarios',
             'htmlLibrosDevolver',
-            'librosPrestados'
+            // 'librosPrestados'
         ));
     }
 

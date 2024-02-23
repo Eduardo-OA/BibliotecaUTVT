@@ -37,7 +37,7 @@ class MaquinasController extends Controller
         return redirect()->route('maquinas.index')->with('success', 'Maquina añadida exitosamente');
     }
 
-    public function update(Request $request, $id)
+    mostrarAvisoDevolucion    public function update(Request $request, $id)
     {
         $rules = [
             'isla' => 'required',
