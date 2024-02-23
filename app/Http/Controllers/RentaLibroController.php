@@ -31,9 +31,6 @@ class RentaLibroController extends Controller
     // Método para mostrar el formulario de creación de un nuevo préstamo de libro
     public function create()
     {
-
-
-
     }
 
 
@@ -55,9 +52,9 @@ class RentaLibroController extends Controller
         $libro = Prestamolibros::findOrFail($prestamo->id);
         $libro->status = 'rentado';
         $libro->save();
-          $libros = Libros::findOrFail($request->libros_id);
-         $libros->cantidad -= 1;
-         $libros->save();
+        $libros = Libros::findOrFail($request->libros_id);
+        $libros->cantidad -= 1;
+        $libros->save();
         // return view('welcome');
         return redirect()->route('inicio')->with('success', 'Préstamo de libro creado exitosamente.');
     }
@@ -98,28 +95,26 @@ class RentaLibroController extends Controller
     }
 
     // Método para eliminar un préstamo de libro de la base de datos
-  public function destroy($id)
-{
-    $prestamo = Prestamolibros::findOrFail($id);
+    public function destroy($id)
+    {
+        $prestamo = Prestamolibros::findOrFail($id);
 
-    // Obtener el libro asociado al préstamo
-    $libro = $prestamo->libro;
+        // Obtener el libro asociado al préstamo
+        $libro = $prestamo->libro;
 
-    // Actualizar el estado del libro devuelto a "disponible"
-    $prestamo->status = 'disponible';
-    $prestamo->save();
+        // Actualizar el estado del libro devuelto a "disponible"
+        $prestamo->status = 'disponible';
+        $prestamo->save();
 
-    // Aumentar la cantidad de libros en 1
-    $libro->cantidad++;
-    $libro->save();
+        // Aumentar la cantidad de libros en 1
+        $libro->cantidad++;
+        $libro->save();
 
 
-    // Ahora puedes decidir si quieres mantener el registro de préstamo en la base de datos o eliminarlo.
-    // Si deseas mantener el registro, puedes comentar la línea siguiente.
-    // $prestamo->delete();
+        // Ahora puedes decidir si quieres mantener el registro de préstamo en la base de datos o eliminarlo.
+        // Si deseas mantener el registro, puedes comentar la línea siguiente.
+        // $prestamo->delete();
 
-    return redirect()->route('inicio')->with('success', 'Préstamo de libro devuelto exitosamente.');
-
-}
-
+        return redirect()->route('inicio')->with('success', 'Préstamo de libro devuelto exitosamente.');
+    }
 }
