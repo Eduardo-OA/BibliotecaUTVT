@@ -21,41 +21,52 @@ class RentaMaquinasController extends Controller
         // $libros = Libros::all();
         $usuarios = User::all();
         $maquinas = Maquinas::all();
-        // Consulta para obtener los libros disponibles
-        $librosDisponibles = Libros::where('cantidad', '>',  0)->get();
-
-        // Consulta para obtener los libros alquilados
-        $librosAlquilados = Prestamolibros::where('status', 'rentado')->get();
-
-        //////*DEVOLVER******************************* */
-        // Obtener la fecha actual
-        $fechaActual = Carbon::now();
-
-        // Obtener los libros que deben ser devueltos hoy o en los próximos días
-        $librosDevolver = Prestamolibros::whereDate('fecha_devo', '>=', $fechaActual)
-            ->where('fecha_devo', '<=', $fechaActual->addDays(3))
-            ->where('status', 'rentado')
-            ->get();
 
 
-        // Generar HTML para los libros a devolver
-        $htmlLibrosDevolver = '';
-        foreach ($librosDevolver as $libro) {
-            $fechaDevoCarbon = Carbon::parse($libro->fecha_devo);
-            $htmlLibrosDevolver .= 'El libro:       ' .  $libro->libro->titulo . ' - Devolver el ' . $fechaDevoCarbon->toDateString();
-        }
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////
+        ////////////////////////CONSULTAS DE WELCOME(RENTA DE LIBROS)/////////////////
+        //////////////////////////////////////////////////////////////////////////////
+
+           // Consulta para obtener los libros disponibles
+           $librosDisponibles = Libros::where('cantidad', '>',  0)->get();
+
+           // Consulta para obtener los libros alquilados
+           $librosAlquilados = Prestamolibros::where('status', 'rentado')->get();
+
+           //////*DEVOLVER******************************* */
+           // Obtener la fecha actual
+           $fechaActual = Carbon::now();
+
+           // Obtener los libros que deben ser devueltos hoy o en los próximos días
+           $librosDevolver = Prestamolibros::whereDate('fecha_devo', '>=', $fechaActual)
+               ->where('fecha_devo', '<=', $fechaActual->addDays(3))
+               ->where('status', 'rentado')
+               ->get();
+
+
+           // Generar HTML para los libros a devolver
+           $htmlLibrosDevolver = '';
+           foreach ($librosDevolver as $libro) {
+               $fechaDevoCarbon = Carbon::parse($libro->fecha_devo);
+               $htmlLibrosDevolver .= 'El libro:       ' .  $libro->libro->titulo . ' - Devolver el ' . $fechaDevoCarbon->toDateString();
+           }
         // dd($librosRentados);
         return view('welcome', compact(
             'islas',
             'maquinas',
+            'usuarios',
             // 'librosRentados',
+            // 'libros',
+            // 'librosPrestados',
             'librosDevolver',
             'librosDisponibles',
             'librosAlquilados',
-            // 'libros',
-            'usuarios',
-            'htmlLibrosDevolver',
-            // 'librosPrestados'
+            'htmlLibrosDevolver'
         ));
     }
 
