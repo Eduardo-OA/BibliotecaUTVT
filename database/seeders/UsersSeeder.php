@@ -15,7 +15,7 @@ class UsersSeeder extends Seeder
     public function run(): void
     {
         // Insertar datos de prueba en la tabla 'users'
-    
+
         //intyeccion
         DB::table('users')->insert([
             'nombre' => 'Administrador',
@@ -27,7 +27,7 @@ class UsersSeeder extends Seeder
             'genero' => 'M',
             'email' => 'admin@biblioteca.com',
             'password' => Hash::make('admin'),
-            'rol_id' => 1, 
+            'rol_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

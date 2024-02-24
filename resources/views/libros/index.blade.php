@@ -1,6 +1,8 @@
 @extends('layout.layout')
 
 @section('content')
+{{-- @include('modalesInicio') --}}
+
 <div class="col-md-12">
     <div class="card">
         <div class="card-header row">
@@ -34,7 +36,7 @@
                     <tbody>
                         <tr>
                             @foreach ($libros as $libro)
-                                
+
                             <td>{{$libro->id}}</td>
                             <td>{{$libro->titulo}}</td>
                             <td>{{$libro->autores}}</td>

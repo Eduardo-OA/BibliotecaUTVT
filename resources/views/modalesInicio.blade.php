@@ -152,37 +152,114 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="">
+            <form action="{{ route('renta-libros.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="modal-body row">
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="libro">Seleccione el libro a prestar: </label>
-                            <select class="form-control" id="libro" name="libro">
-                                <option>Libro - Genero - Disponibilidad</option>
+                            <label for="libros_id">Seleccione el libro a prestar:</label>
+                            <select class="form-control" id="libros_id" name="libros_id">
+                                <option value="">Seleccione un libro</option>
+                                @foreach($librosDisponibles as $libro)
+                                    <option value="{{ $libro->id }}">{{ $libro->titulo }} - {{ $libro->genero }} - {{ $libro->disponibilidad ? 'Disponible' : 'No disponible' }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="user">Seleccione al estudiante: </label>
-                            <select class="form-control" id="user" name="user">
-                                <option>Matricula - Nombre - Carrera</option>
+                            <label for="usuario_id">Seleccione al estudiante:</label>
+                            <select class="form-control" id="usuario_id" name="usuario_id">
+                                <option value="">Seleccione un usuario</option>
+                                @foreach($usuarios as $usuario)
+                                    <option value="{{ $usuario->id }}">{{ $usuario->matricula }} - {{ $usuario->nombre }} - {{ $usuario->carrera }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label for="anotaciones">Anotaciones acerca del libro: </label>
-                            <textarea class="form-control" id="anotaciones" name="anotaciones" rows="5" placeholder="Ingrese el estado en el que se encuentra el libro antes del prestamo:"></textarea>
+                            <label for="fecha_pres">Fecha de Prestamo:</label>
+                            <input type="date" id="fecha_pres" name="fecha_pres" class="form-control">
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="fecha_devo">Fecha de Devolucion:</label>
+                            <input type="date" id="fecha_devo" name="fecha_devo" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="notas">Anotaciones acerca del libro:</label>
+                            <textarea class="form-control" id="notas" name="notas" rows="5" placeholder="Ingrese el estado en el que se encuentra el libro antes del prestamo:"></textarea>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Rentar</button>
+                    <button type="submit" class="btn btn-primary">Rentar</button>
                 </div>
             </form>
+
         </div>
     </div>
 
     <!-- Renta de Libros Modal END -->
+
+
+
+<!-- Devolución de Libros Modal START
+este  es para devolver cualuier libro q qyuera tipo select (que llegue antes de lo esperado)-->
+{{--
+<div class="modal fade" id="modal-devolucion-libros" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Devolución de Libros</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="confirmForm" action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST" enctype="multipart/form-data">
+
+                @csrf
+                @method('DELETE')
+                <div class="modal-body row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="libros_id">Libro a devolver:</label>
+                            <select class="form-control" id="libros_id" name="libros_id">
+                                <option value="">Seleccione un libro</option>
+                                @foreach($librosDevolver as $libro)
+                                    <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="fecha_devo">Fecha de devolución:</label>
+                            <input type="date" id="fecha_devo" name="fecha_devo" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="notas">Anotaciones sobre la devolución:</label>
+                            <textarea class="form-control" id="notas" name="notas" rows="5" placeholder="Ingrese cualquier anotación adicional sobre la devolución"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Devolver</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div> --}}
+
+<!-- Devolución de Libros Modal END -->

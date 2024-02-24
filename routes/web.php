@@ -6,6 +6,7 @@ use App\Http\Controllers\LibrosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\MaquinasController;
 use App\Http\Controllers\RentaMaquinasController;
+use App\Http\Controllers\RentaLibroController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +41,17 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 Route::middleware('auth')->group(function () {
     Route::get('/', [RentaMaquinasController::class, 'index'])->name('inicio');
 
-    //  Resourse usuarios 
+
+
+
+
+    // Route::get('/', function () {
+    //     $maquinas = RentaMaquinasController::index();
+    //     $libros = RentaLibroController::index();
+    //     return view('tu_vista', compact('maquinas', 'libros'));
+    // });
+
+    //  Resourse usuarios
     Route::resource('usuarios', UsuariosController::class);
     Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
     Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
@@ -57,7 +68,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
     Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
 
-    //Renta de maquinas
+    //  Renta de maquinas
     Route::name('rentarmaquina')->post('rentarmaquina', [RentaMaquinasController::class, 'rentarmaquina']);
     Route::put('rentaMaquina.update/{id}', [RentaMaquinasController::class, 'update'])->name('rentaMaquina.update');
+    //  RUTAS de renta LIBROS
+    Route::resource('renta-libros', RentaLibroController::class);
+    Route::get('/mostrar-aviso-devolucion', [RentaMaquinasController::class, 'mostrarAvisoDevolucion'])->name('mostrar.aviso.devolucion');
+    
 });

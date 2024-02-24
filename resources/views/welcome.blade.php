@@ -1,5 +1,4 @@
 @extends('layout.layout')
-
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/islas.css') }}">
 @endsection
@@ -46,8 +45,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Rentas de libros</p>
-                        <p class="card-title">55
-                        <p>
+                        <p class="card-title">55</p>
                     </div>
                 </div>
             </div>
@@ -147,19 +145,65 @@
                         </th>
                     </thead>
                     <tbody>
+                        @foreach ($librosAlquilados as $prestamo)
                         <tr>
-                            <td>
-                                222110811 - Jossue Alejandro Candelas Hernández
+                            <td> {{ $prestamo->user->nombre }} {{ $prestamo->user->app }} {{ $prestamo->user->apm }}
                             </td>
-                            <td>
-                                Matemáticas para Ingenieria II
-                            </td>
+                            <td>{{ $prestamo->libro->titulo }}</td>
                             <td class="text-center">
-                                14 - Febrero - 2024
+                                {{ \Carbon\Carbon::createFromFormat('Y-m-d', $prestamo->fecha_pres)->format('d - F - Y') }}
                             </td>
+
+                            {{-- <td class="text-center">{{ $prestamo->fecha_pres->format('d - F - Y') }}</td> --}}
+
+
+                            <!-- Finalizar renta   INICIO -->
+
                             <td class="text-center">
-                                <button class="btn btn-secondary">Terminar renta</button>
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#modal-devolucion-libros{{ $prestamo->id }}">
+                                    Devolver
+                                </button>
                             </td>
+
+                            <!-- Devolución de Libros Modal START -->
+                            <div class="modal fade" id="modal-devolucion-libros{{ $prestamo->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"> Devolución de Libros</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <div class="modal-body row">
+                                                <div class="col-12">
+                                                    <p class="text-center" style="font-size: 18px;">¿Estás seguro de
+                                                        finalizar la renta del libro? <br>
+                                                    </p>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <b>{{ $prestamo->libro->titulo }}</b> alquilado por: <b><i> {{ $prestamo->user->nombre .' '. $prestamo->user->app .' '. $prestamo->user->apm }}</i></b>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="font-size: 16px;">Cancelar</button>
+                                                <button type="submit" class="btn btn-success" style="font-size: 16px;">Confirmar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Devolución de Libros Modal END -->
+                            @endforeach
+                            <!-- Devolución de Libros Modal END -->
+
+                            </td>
+                            <!-- Finalizar renta   END -->
+                        </tr>
+
                         </tr>
                     </tbody>
                 </table>
@@ -232,32 +276,93 @@
 </script>
 <!-- Alertas -->
 <script>
-	$(document).ready(function() {
-		@if(session('success'))
-		$.notify({
-			message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
-		}, {
-			type: 'success',
-			timer: 8000,
-			placement: {
-				from: 'top',
-				align: 'center'
-			}
-		});
-		@endif
-		@if( isset($errors) && count($errors) > 0 )
-		$.notify({
-			message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
-		}, {
-			type: 'danger',
-			timer: 8000,
-			placement: {
-				from: 'top',
-				align: 'center'
-			}
-		});
-		@endif
-	});
+    $(document).ready(function() {
+        @if(session('success'))
+        $.notify({
+            message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
+        }, {
+            type: 'success',
+            timer: 5000,
+            placement: {
+                from: 'top',
+                align: 'center'
+            }
+        });
+        @endif
+        @if(isset($errors) && count($errors) > 0)
+        $.notify({
+            message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
+        }, {
+            type: 'danger',
+            timer: 5000,
+            placement: {
+                from: 'top',
+                align: 'center'
+            }
+        });
+        @endif
+        @if($librosDevolver -> isNotEmpty())
+        $.notify({
+            message: "<b> Próximas devoluciones: </b> <ul> @foreach ($librosDevolver as $libro) <li> {{ $libro->libro->titulo }} - Devolver el {{ Carbon\Carbon::parse($libro->fecha_devo)->toDateString() }} </li> @endforeach </ul>"
+        }, {
+            type: 'warning',
+            timer: 5000,
+            placement: {
+                from: 'top',
+                align: 'center'
+            }
+        });
+        @endif
+    });
+</script>
+<script>
+    function valoresRenta(isla, maquina) {
+        const inputMaquinaVista = document.querySelector('#maquinaVista');
+        const inputMaquinaForm = document.querySelector('#maquinaForm');
+        inputMaquinaForm.value = maquina;
+        inputMaquinaVista.value = `Isla ${isla} - Maquina ${maquina}`;
+    }
+</script>
+
+<script>
+    //  Mostrar hora final en tiempo real
+    function actualizarReloj() {
+        const relojElemento = document.getElementById('reloj');
+        const horaElemento = document.getElementById('hora');
+        const minutosElemento = document.getElementById('minutos');
+
+        if (horaElemento) {
+            const ahora = new Date();
+            const hora = ahora.getHours();
+            const minutos = ahora.getMinutes();
+
+            horaElemento.textContent = hora < 10 ? '0' + hora : hora;
+            minutosElemento.textContent = minutos < 10 ? '0' + minutos : minutos;
+        }
+
+        return
+    }
+    setInterval(actualizarReloj, 1000);
+</script>
+
+{{-- MARCAR LA DEVOLUCION A DB  --}}
+<script>
+    function devolverPrestamo(prestamoId) {
+        // Confirmar si el usuario realmente quiere devolver el préstamo
+        if (confirm('¿Estás seguro de que quieres marcar este préstamo como devuelto?')) {
+            // Enviar una solicitud AJAX al servidor para marcar el préstamo como devuelto
+            axios.post('/devolver-prestamo', {
+                    prestamo_id: prestamoId
+                })
+                .then(function(response) {
+                    // Recargar la página o actualizar la lista de préstamos después de marcar el préstamo como devuelto
+                    location.reload();
+                })
+                .catch(function(error) {
+                    console.error('Error al marcar el préstamo como devuelto:', error);
+                });
+        }
+    }
 </script>
 @endsection
 
