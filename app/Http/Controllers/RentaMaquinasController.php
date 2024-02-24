@@ -38,6 +38,7 @@ class RentaMaquinasController extends Controller
         $cantidadMaquinasRenta = count(Rentamaquinas::whereNull('hora_final')->get());
 
         ////////////////////////CONSULTAS DE WELCOME(RENTA DE LIBROS)/////////////////
+        $cantidadLibrosRenta = count(Prestamolibros::where('status', 'rentado')->get());
 
         // Consulta para obtener los libros disponibles
         $librosDisponibles = Libros::where('cantidad', '>',  0)->get();
@@ -70,6 +71,7 @@ class RentaMaquinasController extends Controller
             'usuarios',
             'rentaTable',
             'cantidadMaquinasRenta',
+            'cantidadLibrosRenta',
             'islas',
             'maquinas',
             'usuarios',

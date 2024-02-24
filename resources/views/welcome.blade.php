@@ -45,7 +45,7 @@
                 <div class="col-7 col-md-8">
                     <div class="numbers">
                         <p class="card-category">Rentas de libros</p>
-                        <p class="card-title">55</p>
+                        <p class="card-title">{{ $cantidadLibrosRenta }}</p>
                     </div>
                 </div>
             </div>
