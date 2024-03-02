@@ -1,6 +1,8 @@
 @extends('layout.layout')
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/islas.css') }}">
+<link rel="stylesheet" href="{{ asset('css/virtual-select.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/tooltip.min.css') }}">
 @endsection
 
 <!-- Contenido de la página START -->
@@ -16,7 +18,7 @@
                 </div>
                 <div class="col-7 col-md-8">
                     <div class="numbers">
-                        <p class="card-category">Rentas de maquinas</p>
+                        <p class="card-category">Prestamo de maquinas</p>
                         <p class="card-title">{{ $cantidadMaquinasRenta }}
                         <p>
                     </div>
@@ -28,7 +30,7 @@
             <div class="stats">
                 <i class="bi bi-check"></i>
                 <!-- Extra large modal -->
-                <a href="#" type="button" data-toggle="modal" data-target=".bd-example-modal-xl">Nueva Renta</a>
+                <a href="#" type="button" data-toggle="modal" data-target=".bd-example-modal-xl">Nuevo Prestamo</a>
             </div>
         </div>
     </div>
@@ -44,7 +46,7 @@
                 </div>
                 <div class="col-7 col-md-8">
                     <div class="numbers">
-                        <p class="card-category">Rentas de libros</p>
+                        <p class="card-category">Prestamo de libros</p>
                         <p class="card-title">{{ $cantidadLibrosRenta }}</p>
                     </div>
                 </div>
@@ -55,7 +57,7 @@
             <div class="stats">
                 <i class="bi bi-check"></i>
                 <!-- Extra large modal -->
-                <a href="#" type="button" data-toggle="modal" data-target="#modal-libros">Nueva Renta</a>
+                <a href="#" type="button" data-toggle="modal" data-target="#modal-libros">Nuevo Prestamo</a>
             </div>
         </div>
     </div>
@@ -63,7 +65,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title"> Maquinas en renta</h4>
+            <h4 class="card-title"> Maquinas en prestamo</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -111,7 +113,7 @@
                                 </div>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-secondary" data-toggle="modal" data-target="#createModal{{ $renta->id }}">Terminar renta</button>
+                                <button class="btn btn-secondary" data-toggle="modal" data-target="#createModal{{ $renta->id }}">Finalizar prestamo</button>
                             </td>
                             @endif
                         </tr>
@@ -125,7 +127,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title"> Libros en renta</h4>
+            <h4 class="card-title"> Libros en prestamo</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -181,7 +183,7 @@
                                             <div class="modal-body row">
                                                 <div class="col-12">
                                                     <p class="text-center" style="font-size: 18px;">¿Estás seguro de
-                                                        finalizar la renta del libro? <br>
+                                                        finalizar el prestamo del libro? <br>
                                                     </p>
                                                 </div>
                                                 <div class="col-12 text-center">
@@ -363,6 +365,30 @@
                 });
         }
     }
+</script>
+
+<script src="{{ asset('js/plugins/tooltip.min.js') }}"></script>
+<script src="{{ asset('js/plugins/virtual-select.min.js') }}"></script>
+<script>
+    $(document).ready(function(){
+        VirtualSelect.init({ 
+            ele: '#usuariosMaquina',
+            search: true,
+            dropboxWidth: '500px',
+        });
+
+        VirtualSelect.init({
+            ele: '#libros_id',
+            search: true,
+            dropboxWidth: '500px',
+        });
+
+        VirtualSelect.init({
+            ele: '#usuario_id',
+            search: true,
+            dropboxWidth: '500px',
+        });
+    });
 </script>
 @endsection
 

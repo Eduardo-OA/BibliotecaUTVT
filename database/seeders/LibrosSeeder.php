@@ -17,7 +17,7 @@ class LibrosSeeder extends Seeder
         // Crear datos de ejemplo para la tabla libros
         Libro::create([
             'titulo' => 'El nombre del viento',
-            'autores' => 'Patrick Rothfuss',
+            'autor_principal' => 'Patrick Rothfuss',
             'genero' => 'Fantasía',
             'editorial' => 'Plaza & Janés',
             'idioma' => 'Español',

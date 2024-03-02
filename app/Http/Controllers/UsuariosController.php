@@ -92,7 +92,6 @@ class UsuariosController extends Controller
 
     public function update(Request $request, $id)
     {
-
         //  Mensajes de validación
         $messages = [
             'nombre.required' => 'Es necesario colocar un nombre.',
@@ -117,7 +116,7 @@ class UsuariosController extends Controller
                     'app' => ['required', 'string', 'max:255'],
                     'apm' => ['required', 'string', 'max:255'],
                     'genero' => ['required', 'string'],
-                    'email' => ['email', 'unique:' . User::class],
+                    'email' => ['email'],
                 ], $messages);
             } elseif ($user->rol_id == 3) { // Estudiante
                 $request->validate([
@@ -125,7 +124,6 @@ class UsuariosController extends Controller
                     'app' => ['required', 'string', 'max:255'],
                     'apm' => ['required', 'string', 'max:255'],
                     'genero' => ['required', 'string'],
-                    'carrera' => ['required', 'string'],
                     'matricula' => ['required', 'string'],
                     'direccion' => ['required', 'string'],
                     'celular' => ['required', 'string'],

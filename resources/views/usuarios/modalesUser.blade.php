@@ -12,45 +12,50 @@
 				<div class="modal-body row">
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Nombre:</label>
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Nombre:</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{old('nombre')}}">
 							@error('nombre')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Apellido Paterno:</label>
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Apellido Paterno:</label>
 							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p..." value="{{old('app')}}">
 							@error('app')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Apellido Materno:</label>
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Apellido Materno:</label>
 							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m..." value="{{old('apm')}}">
 							@error('apm')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
-						</div>
-					</div>
-					<div class="col-12 pt-2">
-						<label>Genero:</label>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoF" name="genero" class="custom-control-input" value="F" checked>
-							<label class="custom-control-label" for="generoF">Mujer</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoH" name="genero" class="custom-control-input" value="M">
-							<label class="custom-control-label" for="generoH">Hombre</label>
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
 						<div class="form-group">
-							<label for="opciones">Selecciona una opción:</label>
+							<label for="genero"><strong style="color: red;">*</strong> Genero:</label>
+							<select class="form-control" name="genero" id="genero">
+								<option value="" selected>Seleccione...</option>
+								<option value="M">Mujer</option>
+								<option value="H">Hombre</option>
+								<option value="NB">No Binario</option>
+								<option value="MT">Mujer Transgénero</option>
+								<option value="HT">Hombre Transgénero</option>
+								<option value="AG">Agénero</option>
+								<option value="NI">Identidad de género no incluida</option>
+								<option value="PE">Prefiero no especificar</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-12 pt-2">
+						<div class="form-group">
+							<label for="opciones"><strong style="color: red;">*</strong> Selecciona una opción:</label>
 							<select class="form-control" id="opciones" name="rol_id" onchange="mostrarFormulario()">
 								@foreach ($roles as $rol)
 								<option value="{{ $rol->id }}">{{ $rol->name }}</option>
@@ -63,19 +68,19 @@
 								<p id="texto_registro">Ingrese datos adicionales para registrar un nuevo administrador.</p>
 							</div>
 							<div class="form-group">
-								<label for="email">Correo electrónico:</label>
+								<label for="email"><strong style="color: red;">*</strong> Correo electrónico:</label>
 								<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
 								<small id="emailHelp" class="form-text text-muted">Ingrese el correo del administrador o auxiliar.</small>
 								@error('email')
-                                  <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
-								<label for="password">Contraseña</label>
+								<label for="password"><strong style="color: red;">*</strong> Contraseña</label>
 								<input type="password" class="form-control" id="password" name="password">
 								@error('password')
-                                  <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 						</div>
 
@@ -84,7 +89,7 @@
 								<p>Ingrese datos adicionales para registrar un nuevo estudiante.</p>
 							</div>
 							<div class="form-group">
-								<label for="carrera">Seleccione la carrera del estudiante:</label>
+								<label for="carrera"><strong style="color: red;">*</strong> Seleccione la carrera del estudiante:</label>
 								<select class="form-control" id="carrera" name="carrera">
 									<option value="T.S.U Mantenimiento, Área industrial">T.S.U Mantenimiento, Área industrial.</option>
 									<option value="T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.">T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.</option>
@@ -106,29 +111,29 @@
 									<option value="LIC. Enfermería">LIC. Enfermería</option>
 								</select>
 								@error('carrera')
-                                   <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
-								<label for="matricula">Matricula del estudiante:</label>
+								<label for="matricula"><strong style="color: red;">*</strong> Matricula del estudiante:</label>
 								<input type="number" class="form-control" id="matricula" name="matricula" placeholder="222XXXXXX" value="{{old('matricula')}}">
 								@error('matricula')
-                                 <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
-								<label for="direccion">Dirección del estudiante:</label>
+								<label for="direccion"><strong style="color: red;">*</strong> Dirección del estudiante:</label>
 								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{old('direccion')}}">
 								@error('direccion')
-                                 <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
-								<label for="celular">Número de teléfono del estudiante:</label>
+								<label for="celular"><strong style="color: red;">*</strong> Número de teléfono del estudiante:</label>
 								<input type="text" class="form-control" id="celular" name="celular" placeholder="72XXXXXXXX" value="{{old('celuar')}}">
 								@error('celular')
-                                 <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 						</div>
 
@@ -162,40 +167,45 @@
 				<div class="modal-body row">
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Nombre:</label>
-							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{ $user->nombre }}">
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Nombre:</label>
+							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{ old('nombre', $user->nombre) }}">
 							@error('nombre')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Apellido Paterno:</label>
-							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p..." value="{{ $user->app }}">
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Apellido Paterno:</label>
+							<input type="text" class="form-control" id="app" name="app" placeholder="apellido p..." value="{{ old('app', $user->app) }}">
 							@error('app')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Apellido Materno:</label>
-							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m..." value="{{ $user->apm }}">
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Apellido Materno:</label>
+							<input type="text" class="form-control" id="apm" name="apm" placeholder="apellido m..." value="{{ old('apm', $user->apm) }}">
 							@error('apm')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
-						<label>Genero:</label>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoF" name="genero" class="custom-control-input" value="F" {{ $user->genero === 'F' ? 'checked' : '' }}>
-							<label class="custom-control-label" for="generoF">Mujer</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoH" name="genero" class="custom-control-input" value="M" {{ $user->genero === 'M' ? 'checked' : '' }}>
-							<label class="custom-control-label" for="generoH">Hombre</label>
+						<div class="form-group">
+							<label for="genero"><strong style="color: red;">*</strong> Genero:</label>
+							<select class="form-control" name="genero" id="genero">
+								<option value="" {{ $user->genero == null ? 'selected' : '' }}>Seleccione...</option>
+								<option value="M" {{ $user->genero == 'M' ? 'selected' : '' }}>Mujer</option>
+								<option value="H" {{ $user->genero == 'H' ? 'selected' : '' }}>Hombre</option>
+								<option value="NB" {{ $user->genero == 'NB' ? 'selected' : '' }}>No Binario</option>
+								<option value="MT" {{ $user->genero == 'MT' ? 'selected' : '' }}>Mujer Transgénero</option>
+								<option value="HT" {{ $user->genero == 'HT' ? 'selected' : '' }}>Hombre Transgénero</option>
+								<option value="AG" {{ $user->genero == 'AG' ? 'selected' : '' }}>Agénero</option>
+								<option value="NI" {{ $user->genero == 'NI' ? 'selected' : '' }}>Identidad de género no incluida</option>
+								<option value="PE" {{ $user->genero == 'PE' ? 'selected' : '' }}>Prefiero no especificar</option>
+							</select>
 						</div>
 					</div>
 					<div class="col-12 pt-2">
@@ -218,18 +228,18 @@
 							</div>
 							<div class="form-group">
 								<label for="email">Correo electrónico:</label>
-								<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{ $user->email }}">
+								<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value="{{ old('email', $user->email) }}">
 								<small id="emailHelp" class="form-text text-muted">Ingrese el nuevo correo del administrador o auxiliar.</small>
 								@error('email')
-                                   <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
 								<label for="password">Contraseña</label>
 								<input type="password" class="form-control" id="password" name="password">
 								@error('password')
-                                  <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 						</div>
 					</div>
@@ -261,44 +271,49 @@
 				<div class="modal-body row">
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Nombre:</label>
-							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{ $user->nombre }}">
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Nombre:</label>
+							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre..." value="{{ old('nombre', $user->nombre) }}">
 							@error('nombre')
-                              <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Apellido Paterno:</label>
-							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p..." value="{{ $user->app }}">
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Apellido Paterno:</label>
+							<input type="text" class="form-control" id="app" name="app" placeholder="apellido p..." value="{{ old('app', $user->app) }}">
 							@error('app')
-                             <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
 						<div class="form-group">
-							<label for="exampleFormControlInput1">Apellido Materno:</label>
-							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m..." value="{{ $user->apm }}">
+							<label for="exampleFormControlInput1"><strong style="color: red;">*</strong> Apellido Materno:</label>
+							<input type="text" class="form-control" id="apm" name="apm" placeholder="apellido m..." value="{{ old('apm', $user->apm) }}">
 							@error('apm')
-                              <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
-						<label>Genero:</label>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoF" name="genero" class="custom-control-input" value="F" {{ $user->genero == 'F' ? 'checked' : '' }}>
-							<label class="custom-control-label" for="generoF">Mujer</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoH" name="genero" class="custom-control-input" value="M" {{ $user->genero == 'M' ? 'checked' : '' }}>
-							<label class="custom-control-label" for="generoH">Hombre</label>
+						<div class="form-group">
+							<label for="genero"><strong style="color: red;">*</strong> Genero:</label>
+							<select class="form-control" name="genero" id="genero">
+								<option value="" {{ $user->genero == null ? 'selected' : '' }}>Seleccione...</option>
+								<option value="M" {{ $user->genero == 'M' ? 'selected' : '' }}>Mujer</option>
+								<option value="H" {{ $user->genero == 'H' ? 'selected' : '' }}>Hombre</option>
+								<option value="NB" {{ $user->genero == 'NB' ? 'selected' : '' }}>No Binario</option>
+								<option value="MT" {{ $user->genero == 'MT' ? 'selected' : '' }}>Mujer Transgénero</option>
+								<option value="HT" {{ $user->genero == 'HT' ? 'selected' : '' }}>Hombre Transgénero</option>
+								<option value="AG" {{ $user->genero == 'AG' ? 'selected' : '' }}>Agénero</option>
+								<option value="NI" {{ $user->genero == 'NI' ? 'selected' : '' }}>Identidad de género no incluida</option>
+								<option value="PE" {{ $user->genero == 'PE' ? 'selected' : '' }}>Prefiero no especificar</option>
+							</select>
 						</div>
 						@error('genero')
-                            <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
+						<small class="form-text text-danger">{{$message}}</small>
+						@enderror
 					</div>
 					<div class="col-12 pt-2">
 						<fieldset disabled>
@@ -341,30 +356,30 @@
 										<option value="LIC. Enfermería" {{ $user->carrera == 'LIC. Enfermería' ? 'selected' : '' }}>LIC. Enfermería.</option>
 									</select>
 									@error('carrera')
-                                      <small class="form-text text-danger">{{$message}}</small>
-                                    @enderror
+									<small class="form-text text-danger">{{$message}}</small>
+									@enderror
 								</div>
 							</fieldset>
 							<div class="form-group">
-								<label for="matricula">Matricula del estudiante:</label>
-								<input type="number" class="form-control" id="matricula" name="matricula" placeholder="222XXXXXX" value="{{ $user->matricula }}">
+								<label for="matricula"><strong style="color: red;">*</strong> Matricula del estudiante:</label>
+								<input type="number" class="form-control" id="matricula" name="matricula" placeholder="222XXXXXX" value="{{ old('matricula', $user->matricula) }}">
 								@error('matricula')
-                                 <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
-								<label for="direccion">Dirección del estudiante:</label>
-								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{ $user->direccion }}">
+								<label for="direccion"><strong style="color: red;">*</strong> Dirección del estudiante:</label>
+								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{ old('direccion', $user->direccion) }}">
 								@error('direccion')
-                                  <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 							<div class="form-group">
-								<label for="celular">Número de teléfono del estudiante:</label>
-								<input type="text" class="form-control" id="celular" name="celular" placeholder="72XXXXXXXX" value="{{ $user->celular }}">
+								<label for="celular"><strong style="color: red;">*</strong> Número de teléfono del estudiante:</label>
+								<input type="text" class="form-control" id="celular" name="celular" placeholder="72XXXXXXXX" value="{{ old('celular', $user->celular) }}">
 								@error('celular')
-                                 <small class="form-text text-danger">{{$message}}</small>
-                                @enderror
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
 							</div>
 						</div>
 					</div>
@@ -399,8 +414,8 @@
 							<label for="exampleFormControlInput1">Nombre:</label>
 							<input type="text" class="form-control" id="nombre" name="nombre" placeholder="nombre...">
 							@error('nombre')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
@@ -408,8 +423,8 @@
 							<label for="exampleFormControlInput1">Apellido Paterno:</label>
 							<input type="text" class="form-control" id="nombre" name="app" placeholder="apellido p...">
 							@error('app')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-4">
@@ -417,23 +432,28 @@
 							<label for="exampleFormControlInput1">Apellido Materno:</label>
 							<input type="text" class="form-control" id="nombre" name="apm" placeholder="apellido m...">
 							@error('apm')
-                            <small class="form-text text-danger">{{$message}}</small>
-                            @enderror
+							<small class="form-text text-danger">{{$message}}</small>
+							@enderror
 						</div>
 					</div>
 					<div class="col-12 pt-2">
-						<label>Genero:</label>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoF" name="genero" class="custom-control-input" value="F" {{ $user->genero === 'F' ? 'checked' : '' }}>
-							<label class="custom-control-label" for="generoF">Mujer</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio" id="generoH" name="genero" class="custom-control-input" value="M" {{ $user->genero === 'M' ? 'checked' : '' }}>
-							<label class="custom-control-label" for="generoH">Hombre</label>
+						<div class="form-group">
+							<label for="genero"><strong style="color: red;">*</strong> Genero:</label>
+							<select class="form-control" name="genero" id="genero">
+								<option value="">Seleccione...</option>
+								<option value="M">Mujer</option>
+								<option value="H">Hombre</option>
+								<option value="NB">No Binario</option>
+								<option value="MT">Mujer Transgénero</option>
+								<option value="HT">Hombre Transgénero</option>
+								<option value="AG">Agénero</option>
+								<option value="NI">Identidad de género no incluida</option>
+								<option value="PE">Prefiero no especificar</option>
+							</select>
 						</div>
 						@error('genero')
-                            <small class="form-text text-danger">{{$message}}</small>
-                        @enderror
+						<small class="form-text text-danger">{{$message}}</small>
+						@enderror
 					</div>
 					<div class="col-12 pt-2">
 						<fieldset disabled>

@@ -19,10 +19,11 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
+                <table id="librosTable" class="table">
                     <thead class=" text-primary">
                         <th>Id</th>
                         <th>Título</th>
+                        <th>Autor principal</th>
                         <th>Autores</th>
                         <th>Genero</th>
                         <th>Editorial</th>
@@ -31,14 +32,15 @@
                         <th>Disponibilidad</th>
                         <th>Ubicación Física</th>
                         <th>Fecha de adquisición</th>
-                        <th class="text-center" colspan="2">Acciones</th>
+                        <th class="text-center">Acción</th>
+                        <th class="text-center">Acción</th>
                     </thead>
                     <tbody>
+                        @foreach ($libros as $libro)
                         <tr>
-                            @foreach ($libros as $libro)
-
                             <td>{{$libro->id}}</td>
                             <td>{{$libro->titulo}}</td>
+                            <td>{{$libro->autor_principal}}</td>
                             <td>{{$libro->autores}}</td>
                             <td>{{$libro->genero}}</td>
                             <td>{{$libro->editorial}}</td>
@@ -82,32 +84,52 @@
 
 <!-- Alertas -->
 <script>
-	$(document).ready(function() {
-		@if(session('success'))
-		$.notify({
-			message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
-		}, {
-			type: 'success',
-			timer: 8000,
-			placement: {
-				from: 'top',
-				align: 'center'
-			}
-		});
-		@endif
-		@if( isset($errors) && count($errors) > 0 )
-		$.notify({
-			message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
-		}, {
-			type: 'danger',
-			timer: 8000,
-			placement: {
-				from: 'top',
-				align: 'center'
-			}
-		});
-		@endif
-	});
+    $(document).ready(function() {
+        @if(session('success'))
+        $.notify({
+            message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
+        }, {
+            type: 'success',
+            timer: 8000,
+            placement: {
+                from: 'top',
+                align: 'center'
+            }
+        });
+        @endif
+        @if(isset($errors) && count($errors) > 0)
+        $.notify({
+            message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
+        }, {
+            type: 'danger',
+            timer: 8000,
+            placement: {
+                from: 'top',
+                align: 'center'
+            }
+        });
+        @endif
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#librosTable').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ - _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 para 0 de 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+            },
+        });
+    });
 </script>
 @endsection
 

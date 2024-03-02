@@ -31,6 +31,8 @@ Coded by www.creative-tim.com
     <!-- Bootstrap version 4.4 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="{{ asset('css/paper-dashboard.css') }}" rel="stylesheet" />
+    <!-- DataTable -->
+    <link href="https://cdn.datatables.net/v/bs4/dt-2.0.1/datatables.min.css" rel="stylesheet">
     <!-- CSS Files -->
     @yield('css')
 </head>
@@ -166,7 +168,8 @@ Coded by www.creative-tim.com
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <!-- SweetAlert2 JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <!-- DataTables Plugin -->
+    <script src="https://cdn.datatables.net/v/bs4/dt-2.0.1/datatables.min.js"></script>
     @yield('modals')
 </body>
 

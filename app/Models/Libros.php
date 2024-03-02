@@ -10,6 +10,7 @@ class Libros extends Model
     use HasFactory;
     protected $fillable = [
         'titulo',
+        'autor_principal',
         'autores',
         'genero',
         'editorial',

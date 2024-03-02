@@ -16,8 +16,8 @@
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table">
-					<thead class=" text-primary">
+				<table id="userTable" class="table">
+					<thead class="text-center text-primary">
 						<th>#</th>
 						<th>Nombre</th>
 						<th>Apellido Paterno</th>
@@ -29,12 +29,13 @@
 						<th>Direccion</th>
 						<th>Celular</th>
 						<th>E-mail</th>
-						<th class="text-center" colspan="2">Acciones</th>
+						<th class="text-center">Acción</th>
+						<th class="text-center">Acción</th>
 					</thead>
 					<tbody>
 						@foreach ($usuarios as $user)
-						<tr>
-							<td>{{$user->id}}</td>
+						<tr class="text-center">
+							<td class="text-center">{{$user->id}}</td>
 							<td>{{$user->nombre}}</td>
 							<td>{{$user->app}}</td>
 							<td>{{$user->apm}}</td>
@@ -50,10 +51,22 @@
 								@endif
 							</td>
 							<td>
-								@if($user -> genero == 'M')
+								@if($user -> genero == 'H')
 								Hombre
-								@elseif($user->genero == 'F')
+								@elseif($user->genero == 'M')
 								Mujer
+								@elseif($user->genero == 'NB')
+								No Binario
+								@elseif($user->genero == 'MT')
+								Mujer Transgénero
+								@elseif($user->genero == 'HT')
+								Hombre Transgénero
+								@elseif($user->genero == 'AG')
+								Agénero
+								@elseif($user->genero == 'NI')
+								Identidad de género no incluida
+								@elseif($user->genero == 'PE')
+								Prefiero no especificar
 								@endif
 							</td>
 							<td>{{$user->carrera !== null ? $user->carrera : 'Sin dato'}}</td>
@@ -141,6 +154,26 @@
 		});
 		@endif
 	});
+</script>
+<script>
+    $(document).ready(function() {
+        $('#userTable').DataTable({
+            language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ - _END_ de _TOTAL_ Entradas",
+                "infoEmpty": "Mostrando 0 para 0 de 0 Entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ Entradas",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+            },
+        }); 
+    });
 </script>
 @endsection
 

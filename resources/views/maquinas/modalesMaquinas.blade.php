@@ -13,19 +13,19 @@
                     <form action="{{ route('maquinas.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
-                            <label for="isla" class="col-sm-6 col-form-label">Isla a la que pertenece la maquina:</label>
+                            <label for="isla" class="col-sm-6 col-form-label"><strong style="color: red;">*</strong> Isla a la que pertenece la maquina:</label>
                             <div class="col-sm-6">
                                 <input type="number" class="form-control" id="isla" name="isla" class="isla">
                             </div>
                             @error('isla')
-                                <small class="form-text text-danger px-4">{{$message}}</small>
+                            <small class="form-text text-danger px-4">{{$message}}</small>
                             @enderror
                         </div>
                         <hr>
                         <fieldset class="form-group pt-2">
                             <div class="row">
-                                <legend class="col-form-label col-sm-6 pt-3 px-2">Estatus inicial de la maquina:</legend>
-                                <div class="col-sm-6">
+                                <legend class="col-form-label col-sm-6 pt-3 px-2"><strong style="color: red;">*</strong> Estatus inicial de la maquina:</legend>
+                                <div class="col-sm-6" id="divDetalleAdd">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="estatus" id="statusD" value="D" checked>
                                         <label class="form-check-label" for="statusD">
@@ -40,11 +40,14 @@
                                     </div>
                                 </div>
                                 @error('estatus')
-                                   <small class="form-text text-danger">{{$message}}</small>
+                                <small class="form-text text-danger">{{$message}}</small>
                                 @enderror
                             </div>
                         </fieldset>
                         <p>El estatus puede ser cambiado posteriormente en el botón de <strong>editar</strong> o si la maquina es rentada (y su estado inicial es disponible).</p>
+                        <div class="row" id="formAdd_mantenimiento">
+
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="submit" class="btn btn-primary">Crear registro</button>
@@ -75,38 +78,41 @@
                 <div class="modal-body">
                     <div class="form-group row">
                         <div class="col-sm-6">
-                            <label for="isla" class="form-label">Isla a la que desea cambiar la maquina:</label>
+                            <label for="isla" class="form-label"><strong style="color: red;">*</strong> Isla a la que desea cambiar la maquina:</label>
                         </div>
                         <div class="col-sm-6">
                             <input type="number" class="form-control" id="isla" name="isla" value="{{ $maquina->isla }}">
                         </div>
                         @error('isla')
-                            <small class="form-text text-danger">{{$message}}</small>
+                        <small class="form-text text-danger">{{$message}}</small>
                         @enderror
                     </div>
                     <hr>
                     <fieldset class="form-group pt-2">
                         <div class="row">
-                            <legend class="col-form-label col-sm-6 pt-3 px-2">Estatus inicial de la maquina:</legend>
-                            <div class="col-sm-6">
+                            <legend class="col-form-label col-sm-6 pt-3 px-2"><strong style="color: red;">*</strong> Estatus inicial de la maquina:</legend>
+                            <div class="col-sm-6" id="divDetalleEdit">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="estatus" id="statusD" value="D" {{ $maquina->estatus == 'D' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="statusD">
+                                    <input class="form-check-input" type="radio" name="estatus" id="EditstatusD" value="D" {{ $maquina->estatus == 'D' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="EditstatusD">
                                         Disponible
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="estatus" id="statusM" value="M" {{ $maquina->estatus == 'M' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="statusM">
+                                    <input class="form-check-input" type="radio" name="estatus" id="EditstatusM" value="M" {{ $maquina->estatus == 'M' ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="EditstatusM">
                                         En mantenimiento
                                     </label>
                                 </div>
                             </div>
                             @error('estaus')
-                                   <small class="form-text text-danger">{{$message}}</small>
+                            <small class="form-text text-danger">{{$message}}</small>
                             @enderror
                         </div>
                     </fieldset>
+                    <div class="row" id="formEdit_mantenimiento">
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

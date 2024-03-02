@@ -13,16 +13,16 @@
                     <center>
                         <p>Estados de las maquinas</p>
                         <div class="form-check form-check-inline">
-                            <label class="form-check-label" style="color: green;"><i class="bi bi-pc-display" style="font-size: large;"></i> Disponible</label>
+                            <label style="color: green;"><i class="bi bi-pc-display" style="font-size: large;"></i> Disponible</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <label class="form-check-label" style="color: red;"><i class="bi bi-pc-display" style="font-size: large;"></i> Ocupado</label>
+                            <label style="color: red;"><i class="bi bi-pc-display" style="font-size: large;"></i> Ocupado</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <label class="form-check-label" style="color: gray;"><i class="bi bi-pc-display" style="font-size: large;"></i> En mantenimiento</label>
+                            <label style="color: gray;"><i class="bi bi-pc-display" style="font-size: large;"></i> En mantenimiento</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <label class="form-check-label" style="color: #17a2b8;"><i class="bi bi-pc-display" style="font-size: large;"></i> Maquina Seleccionada</label>
+                            <label style="color: #17a2b8;"><i class="bi bi-pc-display" style="font-size: large;"></i> Maquina Seleccionada</label>
                         </div>
                     </center>
                 </div>
@@ -69,20 +69,46 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="usuarios" style="font-size: medium; color:black;">Seleccione un estudiante</label>
-                                        <select class="form-control" id="usuarios" name="usuario_id">
-                                            <option value="">Seleccionar estudiante</option>
-                                            @foreach($usuarios as $usuario)
-                                            <option value="{{ $usuario->id }}" {{ $usuario->id == old('usuario_id') ? 'selected' : '' }}>{{ $usuario->matricula .' - '. $usuario->nombre .' '. $usuario->app .' '. $usuario->apm .' - '. $usuario->carrera }}</option>
-                                            @endforeach
+                                        <label for="carreras" style="font-size: medium; color:black;"> Carrera del estudiante:</label>
+                                        <select class="form-control" id="carreras" name="carreras">
+                                            <option value="">Seleccione...</option>
+                                            <option value="T.S.U Mantenimiento, Área industrial">T.S.U Mantenimiento, Área industrial.</option>
+                                            <option value="T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.">T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.</option>
+                                            <option value="T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.">T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.</option>
+                                            <option value="T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.">T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.</option>
+                                            <option value="T.S.U Procesos Industriales, Área Manufactura.">T.S.U Procesos Industriales, Área Manufactura.</option>
+                                            <option value="T.S.U Química, Área Tecnología Ambiental.">T.S.U Química, Área Tecnología Ambiental.</option>
+                                            <option value="T.S.U Paramédico.">T.S.U Paramédico.</option>
+                                            <option value="T.S.U Desarrollo de Negocios, Área Ventas.">T.S.U Desarrollo de Negocios, Área Ventas.</option>
+                                            <option value="T.S.U Desarrollo de Negocios, Área Mercadotecnica.">T.S.U Desarrollo de Negocios, Área Mercadotecnica.</option>
+                                            <option value="ING. Mantenimiento Industrial.">ING. Mantenimiento Industrial.</option>
+                                            <option value="ING. Mecatrónica">ING. Mecatrónica.</option>
+                                            <option value="ING. Desarrollo y Gestión de Software.">ING. Desarrollo y Gestión de Software.</option>
+                                            <option value="ING. Redes Inteligentes y Ciberseguridad">ING. Redes Inteligentes y Ciberseguridad.</option>
+                                            <option value="ING. Sistemas Productivos.">ING. Sistemas Productivos.</option>
+                                            <option value="ING. Tecnología Ambiental.">ING. Tecnología Ambiental.</option>
+                                            <option value="LIC. Protección Civil y Emergencias.">LIC. Protección Civil y Emergencias.</option>
+                                            <option value="LIC. Innovación de Negocios y Mercadotecnica.">LIC. Innovación de Negocios y Mercadotecnica.</option>
+                                            <option value="LIC. Enfermería">LIC. Enfermería</option>
                                         </select>
-                                        @error('usuario_id')
-                                        <br>
-                                        <span class="text-danger">{{$message}}</span>
-                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-12 pt-2">
+                                    <div class="form-group">
+                                        <label for="usuarios" style="font-size: medium; color:black;">Seleccione un estudiante</label>
+                                    </div>
+                                    <select id="usuariosMaquina" name="usuario_id">
+                                        <option value="">Seleccionar estudiante</option>
+                                        @foreach($usuarios as $usuario)
+                                        <option value="{{ $usuario->id }}" {{ $usuario->id == old('usuario_id') ? 'selected' : '' }}>{{ $usuario->matricula .' - '. $usuario->nombre .' '. $usuario->app .' '. $usuario->apm .' - '. $usuario->carrera }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('usuario_id')
+                                    <br>
+                                    <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="col-12 pt-3">
                                     <div class="form-group">
                                         <label for="maquina" style="font-size: medium; color:black;">Maquina a rentar</label>
                                         <fieldset disabled>
@@ -158,26 +184,26 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="libros_id">Seleccione el libro a prestar:</label>
-                            <select class="form-control" id="libros_id" name="libros_id">
-                                <option value="">Seleccione un libro</option>
-                                @foreach($librosDisponibles as $libro)
-                                    <option value="{{ $libro->id }}">{{ $libro->titulo }} - {{ $libro->genero }} - {{ $libro->disponibilidad ? 'Disponible' : 'No disponible' }}</option>
-                                @endforeach
-                            </select>
                         </div>
+                        <select id="libros_id" name="libros_id">
+                            <option value="">Seleccione un libro</option>
+                            @foreach($librosDisponibles as $libro)
+                            <option value="{{ $libro->id }}">{{ $libro->titulo }} - {{ $libro->genero }} - {{ $libro->disponibilidad ? 'Disponible' : 'No disponible' }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 pt-3">
                         <div class="form-group">
                             <label for="usuario_id">Seleccione al estudiante:</label>
-                            <select class="form-control" id="usuario_id" name="usuario_id">
-                                <option value="">Seleccione un usuario</option>
-                                @foreach($usuarios as $usuario)
-                                    <option value="{{ $usuario->id }}">{{ $usuario->matricula }} - {{ $usuario->nombre }} - {{ $usuario->carrera }}</option>
-                                @endforeach
-                            </select>
                         </div>
+                        <select id="usuario_id" name="usuario_id">
+                            <option value="">Seleccione un usuario</option>
+                            @foreach($usuarios as $usuario)
+                            <option value="{{ $usuario->id }}">{{ $usuario->matricula }} - {{ $usuario->nombre }} - {{ $usuario->carrera }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 pt-3">
                         <div class="form-group">
                             <label for="fecha_pres">Fecha de Prestamo:</label>
                             <input type="date" id="fecha_pres" name="fecha_pres" class="form-control">
@@ -210,9 +236,9 @@
 
 
 
-<!-- Devolución de Libros Modal START
+    <!-- Devolución de Libros Modal START
 este  es para devolver cualuier libro q qyuera tipo select (que llegue antes de lo esperado)-->
-{{--
+    {{--
 <div class="modal fade" id="modal-devolucion-libros" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -224,42 +250,42 @@ este  es para devolver cualuier libro q qyuera tipo select (que llegue antes de 
             </div>
             <form id="confirmForm" action="{{ route('renta-libros.destroy', ['renta_libro' => $prestamo->id]) }}" method="POST" enctype="multipart/form-data">
 
-                @csrf
-                @method('DELETE')
-                <div class="modal-body row">
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="libros_id">Libro a devolver:</label>
-                            <select class="form-control" id="libros_id" name="libros_id">
-                                <option value="">Seleccione un libro</option>
-                                @foreach($librosDevolver as $libro)
-                                    <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="fecha_devo">Fecha de devolución:</label>
-                            <input type="date" id="fecha_devo" name="fecha_devo" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="notas">Anotaciones sobre la devolución:</label>
-                            <textarea class="form-control" id="notas" name="notas" rows="5" placeholder="Ingrese cualquier anotación adicional sobre la devolución"></textarea>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Devolver</button>
-                </div>
-            </form>
-
+    @csrf
+    @method('DELETE')
+    <div class="modal-body row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="libros_id">Libro a devolver:</label>
+                <select class="form-control" id="libros_id" name="libros_id">
+                    <option value="">Seleccione un libro</option>
+                    @foreach($librosDevolver as $libro)
+                    <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="fecha_devo">Fecha de devolución:</label>
+                <input type="date" id="fecha_devo" name="fecha_devo" class="form-control">
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label for="notas">Anotaciones sobre la devolución:</label>
+                <textarea class="form-control" id="notas" name="notas" rows="5" placeholder="Ingrese cualquier anotación adicional sobre la devolución"></textarea>
+            </div>
+        </div>
+
     </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Devolver</button>
+    </div>
+    </form>
+
+</div>
+</div>
 </div> --}}
 
 <!-- Devolución de Libros Modal END -->
