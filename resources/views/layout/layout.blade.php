@@ -109,10 +109,12 @@ Coded by www.creative-tim.com
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-gear-fill"></i>
                                     <p>
-                                        <span class="d-lg-none d-md-block">Acciones</span>
+                                        <span class="d-lg-none d-md-block">Some Actions</span>
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="/logout">Cerrar Sesión</a>
                                 </div>
                             </li>
