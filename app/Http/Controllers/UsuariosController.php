@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuariosController extends Controller
 {
@@ -140,7 +141,7 @@ class UsuariosController extends Controller
             if ($user->rol_id == 1 || $user->rol_id == 2) { // Admin y auxiliar
                 // dd("Registro de tipo Auxiliar o admin", $user->rol_id);
                 $user->email = $request->input('email');
-                $user->password = bcrypt($request->input('password'));
+                $user->password = Hash::make($request->input('password'));
             } elseif ($user->rol_id == 3) { // Estudiante
                 // dd("Registro de tipo estudiante", $user->rol_id);
                 // $user->carrera = $request->input('carrera');

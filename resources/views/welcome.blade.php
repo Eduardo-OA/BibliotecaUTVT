@@ -224,7 +224,7 @@
 
     // Titulo de la paginá
     var titulo = document.querySelector('#titulo');
-    titulo.innerHTML = 'Inicio';
+    titulo.innerHTML = "Inicio - {{ auth()->user()->nombre .''. auth()->user()->app .' '. auth()->user()->apm }}";
 </script>
 
 <script>
