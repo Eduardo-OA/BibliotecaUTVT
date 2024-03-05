@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Maquinas;
+use App\Models\MantenimientoMaquina;
 
 class MaquinasController extends Controller
 {
@@ -11,7 +12,8 @@ class MaquinasController extends Controller
     {
         //
         $maquinas = Maquinas::all();
-        return view('maquinas.index', compact('maquinas'));
+        $mant = MantenimientoMaquina::all();
+        return view('maquinas.index', compact('maquinas', 'mant'));
     }
 
     public function store(Request $request)
@@ -31,10 +33,19 @@ class MaquinasController extends Controller
         $maquina = new Maquinas([
             'isla' => $request->input('isla'),
             'estatus' => $request->input('estatus', 'Disponible'),
-            'mdetalles' => $request->input('detalle_mantenimiento')
         ]);
 
         $maquina->save();
+
+        $nmaquinas = Maquinas::count();
+
+
+        $mdetalles = new MantenimientoMaquina([
+            'maquina_id' => $nmaquinas,
+            'detalle' => $request->input('detalle_mantenimiento')
+        ]);
+        
+        $mdetalles->save();
         return redirect()->route('maquinas.index')->with('success', 'Maquina añadida exitosamente');
     }
 
@@ -57,6 +68,17 @@ class MaquinasController extends Controller
         $maquina->isla = $request->input('isla');
         $maquina->estatus = $request->input('estatus');
         $maquina->save();
+
+       /* $estado = $request->input('estatus');
+
+        if ($estado == 'M'){
+            $mdetalles = new MantenimientoMaquina([
+                'maquina_id' => $maquina->id,
+                'detalle' => $request->input('detalle_mantenimiento')
+            ]);
+            $mdetalles->save();
+        } */
+
         return redirect()->route('maquinas.index')->with('success', 'Maquina actualizada exitosamente.');
     }
 

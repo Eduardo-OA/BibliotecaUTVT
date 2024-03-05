@@ -31,12 +31,15 @@
                             <td class="text-center">{{$maquina->id}}</td>
                             <td>Maquina {{$maquina->id}}</td>
                             <td class="text-center">{{$maquina->isla}}</td>
+                            @php
+                                $detalleUltimoMantenimiento = \App\Models\MantenimientoMaquina::where('maquina_id', $maquina->id)->latest('created_at')->value('detalle');
+                            @endphp
                             <td>
                                 @if( $maquina->estatus == 'D' )
                                 Disponible
                                 @elseif( $maquina->estatus == 'M' )
                                 Mantenimiento: <br>
-                                {{$maquina->mdetalles}}
+                                {{ $detalleUltimoMantenimiento }}
                                 @elseif( $maquina->estatus == 'O' )
                                 Ocupado
                                 @endif
