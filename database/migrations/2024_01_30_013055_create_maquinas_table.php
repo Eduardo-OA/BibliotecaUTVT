@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('maquinas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('estatus')->nullable();
+            $table->text('mdetalles')->nullable();
             $table->integer('isla');
             $table->timestamps();
         });

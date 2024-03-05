@@ -35,7 +35,8 @@
                                 @if( $maquina->estatus == 'D' )
                                 Disponible
                                 @elseif( $maquina->estatus == 'M' )
-                                Mantenimiento
+                                Mantenimiento: <br>
+                                {{$maquina->mdetalles}}
                                 @elseif( $maquina->estatus == 'O' )
                                 Ocupado
                                 @endif

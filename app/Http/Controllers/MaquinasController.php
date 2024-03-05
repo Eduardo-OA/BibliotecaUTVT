@@ -30,7 +30,8 @@ class MaquinasController extends Controller
 
         $maquina = new Maquinas([
             'isla' => $request->input('isla'),
-            'estatus' => $request->input('estatus', 'D')
+            'estatus' => $request->input('estatus', 'Disponible'),
+            'mdetalles' => $request->input('detalle_mantenimiento')
         ]);
 
         $maquina->save();
