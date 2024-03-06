@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Maquinas;
 
+
+
 class MaquinasController extends Controller
 {
     public function index()
@@ -67,5 +69,39 @@ class MaquinasController extends Controller
         return redirect()->route('maquinas.index')->with('success', 'Maquina eliminada exitosamente.');
     }
 
+    public function reportes()
+    {
+        //
+        $maquinas = Maquinas::all();
+            $semanal = \DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+            COUNT(*) AS total_rentas
+            FROM rentamaquinas
+            JOIN users ON rentamaquinas.usuario_id = users.id
+            WHERE users.rol_id = 3
+            AND WEEK(rentamaquinas.created_at) = WEEK(CURDATE()) -- Selecciona las rentas de la semana actual
+            GROUP BY dia_renta;');
+        $mensual =\DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+        COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        WHERE users.rol_id = 3
+        AND MONTH(rentamaquinas.created_at) = MONTH(CURDATE()) -- Selecciona las rentas del mes actual
+        GROUP BY dia_renta');
+        $cuatrimestral=\DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+        COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        WHERE users.rol_id = 3
+        AND rentamaquinas.created_at >= DATE_SUB(CURDATE(), INTERVAL 4 MONTH) -- Selecciona las rentas de los últimos 4 meses
+        GROUP BY dia_renta;');
+        $carreras=\DB::select('SELECT users.carrera, COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        GROUP BY users.carrera;');
+        return view('maquinas.reportes')
+            ->with(['semanal' => $semanal])
+            ->with(['mensual'=>$mensual])
+            ->with(['carreras'=>$carreras])
+            ->with(['cuatrimestral'=>$cuatrimestral]);
+    }
 }
-

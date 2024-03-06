@@ -128,4 +128,46 @@ class LibrosController extends Controller
             return redirect()->route('libros.index')->with('error', 'Libro no encontrado.');
         }
     }
+
+    public function reporteslibros()
+    {
+        //
+        $libros = Libros::all();
+        $semanal = \DB::select('SELECT DATE(prestamolibros.created_at) AS dia_renta,
+        COUNT(*) AS total_rentas
+        FROM prestamolibros
+        JOIN users ON prestamolibros.usuario_id = users.id
+        WHERE users.rol_id = 3
+        AND WEEK(prestamolibros.created_at) = WEEK(CURDATE()) -- Selecciona las rentas de la semana actual
+        GROUP BY dia_renta;');
+        $mensual =\DB::select(' SELECT DATE(prestamolibros.created_at) AS dia_renta,
+        COUNT(*) AS total_rentas
+        FROM prestamolibros
+        JOIN users ON prestamolibros.usuario_id = users.id
+        WHERE users.rol_id = 3
+        AND MONTH(prestamolibros.created_at) = MONTH(CURDATE()) -- Selecciona las rentas del mes actual
+        GROUP BY dia_renta');
+        $cuatrimestral=\DB::select('SELECT DATE(prestamolibros.created_at) AS dia_renta,
+       COUNT(*) AS total_rentas
+       FROM prestamolibros
+       JOIN users ON prestamolibros.usuario_id = users.id
+       WHERE users.rol_id = 3
+       AND prestamolibros.created_at >= DATE_SUB(CURDATE(), INTERVAL 4 MONTH) -- Selecciona las rentas de los últimos 4 meses
+       GROUP BY dia_renta;');
+        $carreras=\DB::select('SELECT users.carrera, COUNT(*) AS total_rentas
+        FROM prestamolibros
+        JOIN users ON prestamolibros.usuario_id = users.id
+        GROUP BY users.carrera;');
+        $solicitado=\DB::select('SELECT prestamolibros.libros_id, libros.titulo, COUNT(*) AS cantidad_solicitudes
+        FROM prestamolibros
+        JOIN libros ON prestamolibros.libros_id = libros.id
+        GROUP BY prestamolibros.libros_id, libros.titulo
+        ORDER BY cantidad_solicitudes DESC;');
+        return view('libros.reporteslibros')
+        ->with(['mensual' => $mensual])
+        ->with(['cuatrimestral' => $cuatrimestral])
+        ->with(['carreras' => $carreras])
+        ->with(['solicitado' => $solicitado])
+        ->with(['semanal' => $semanal]);
+    }
 }
