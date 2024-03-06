@@ -62,11 +62,16 @@ Route::middleware('auth')->group(function () {
     Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
     Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store');
     Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy');
+    Route::name('reporteslibros')->get('reporteslibros',[LibrosController::class, 'reporteslibros']);
+
 
     //  Resource Maquinas
     Route::resource('maquinas', MaquinasController::class);
     Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
     Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
+    Route::name('reportes')->get('reportes',[MaquinasController::class, 'reportes']);
+
+
 
     //  Renta de maquinas
     Route::name('rentarmaquina')->post('rentarmaquina', [RentaMaquinasController::class, 'rentarmaquina']);
@@ -75,4 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('renta-libros', RentaLibroController::class);
     Route::get('/mostrar-aviso-devolucion', [RentaMaquinasController::class, 'mostrarAvisoDevolucion'])->name('mostrar.aviso.devolucion');
     
+
+
+
 });
