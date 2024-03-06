@@ -124,7 +124,8 @@
         });
     });
 </script>
-<script>
+
+<!--<script>
     $(document).ready(function() {
         const divRadioButtons = document.querySelector('#divDetalleAdd');
         const divRadioButtonsEdit = document.querySelector('#divDetalleEdit');
@@ -182,7 +183,7 @@
         }
 
     });
-</script>
+</script>-->
 @endsection
 
 @section('modals')

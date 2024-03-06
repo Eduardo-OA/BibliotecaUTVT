@@ -38,14 +38,16 @@ class MaquinasController extends Controller
         $maquina->save();
 
         $nmaquinas = Maquinas::count();
+        $estado = $request->input('estatus');
 
-
-        $mdetalles = new MantenimientoMaquina([
-            'maquina_id' => $nmaquinas,
-            'detalle' => $request->input('detalle_mantenimiento')
-        ]);
+        if($estado == 'M'){
+            $mdetalles = new MantenimientoMaquina([
+                'maquina_id' => $nmaquinas,
+                'detalle' => $request->input('detalle_mantenimiento')
+            ]);
+            $mdetalles->save();
+        }
         
-        $mdetalles->save();
         return redirect()->route('maquinas.index')->with('success', 'Maquina añadida exitosamente');
     }
 
@@ -69,15 +71,16 @@ class MaquinasController extends Controller
         $maquina->estatus = $request->input('estatus');
         $maquina->save();
 
-       /* $estado = $request->input('estatus');
+        $estado = $request->input('estatus');
 
-        if ($estado == 'M'){
+        if($estado == 'M'){
             $mdetalles = new MantenimientoMaquina([
                 'maquina_id' => $maquina->id,
                 'detalle' => $request->input('detalle_mantenimiento')
             ]);
+            
             $mdetalles->save();
-        } */
+        }
 
         return redirect()->route('maquinas.index')->with('success', 'Maquina actualizada exitosamente.');
     }

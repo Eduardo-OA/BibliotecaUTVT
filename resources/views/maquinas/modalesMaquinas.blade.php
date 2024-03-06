@@ -44,6 +44,14 @@
                                 @enderror
                             </div>
                         </fieldset>
+
+                        <div id="detalleMantenimiento" class="col-12 DM" style="display: none;">
+                            <div class="form-group">
+                                <label for="detalle_mantenimiento">Detalle del mantenimiento:</label>
+                                <textarea class="form-control" id="detalle_mantenimiento" name="detalle_mantenimiento" rows="3" placeholder="Escriba una descripción acerca de la razón del mantenimiento"></textarea>
+                            </div>
+                        </div>
+
                         <p>El estatus puede ser cambiado posteriormente en el botón de <strong>editar</strong> o si la maquina es rentada (y su estado inicial es disponible).</p>
                         <div class="row" id="formAdd_mantenimiento">
 
@@ -52,6 +60,34 @@
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                             <button type="submit" class="btn btn-primary">Crear registro</button>
                         </div>
+
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                // Obtén el grupo de radio buttons por su nombre
+                                var radioGroup = document.getElementsByName('estatus');
+                        
+                                // Agrega un evento change a cada radio button en el grupo
+                                radioGroup.forEach(function (radio) {
+                                    radio.addEventListener('change', function () {
+                                        // Obtén el valor del radio button seleccionado
+                                        var selectedValue = document.querySelector('input[name="estatus"]:checked').value;
+                        
+                                        // Obtén el div con ID "detalleMantenimiento"
+                                        var detalleMantenimientoDiv = document.getElementById('detalleMantenimiento');
+                        
+                                        // Obtén el textarea dentro del div "detalleMantenimiento"
+                                        var detalleMantenimientoTextarea = detalleMantenimientoDiv.querySelector('textarea');
+                        
+                                        // Muestra u oculta el div según el valor del radio button
+                                        detalleMantenimientoDiv.style.display = (selectedValue === 'M') ? 'block' : 'none';
+                        
+                                        // Agrega o quita el atributo 'required' al textarea según la condición
+                                        detalleMantenimientoTextarea.required = (selectedValue === 'M');
+                                    });
+                                });
+                            });
+                        </script>
+                        
                     </form>
                 </div>
             </div>
@@ -93,13 +129,13 @@
                             <legend class="col-form-label col-sm-6 pt-3 px-2"><strong style="color: red;">*</strong> Estatus inicial de la maquina:</legend>
                             <div class="col-sm-6" id="divDetalleEdit">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="estatus" id="EditstatusD" value="D" {{ $maquina->estatus == 'D' ? 'checked' : '' }}>
+                                    <input class="form-check-input estatus" type="radio" name="estatus" id="EditstatusD" value="D" data-maquina-id="{{ $maquina->id }}">
                                     <label class="form-check-label" for="EditstatusD">
                                         Disponible
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="estatus" id="EditstatusM" value="M" {{ $maquina->estatus == 'M' ? 'checked' : '' }}>
+                                    <input class="form-check-input estatus" type="radio" name="estatus" id="EditstatusM" value="M" data-maquina-id="{{ $maquina->id }}">
                                     <label class="form-check-label" for="EditstatusM">
                                         En mantenimiento
                                     </label>
@@ -113,11 +149,51 @@
                     <div class="row" id="formEdit_mantenimiento">
 
                     </div>
+
+                    <div id="detalleMantenimiento_{{ $maquina->id }}" class="col-12 DM" style="display: none;">
+                        <div class="form-group">
+                            <label for="detalle_mantenimiento">Detalle del mantenimiento:</label>
+                            <textarea class="form-control" id="detalle_mantenimiento" name="detalle_mantenimiento" rows="3" placeholder="Escriba una descripción acerca de la razón del mantenimiento"></textarea>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-warning">Guardar cambios</button>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        // Obtén todos los elementos con clase "estatus" (todos los radio buttons)
+                        var radioButtons = document.querySelectorAll('.estatus');
+                
+                        // Itera sobre cada radio button
+                        radioButtons.forEach(function (radio) {
+                            // Agrega un evento change a cada radio button
+                            radio.addEventListener('change', function () {
+                                // Obtiene el valor del radio button seleccionado
+                                var selectedValue = this.value;
+                
+                                // Obtiene el ID único del div "detalleMantenimiento"
+                                var detalleMantenimientoId = 'detalleMantenimiento_' + this.dataset.maquinaId;
+                
+                                // Obtiene el div con el ID correspondiente
+                                var detalleMantenimientoDiv = document.getElementById(detalleMantenimientoId);
+                
+                                // Obtiene el textarea dentro del div "detalleMantenimiento"
+                                var detalleMantenimientoTextarea = detalleMantenimientoDiv.querySelector('textarea');
+                
+                                // Muestra u oculta el div según el valor del radio button
+                                detalleMantenimientoDiv.style.display = (selectedValue === 'M') ? 'block' : 'none';
+                
+                                // Agrega o quita el atributo 'required' al textarea según la condición
+                                detalleMantenimientoTextarea.required = (selectedValue === 'M');
+                            });
+                        });
+                    });
+                </script>
+
             </form>
         </div>
     </div>

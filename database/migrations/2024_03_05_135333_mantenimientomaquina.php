@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('MantenimientoMaquina', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('maquina_id')->constrained('maquinas');
-            $table->text('detalle');
+            $table->text('detalle')->nullable();
             $table->timestamps();
         });
     }
