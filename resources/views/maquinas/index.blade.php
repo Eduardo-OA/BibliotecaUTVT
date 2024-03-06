@@ -22,7 +22,7 @@
                         <th class="text-center">Id</th>
                         <th>Maquina</th>
                         <th class="text-center">Isla</th>
-                        <th>Status</th>
+                        <th>Estatus</th>
                         <th class="text-center">Acciones</th>
                     </thead>
                     <tbody>

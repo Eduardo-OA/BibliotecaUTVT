@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <p>El estatus puede ser cambiado posteriormente en el botón de <strong>editar</strong> o si la maquina es rentada (y su estado inicial es disponible).</p>
+                        <p>El estatus puede ser cambiado posteriormente en el botón de <strong>editar</strong> o si la maquina es prestada (y su estado inicial es disponible).</p>
                         <div class="row" id="formAdd_mantenimiento">
 
                         </div>
