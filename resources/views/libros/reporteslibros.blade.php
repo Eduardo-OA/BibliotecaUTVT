@@ -5,14 +5,14 @@
     <div class="card">
         <div class="card-header row">
             <div class="col">
-                <h4 class="card-title px-4"> Reportes</h4>
+                <h4 class="card-title px-4"> Gráficas | Reportes Libros</h4>
                 <p class="card-category px-4"> Reportes en el sistema de los libros.</p>
             </div>
             <div class="col p-4 d-flex justify-content-end">
                 <!-- Button añadir maquina modal -->
-                <button type="button" class="btn btn-info"><a href="/maquinas">
-                        Regresar
-                    </a></button>
+                <a class="btn btn-info" href="/libros">
+                    Regresar
+                </a>
 
             </div>
         </div>
@@ -62,354 +62,358 @@
                         <div id="my-cerrar">
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+@section('js')
+<script>
+    function mostrarContenido(id) {
+        // Ocultar todos los contenidos
 
+        document.getElementById('contenido1').style.display = 'none';
+        document.getElementById('contenido2').style.display = 'none';
+        document.getElementById('contenido3').style.display = 'none';
+        document.getElementById('contenido4').style.display = 'none';
+        document.getElementById('contenido5').style.display = 'none';
+        // Mostrar el contenido correspondiente al botón presionado
+        document.getElementById(id).style.display = 'block';
+    }
+</script>
 
-
-                    <script>
-                        function mostrarContenido(id) {
-                            // Ocultar todos los contenidos
-
-                            document.getElementById('contenido1').style.display = 'none';
-                            document.getElementById('contenido2').style.display = 'none';
-                            document.getElementById('contenido3').style.display = 'none';
-                            document.getElementById('contenido4').style.display = 'none';
-                            document.getElementById('contenido5').style.display = 'none';
-                            // Mostrar el contenido correspondiente al botón presionado
-                            document.getElementById(id).style.display = 'block';
-                        }
-                    </script>
-                    
 <!-- -------------------------------Prestamos semanales de computadoras----------------------------------------- -->
 <script>
-            const bgREColor = {
-                    id: 'bgRETColor',
-                    beforeDraw: (chart, options) => {
-                        const {
-                            ctx,
-                            width,
-                            height
-                        } = chart;
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(0, 0, width, height)
-                        ctx.restore();
-                    }
-                }
+    const bgREColor = {
+        id: 'bgRETColor',
+        beforeDraw: (chart, options) => {
+            const {
+                ctx,
+                width,
+                height
+            } = chart;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height)
+            ctx.restore();
+        }
+    }
     new Chart(document.getElementById("GraficoSemanal"), {
-                    type: 'bar',
-                    data: {
-                        labels: [
+        type: 'bar',
+        data: {
+            labels: [
 
-                            @foreach($semanal as $am)
-                                "{{ $am -> dia_renta }}",
+                @foreach($semanal as $am)
+                "{{ $am -> dia_renta }}",
 
-                                @endforeach
-                        ],
-                        
-                     
-                        datasets: [{
-                            label: "Registros de prestamos semanal",
-                            backgroundColor: [
-                                    @foreach($semanal as $am)
-                                    "#" + Math.floor(Math.random() * 16777215).toString(16),
-                                    @endforeach
-                            ],
-                            
-                            data: [
-                                @foreach($semanal as $am)
-                                "{{ $am -> total_rentas }}",
+                @endforeach
+            ],
 
-                                @endforeach
-                            ],
-                            tension: 0.1,
-                            fill: false
-                        
-                        }]
-                    },
-                    options: {
- 
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
-                            legend: {
-                                display: true
-                            },
-                            
-                    },
-                    plugins: [bgREColor],
-                    
-                });
 
+            datasets: [{
+                label: "Registros de prestamos semanal",
+                backgroundColor: [
+                    @foreach($semanal as $am)
+                    "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    @endforeach
+                ],
+
+                data: [
+                    @foreach($semanal as $am)
+                    "{{ $am -> total_rentas }}",
+
+                    @endforeach
+                ],
+                tension: 0.1,
+                fill: false
+
+            }]
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true
+            },
+
+        },
+        plugins: [bgREColor],
+
+    });
 </script>
 
 <!-- -------------------------------Prestamos mesual de computadoras----------------------------------------- -->
 <script>
-            const bgrEColor = {
-                    id: 'bgRETColor',
-                    beforeDraw: (chart, options) => {
-                        const {
-                            ctx,
-                            width,
-                            height
-                        } = chart;
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(0, 0, width, height)
-                        ctx.restore();
-                    }
-                }
+    const bgrEColor = {
+        id: 'bgRETColor',
+        beforeDraw: (chart, options) => {
+            const {
+                ctx,
+                width,
+                height
+            } = chart;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height)
+            ctx.restore();
+        }
+    }
     new Chart(document.getElementById("GraficoMensual"), {
-                    type: 'bar',
-                    data: {
-                        labels: [
+        type: 'bar',
+        data: {
+            labels: [
 
-                            @foreach($mensual as $am)
-                                "{{ $am -> dia_renta }}",
+                @foreach($mensual as $am)
+                "{{ $am -> dia_renta }}",
 
-                                @endforeach
-                        ],
-                        
-                     
-                        datasets: [{
-                            label: "Registros de prestamos mensual",
-                            backgroundColor: [
-                                    @foreach($mensual as $am)
-                                    "#" + Math.floor(Math.random() * 16777215).toString(16),
-                                    @endforeach
-                            ],
-                            
-                            data: [
-                                @foreach($mensual as $am)
-                                "{{ $am -> total_rentas }}",
+                @endforeach
+            ],
 
-                                @endforeach
-                            ],
-                            tension: 0.1,
-                            fill: false
-                        
-                        }]
-                    },
-                    options: {
- 
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
-                            legend: {
-                                display: true
-                            },
-                            
-                    },
-                    plugins: [bgrEColor],
-                    
-                });
 
+            datasets: [{
+                label: "Registros de prestamos mensual",
+                backgroundColor: [
+                    @foreach($mensual as $am)
+                    "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    @endforeach
+                ],
+
+                data: [
+                    @foreach($mensual as $am)
+                    "{{ $am -> total_rentas }}",
+
+                    @endforeach
+                ],
+                tension: 0.1,
+                fill: false
+
+            }]
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true
+            },
+
+        },
+        plugins: [bgrEColor],
+
+    });
 </script>
 
 <!-- -------------------------------Prestamos cuatrimestral de computadoras----------------------------------------- -->
 <script>
-            const bgRCColor = {
-                    id: 'bgRETColor',
-                    beforeDraw: (chart, options) => {
-                        const {
-                            ctx,
-                            width,
-                            height
-                        } = chart;
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(0, 0, width, height)
-                        ctx.restore();
-                    }
-                }
+    const bgRCColor = {
+        id: 'bgRETColor',
+        beforeDraw: (chart, options) => {
+            const {
+                ctx,
+                width,
+                height
+            } = chart;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height)
+            ctx.restore();
+        }
+    }
     new Chart(document.getElementById("GraficoCuatrimestral"), {
-                    type: 'bar',
-                    data: {
-                        labels: [
+        type: 'bar',
+        data: {
+            labels: [
 
-                            @foreach($cuatrimestral as $am)
-                                "{{ $am -> dia_renta }}",
+                @foreach($cuatrimestral as $am)
+                "{{ $am -> dia_renta }}",
 
-                                @endforeach
-                        ],
-                        
-                     
-                        datasets: [{
-                            label: "Registros de prestamos cuatrimestral",
-                            backgroundColor: [
-                                    @foreach($cuatrimestral as $am)
-                                    "#" + Math.floor(Math.random() * 16777215).toString(16),
-                                    @endforeach
-                            ],
-                            
-                            data: [
-                                @foreach($cuatrimestral as $am)
-                                "{{ $am -> total_rentas }}",
+                @endforeach
+            ],
 
-                                @endforeach
-                            ],
-                            tension: 0.1,
-                            fill: false
-                        
-                        }]
-                    },
-                    options: {
- 
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
-                            legend: {
-                                display: true
-                            },
-                            
-                    },
-                    plugins: [bgRCColor],
-                    
-                });
 
+            datasets: [{
+                label: "Registros de prestamos cuatrimestral",
+                backgroundColor: [
+                    @foreach($cuatrimestral as $am)
+                    "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    @endforeach
+                ],
+
+                data: [
+                    @foreach($cuatrimestral as $am)
+                    "{{ $am -> total_rentas }}",
+
+                    @endforeach
+                ],
+                tension: 0.1,
+                fill: false
+
+            }]
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true
+            },
+
+        },
+        plugins: [bgRCColor],
+
+    });
 </script>
-
-
 
 <!-- -------------------------------Carreras que mas rentan computadoras----------------------------------------- -->
 <script>
-            const bgRCAColor = {
-                    id: 'bgrCAColor',
-                    beforeDraw: (chart, options) => {
-                        const {
-                            ctx,
-                            width,
-                            height
-                        } = chart;
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(0, 0, width, height)
-                        ctx.restore();
-                    }
-                }
+    const bgRCAColor = {
+        id: 'bgrCAColor',
+        beforeDraw: (chart, options) => {
+            const {
+                ctx,
+                width,
+                height
+            } = chart;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height)
+            ctx.restore();
+        }
+    }
     new Chart(document.getElementById("GraficoCarrera"), {
-                    type: 'bar',
-                    data: {
-                        labels: [
+        type: 'bar',
+        data: {
+            labels: [
 
-                            @foreach($carreras as $am)
-                                "{{ $am -> carrera }}",
+                @foreach($carreras as $am)
+                "{{ $am -> carrera }}",
 
-                                @endforeach
-                        ],
-                        
-                     
-                        datasets: [{
-                            label: "Registros de carreras",
-                            backgroundColor: [
-                                    @foreach($carreras as $am)
-                                    "#" + Math.floor(Math.random() * 16777215).toString(16),
-                                    @endforeach
-                            ],
-                            
-                            data: [
-                                @foreach($carreras as $am)
-                                "{{ $am -> total_rentas }}",
+                @endforeach
+            ],
 
-                                @endforeach
-                            ],
-                            tension: 0.1,
-                            fill: false
-                        
-                        }]
-                    },
-                    options: {
- 
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
-                            legend: {
-                                display: true
-                            },
-                            
-                    },
-                    plugins: [bgRCAColor],
-                    
-                });
 
+            datasets: [{
+                label: "Registros de carreras",
+                backgroundColor: [
+                    @foreach($carreras as $am)
+                    "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    @endforeach
+                ],
+
+                data: [
+                    @foreach($carreras as $am)
+                    "{{ $am -> total_rentas }}",
+
+                    @endforeach
+                ],
+                tension: 0.1,
+                fill: false
+
+            }]
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true
+            },
+
+        },
+        plugins: [bgRCAColor],
+
+    });
 </script>
-
 
 <!-- -------------------------------Libro mas solicitado----------------------------------------- -->
 <script>
-            const bgrLMColor = {
-                    id: 'bgrCAColor',
-                    beforeDraw: (chart, options) => {
-                        const {
-                            ctx,
-                            width,
-                            height
-                        } = chart;
-                        ctx.fillStyle = 'white';
-                        ctx.fillRect(0, 0, width, height)
-                        ctx.restore();
-                    }
-                }
+    const bgrLMColor = {
+        id: 'bgrCAColor',
+        beforeDraw: (chart, options) => {
+            const {
+                ctx,
+                width,
+                height
+            } = chart;
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height)
+            ctx.restore();
+        }
+    }
     new Chart(document.getElementById("Graficolibromaspedido"), {
-                    type: 'bar',
-                    data: {
-                        labels: [
+        type: 'bar',
+        data: {
+            labels: [
 
-                            @foreach($solicitado as $am)
-                                "{{ $am -> titulo }}",
+                @foreach($solicitado as $am)
+                "{{ $am -> titulo }}",
 
-                                @endforeach
-                        ],
-                        
-                     
-                        datasets: [{
-                            label: "Registros de carreras",
-                            backgroundColor: [
-                                    @foreach($solicitado as $am)
-                                    "#" + Math.floor(Math.random() * 16777215).toString(16),
-                                    @endforeach
-                            ],
-                            
-                            data: [
-                                @foreach($solicitado as $am)
-                                "{{ $am -> cantidad_solicitudes }}",
+                @endforeach
+            ],
 
-                                @endforeach
-                            ],
-                            tension: 0.1,
-                            fill: false
-                        
-                        }]
-                    },
-                    options: {
- 
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        },
-                            legend: {
-                                display: true
-                            },
-                            
-                    },
-                    plugins: [bgrLMColor],
-                    
-                });
 
+            datasets: [{
+                label: "Registros de carreras",
+                backgroundColor: [
+                    @foreach($solicitado as $am)
+                    "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    @endforeach
+                ],
+
+                data: [
+                    @foreach($solicitado as $am)
+                    "{{ $am -> cantidad_solicitudes }}",
+
+                    @endforeach
+                ],
+                tension: 0.1,
+                fill: false
+
+            }]
+        },
+        options: {
+
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            legend: {
+                display: true
+            },
+
+        },
+        plugins: [bgrLMColor],
+
+    });
 </script>
+<script>
+    // Selector de la sección en el navbar
+    var navbar = document.querySelector('#libros');
+    navbar.className = "active";
 
+    // Titulo de la página
+    var titulo = document.querySelector('#titulo');
+    titulo.innerHTML = 'Libros | Gráficas';
+</script>
 @endsection

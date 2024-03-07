@@ -13,9 +13,9 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
                     Añadir
                 </button>
-                <button type="button" class="btn btn-info" ><a href="{{route('reportes')}}">
+                <a class="btn btn-success" href="{{route('reportes')}}">
                     Reportes
-                </a></button>
+                </a>
             </div>
         </div>
         <div class="card-body">
