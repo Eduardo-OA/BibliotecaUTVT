@@ -53,20 +53,20 @@ Route::middleware('auth')->group(function () {
 
     //  Resourse usuarios
     Route::resource('usuarios', UsuariosController::class);
-    Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-    Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
-    Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
+    Route::get('usuarios', [UsuariosController::class, 'index'])->name('usuarios.index')->middleware('role:1');
+    Route::POST('usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store')->middleware('role:1');
+    Route::delete('usuarios/delete/{id}', [UsuariosController::class, 'destroy'])->name('usuarios.destroy')->middleware('role:1');
 
     // Resourse Libros
-    Route::resource('libros', LibrosController::class);
-    Route::get('libros', [LibrosController::class, 'index'])->name('libros.index');
-    Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store');
-    Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy');
+    Route::resource('libros', LibrosController::class)->middleware('role:1');
+    Route::get('libros', [LibrosController::class, 'index'])->name('libros.index')->middleware('role:1');
+    Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store')->middleware('role:1');
+    Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy')->middleware('role:1');
 
     //  Resource Maquinas
-    Route::resource('maquinas', MaquinasController::class);
-    Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update');
-    Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy');
+    Route::resource('maquinas', MaquinasController::class)->middleware('role:1');
+    Route::put('/maquinas/{id}', 'MaquinasController@update')->name('maquinas.update')->middleware('role:1');
+    Route::DELETE('/maquinas/{id}', 'MaquinasController@destroy')->name('maquinas.destroy')->middleware('role:1');
 
     //  Renta de maquinas
     Route::name('rentarmaquina')->post('rentarmaquina', [RentaMaquinasController::class, 'rentarmaquina']);
