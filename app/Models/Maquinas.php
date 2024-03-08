@@ -10,7 +10,8 @@ class Maquinas extends Model
     use HasFactory;
     protected $fillable = [
         'estatus',
-        'isla'
+        'isla',
+        'alias'
     ];
 
     public function Rentamaquinas() {

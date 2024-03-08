@@ -22,6 +22,7 @@
                         <th class="text-center">Id</th>
                         <th>Maquina</th>
                         <th class="text-center">Isla</th>
+                        <th class="text-center">Alias</th>
                         <th>Status</th>
                         <th class="text-center">Acciones</th>
                     </thead>
@@ -31,6 +32,7 @@
                             <td class="text-center">{{$maquina->id}}</td>
                             <td>Maquina {{$maquina->id}}</td>
                             <td class="text-center">{{$maquina->isla}}</td>
+                            <td class="text-center">{{$maquina->alias}}</td>
                             @php
                                 $detalleUltimoMantenimiento = \App\Models\MantenimientoMaquina::where('maquina_id', $maquina->id)->latest('created_at')->value('detalle');
                             @endphp

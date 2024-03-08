@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('MantenimientoMaquina', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('maquina_id')->constrained('maquinas');
+            $table->unsignedBigInteger('maquina_id')->nullable(); // Cambia a 'nullable'
+            $table->foreign('maquina_id')->references('id')->on('maquinas')->onDelete('set null');
             $table->text('detalle')->nullable();
+            $table->integer('id_maquina_eliminada')->nullable(); // Campo que indica a que maquina pertenecia el registro
             $table->timestamps();
         });
     }

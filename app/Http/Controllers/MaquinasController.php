@@ -21,11 +21,13 @@ class MaquinasController extends Controller
         $rules = [
             'isla' => 'required',
             'estatus' => 'required',
+            'alias',
 
         ];
         $message = [
             'isla.required' => 'Asignación de la maquina a una isla es requerida',
             'estatus.required' => 'El estatus es requerido',
+            'alias.required' => 'Agregue un alias a la maquina',
         ];
 
         $this->validate($request, $rules, $message);
@@ -33,6 +35,7 @@ class MaquinasController extends Controller
         $maquina = new Maquinas([
             'isla' => $request->input('isla'),
             'estatus' => $request->input('estatus', 'Disponible'),
+            'alias' => $request->input('alias'),
         ]);
 
         $maquina->save();
@@ -87,10 +90,16 @@ class MaquinasController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $maquina = Maquinas::find($id);
+        // Obtener la máquina que se va a eliminar
+        $maquina = Maquinas::findOrFail($id);
+        MantenimientoMaquina::where('maquina_id', $id)->update(['id_maquina_eliminada' => $id]);
 
+        // Marcar la máquina como eliminada o cambiar su estado según tus necesidades
         $maquina->delete();
-        return redirect()->route('maquinas.index')->with('success', 'Maquina eliminada exitosamente.');
+        // Actualizar el estatus o hacer cualquier otro cambio necesario
+        // Actualizar los registros de MantenimientoMaquina relacionados
+
+        return redirect()->route('maquinas.index')->with('success', 'Máquina eliminada exitosamente.');
     }
 
 }
