@@ -66,6 +66,7 @@ Coded by www.creative-tim.com
                             <p>Inicio</p>
                         </a>
                     </li>
+                    @if (Auth::user()->rol_id != 2)
                     <li id="usuarios">
                         <a href="{{route('usuarios.index')}}">
                             <i class="bi bi-person-fill"></i>
@@ -83,9 +84,8 @@ Coded by www.creative-tim.com
                             <i class="bi bi-journal-bookmark-fill"></i>
                             <p>Libros</p>
                         </a>
-
                     </li>
-                   
+                    @endif
                 </ul>
             </div>
         </div>
