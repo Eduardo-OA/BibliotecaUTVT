@@ -29,10 +29,10 @@ Coded by www.creative-tim.com
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap version 4.4 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link href="{{ asset('css/paper-dashboard.css') }}" rel="stylesheet" />
     <!-- DataTable -->
-    <link href="https://cdn.datatables.net/v/bs4/dt-2.0.1/datatables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}">
     <!-- CSS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" integrity="sha512-OD9Gn6cAUQezuljS6411uRFr84pkrCtw23Hl5TYzmGyD0YcunJIPSBDzrV8EeCiFxGWWvtJOfVo5pOgB++Jsag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -51,7 +51,7 @@ Coded by www.creative-tim.com
           </div> -->
                     <!-- <p>CT</p> -->
                 </a>
-                <a href="#" class="simple-text logo-normal">
+                <a href="/" class="simple-text logo-normal">
                     BIBLIOTECA UTVT
                     <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
@@ -154,30 +154,18 @@ Coded by www.creative-tim.com
         </div>
     </div>
     <!--   Core JS Files   -->
-    <script src="{{ asset('./js/core/jquery.min.js') }}"></script>
-    <script src="{{ asset('./js/core/popper.min.js') }}"></script>
-    <script src="{{ asset('./js/core/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('./js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src="{{ asset('js/core/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('js/core/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <!--  Notifications Plugin    -->
+    <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
     <!-- Chart JS -->
     <script src="{{ asset('./js/plugins/chartjs.min.js') }}"></script>
-    <!--  Notifications Plugin    -->
-    <script src="{{ asset('./js/plugins/bootstrap-notify.js') }}"></script>
-    <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-    <!-- <script src="{{ asset('./js/plugins/paper-dashboard.min.js') }}" type="text/javascript"></script> -->
-    @yield('js')
-    {{-- AXXIOS --}}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- SweetAlert2 JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- DataTables Plugin -->
-    <script src="https://cdn.datatables.net/v/bs4/dt-2.0.1/datatables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" integrity="sha512-OD9Gn6cAUQezuljS6411uRFr84pkrCtw23Hl5TYzmGyD0YcunJIPSBDzrV8EeCiFxGWWvtJOfVo5pOgB++Jsag==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js" integrity="sha512-t2JWqzirxOmR9MZKu+BMz0TNHe55G5BZ/tfTmXMlxpUY8tsTo3QMD27QGoYKZKFAraIPDhFv56HLdN11ctmiTQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    @yield('modals')
+    <script src="{{ asset('./js/plugins/datatables.min.js') }}"></script>
+    @yield('js')
 </body>
+@yield('modals')
 
 </html>

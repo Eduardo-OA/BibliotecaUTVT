@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::get('libros', [LibrosController::class, 'index'])->name('libros.index')->middleware('role:1');
     Route::POST('libros/store', [LibrosController::class, 'store'])->name('libros.store')->middleware('role:1');
     Route::delete('libros/delete/{id}', [LibrosController::class, 'destroy'])->name('libros.destroy')->middleware('role:1');
+    Route::name('reporteslibros')->get('reporteslibros',[LibrosController::class, 'reporteslibros']);
 
     //  Resource Maquinas
     Route::resource('maquinas', MaquinasController::class)->middleware('role:1');

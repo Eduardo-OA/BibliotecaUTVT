@@ -30,6 +30,7 @@ class LibrosController extends Controller
         $rules = [
             'titulo' => 'required',
             'autores' => 'required',
+            'autor_principal' => 'required',
             'genero' => 'required',
             'editorial' => 'required',
             'idioma' => 'required',
@@ -42,6 +43,7 @@ class LibrosController extends Controller
 
         $message = [
             'titulo.required' => 'El titulo es requerido',
+            'autor_principal' => 'Se requiere del autor principal',
             'autores.required' => 'Los autores son requeridos',
             'genero.required' => 'El genero del libro es requerido',
             'editorial.required' => 'La editorial es requerida',
@@ -58,6 +60,7 @@ class LibrosController extends Controller
 
         $libro = new Libros();
         $libro->titulo = $request->input('titulo');
+        $libro->autor_principal = $request->input('autor_principal');
         $libro->autores = $request->input('autores');
         $libro->genero = $request->input('genero');
         $libro->editorial = $request->input('editorial');

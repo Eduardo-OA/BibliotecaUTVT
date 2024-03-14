@@ -1,8 +1,6 @@
 @extends('layout.layout')
 
 @section('content')
-{{-- @include('modalesInicio') --}}
-
 <div class="col-md-12">
     <div class="card">
         <div class="card-header row">

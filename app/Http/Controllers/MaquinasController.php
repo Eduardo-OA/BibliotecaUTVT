@@ -23,7 +23,7 @@ class MaquinasController extends Controller
         $rules = [
             'isla' => 'required',
             'estatus' => 'required',
-            'alias',
+            'alias' => 'required',
 
         ];
         $message = [

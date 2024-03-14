@@ -25,6 +25,7 @@
                         <th class="text-center">Id</th>
                         <th>Maquina</th>
                         <th class="text-center">Isla</th>
+                        <th class="text-center">Alias</th>
                         <th>Estatus</th>
                         <th class="text-center">Acciones</th>
                     </thead>
@@ -36,7 +37,7 @@
                             <td class="text-center">{{$maquina->isla}}</td>
                             <td class="text-center">{{$maquina->alias}}</td>
                             @php
-                                $detalleUltimoMantenimiento = \App\Models\MantenimientoMaquina::where('maquina_id', $maquina->id)->latest('created_at')->value('detalle');
+                            $detalleUltimoMantenimiento = \App\Models\MantenimientoMaquina::where('maquina_id', $maquina->id)->latest('created_at')->value('detalle');
                             @endphp
                             <td>
                                 @if( $maquina->estatus == 'D' )
@@ -81,36 +82,34 @@
 
 <!-- Alertas -->
 <script>
-    $(document).ready(function() {
-        @if(session('success'))
-        $.notify({
-            message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
-        }, {
-            type: 'success',
-            timer: 8000,
-            placement: {
-                from: 'top',
-                align: 'center'
-            }
-        });
-        @endif
-        @if(isset($errors) && count($errors) > 0)
-        $.notify({
-            message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
-        }, {
-            type: 'danger',
-            timer: 8000,
-            placement: {
-                from: 'top',
-                align: 'center'
-            }
-        });
-        @endif
+    @if(session('success'))
+    $.notify({
+        message: "<b> Proceso exitoso! </b> {{ session('success') }}!"
+    }, {
+        type: 'success',
+        timer: 8000,
+        placement: {
+            from: 'top',
+            align: 'center'
+        }
     });
+    @endif
+    @if(isset($errors) && count($errors) > 0)
+    $.notify({
+        message: "<b> Algo salió mal! </b> Asegurese que los datos en el formulario sean correctos"
+    }, {
+        type: 'danger',
+        timer: 8000,
+        placement: {
+            from: 'top',
+            align: 'center'
+        }
+    });
+    @endif
 </script>
 <script>
     $(document).ready(function() {
-        $('#maquinasTable').DataTable({
+        let table = new DataTable('#maquinasTable', {
             language: {
                 "decimal": "",
                 "emptyTable": "No hay información",
@@ -125,69 +124,10 @@
                 "search": "Buscar:",
                 "zeroRecords": "Sin resultados encontrados",
             },
+            responsive: true
         });
     });
 </script>
-
-<!--<script>
-    $(document).ready(function() {
-        const divRadioButtons = document.querySelector('#divDetalleAdd');
-        const divRadioButtonsEdit = document.querySelector('#divDetalleEdit');
-        const radioEstatusM = divRadioButtons.querySelector('#statusM');
-        const radioEstatusD = divRadioButtons.querySelector('#statusD');
-        const detalleMantenimientoDiv = document.querySelector('#formAdd_mantenimiento');
-        const editDetalleMantenimiento = document.querySelector('#formEdit_mantenimiento');
-
-        //  Cuando se selecciona el radioEstatusM aparece el campo de detalle del mantenimiento
-        radioEstatusM.addEventListener('focus', () => {
-            limpiarHTML(detalleMantenimientoDiv);
-            crearHTML(detalleMantenimientoDiv);
-        });
-
-        //  Cuando se selecciona el radioEstatusD desaparece el campo de detalle del mantenimiento
-        radioEstatusD.addEventListener('focus', () => {
-            limpiarHTML(detalleMantenimientoDiv);
-        });
-
-        divRadioButtonsEdit.addEventListener('click', e => {
-            if (e.target.id === 'EditstatusM') {
-                limpiarHTML(editDetalleMantenimiento);
-                crearHTML(editDetalleMantenimiento);
-            } else {
-                limpiarHTML(editDetalleMantenimiento);
-            }
-        });
-
-        //  Elimina el textarea del div donde se colocó
-        function limpiarHTML(div) {
-            while (div.firstChild) {
-                div.firstChild.remove();
-            }
-        }
-
-        //  Genera el textarea de los modales en maquinas
-        function crearHTML(divContenedor) {
-            const divCol12 = document.createElement('div');
-            divCol12.classList.add('col-12');
-            const divFormGroup = document.createElement('div');
-            divFormGroup.classList.add('form-group');
-            const label = document.createElement('label');
-            label.setAttribute('for', 'detalle_mantenimiento');
-            label.textContent = "Detalle del mantenimiento:";
-            const textArea = document.createElement('textarea');
-            textArea.classList.add('form-control');
-            textArea.setAttribute('id', 'detalle_mantenimiento');
-            textArea.setAttribute('name', 'detalle_mantenimiento');
-            textArea.setAttribute('rows', '3');
-            textArea.setAttribute('placeholder', 'Escriba una descripción acerca de la razón del mantenimiento');
-            divFormGroup.appendChild(label);
-            divFormGroup.appendChild(textArea);
-            divCol12.appendChild(divFormGroup);
-            divContenedor.appendChild(divCol12);
-        }
-
-    });
-</script>-->
 @endsection
 
 @section('modals')
