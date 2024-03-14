@@ -19,6 +19,14 @@ class RentaMaquinasController extends Controller
 {
     public function index()
     {
+/////////////////////SELECTS//////////////////
+   // Obtener la lista de carreras disponibles
+   $carreras = User::select('carrera')->distinct()->get();
+
+
+//////////////////END SELECTS/////////////////
+
+
         //  Logica para mostrar maquinas por isla
         $islas = \DB::SELECT('SELECT isla FROM maquinas GROUP BY isla');
         // $libros = Libros::all();
@@ -28,8 +36,8 @@ class RentaMaquinasController extends Controller
         $usuarios = User::all()->where('rol_id', 3);
 
         //  Consulta que se muestra unicamente en la tabla de 'Maquinas en renta'
-        $rentaTable = \DB::SELECT('SELECT usuario.nombre, usuario.app, usuario.apm, usuario.matricula, maquina.isla, maquina.id AS maquina_id, renta.id, renta.hora_inicio, renta.hora_final 
-        FROM rentamaquinas AS renta 
+        $rentaTable = \DB::SELECT('SELECT usuario.nombre, usuario.app, usuario.apm, usuario.matricula, maquina.isla, maquina.id AS maquina_id, renta.id, renta.hora_inicio, renta.hora_final
+        FROM rentamaquinas AS renta
             INNER JOIN users AS usuario ON renta.usuario_id = usuario.id
             INNER JOIN maquinas AS maquina ON renta.maquina_id = maquina.id
         WHERE DATE(renta.updated_at) = CURDATE() ORDER BY renta.hora_inicio DESC');
@@ -66,6 +74,7 @@ class RentaMaquinasController extends Controller
 
         return view('welcome', compact(
             'islas',
+            'carreras',
             'maquinas',
             'rentas',
             'usuarios',
