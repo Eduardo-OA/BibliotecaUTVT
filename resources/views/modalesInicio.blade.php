@@ -194,6 +194,32 @@
                     </div>
                     <div class="col-12 pt-3">
                         <div class="form-group">
+                            <label for="carreras"> Carrera del estudiante:</label>
+                            <select class="form-control" id="carreras" name="carreras">
+                                <option value="">Seleccione...</option>
+                                <option value="T.S.U Mantenimiento, Área industrial">T.S.U Mantenimiento, Área industrial.</option>
+                                <option value="T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.">T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.</option>
+                                <option value="T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.">T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.</option>
+                                <option value="T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.">T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.</option>
+                                <option value="T.S.U Procesos Industriales, Área Manufactura.">T.S.U Procesos Industriales, Área Manufactura.</option>
+                                <option value="T.S.U Química, Área Tecnología Ambiental.">T.S.U Química, Área Tecnología Ambiental.</option>
+                                <option value="T.S.U Paramédico.">T.S.U Paramédico.</option>
+                                <option value="T.S.U Desarrollo de Negocios, Área Ventas.">T.S.U Desarrollo de Negocios, Área Ventas.</option>
+                                <option value="T.S.U Desarrollo de Negocios, Área Mercadotecnica.">T.S.U Desarrollo de Negocios, Área Mercadotecnica.</option>
+                                <option value="ING. Mantenimiento Industrial.">ING. Mantenimiento Industrial.</option>
+                                <option value="ING. Mecatrónica">ING. Mecatrónica.</option>
+                                <option value="ING. Desarrollo y Gestión de Software.">ING. Desarrollo y Gestión de Software.</option>
+                                <option value="ING. Redes Inteligentes y Ciberseguridad">ING. Redes Inteligentes y Ciberseguridad.</option>
+                                <option value="ING. Sistemas Productivos.">ING. Sistemas Productivos.</option>
+                                <option value="ING. Tecnología Ambiental.">ING. Tecnología Ambiental.</option>
+                                <option value="LIC. Protección Civil y Emergencias.">LIC. Protección Civil y Emergencias.</option>
+                                <option value="LIC. Innovación de Negocios y Mercadotecnica.">LIC. Innovación de Negocios y Mercadotecnica.</option>
+                                <option value="LIC. Enfermería">LIC. Enfermería</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 pt-1">
+                        <div class="form-group">
                             <label for="usuario_id">Seleccione al estudiante:</label>
                         </div>
                         <select id="usuario_id" name="usuario_id">
