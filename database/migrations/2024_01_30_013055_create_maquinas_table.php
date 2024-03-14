@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('maquinas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->text('alias');
             $table->text('estatus');
             $table->integer('isla');
             $table->timestamps();

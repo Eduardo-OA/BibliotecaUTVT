@@ -15,9 +15,18 @@
                         <div class="form-group row">
                             <label for="isla" class="col-sm-6 col-form-label"><strong style="color: red;">*</strong> Isla a la que pertenece la maquina:</label>
                             <div class="col-sm-6">
-                                <input type="number" class="form-control" id="isla" name="isla" class="isla">
+                                <input type="number" class="form-control" id="isla" name="isla" class="isla" required>
                             </div>
                             @error('isla')
+                            <small class="form-text text-danger px-4">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group row">
+                            <label for="alias" class="col-sm-6 col-form-label"><strong style="color: red;">*</strong> Nuevo alias de la maquina:</label>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="alias" name="alias" class="alias" required>
+                            </div>
+                            @error('alias')
                             <small class="form-text text-danger px-4">{{$message}}</small>
                             @enderror
                         </div>
@@ -58,9 +67,19 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                            <button type="submit" class="btn btn-primary">Crear registro</button>
+                            <button type="submit" class="btn btn-primary" id="createBtn">Crear registro</button>
                         </div>
 
+                        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+                        <!-- Agrega el script para desactivar el botón después del primer clic -->
+                        <script>
+                            $(document).ready(function(){
+                                $('form').on('submit', function(){
+                                    $('#createBtn').prop('disabled', true);
+                                });
+                            });
+                        </script>
                         <script>
                             document.addEventListener('DOMContentLoaded', function () {
                                 // Obtén el grupo de radio buttons por su nombre
