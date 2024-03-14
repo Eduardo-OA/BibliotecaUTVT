@@ -1,9 +1,9 @@
-<!-- Renta de Maquinas modal START -->
+<!-- Préstamo de Maquinas modal START -->
 <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Rentar Maquina</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Préstamo Maquina</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -134,9 +134,9 @@
         </div>
     </div>
 </div>
-<!-- Renta de Maquinas modal END -->
+<!-- Préstamo de Maquinas modal END -->
 
-<!-- Finalizar Renta START -->
+<!-- Finalizar Préstamo START -->
 @foreach($rentas as $renta)
 <div class="modal fade" id="createModal{{ $renta->id }}" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -165,15 +165,15 @@
     </div>
 </div>
 @endforeach
-<!-- Finalizar Renta END -->
+<!-- Finalizar Préstamo END -->
 
-<!-- Renta de Libros Modal START -->
+<!-- Préstamo de Libros Modal START -->
 
 <div class="modal fade" id="modal-libros" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> Renta de Libros</h5>
+                <h5 class="modal-title" id="exampleModalLabel"> Préstamo de Libros</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -258,12 +258,12 @@
         </div>
     </div>
 
-    <!-- Renta de Libros Modal END -->
+    <!-- Préstamo de Libros Modal END -->
 
 
 
     <!-- Devolución de Libros Modal START
-este  es para devolver cualuier libro q qyuera tipo select (que llegue antes de lo esperado)-->
+este es para devolver cualquier libro que quiera tipo select (que llegue antes de lo esperado)-->
     {{--
 <div class="modal fade" id="modal-devolucion-libros" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
