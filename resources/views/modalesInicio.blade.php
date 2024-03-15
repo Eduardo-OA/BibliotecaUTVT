@@ -310,38 +310,58 @@ este es para devolver cualquier libro que quiera tipo select (que llegue antes d
 
     <!-- Devolución de Libros Modal END -->
 
+    <?php
+    $usuariosArray = [];
+    foreach ($usuarios as $usuario) {
+        $usuariosArray[] = $usuario->toArray();
+    }
+    ?>
 
     <script>
-        document.getElementById('carreras').addEventListener('change', function() {
-            var carreraSeleccionada = this.value;
-            var alumnosSelect = document.getElementById('alumnos');
-            alumnosSelect.innerHTML = '<option value="">Seleccionar estudiante</option>';
+    ////////////MAQUINAS (SELECT)///////////
+    document.getElementById('carreras').addEventListener('change', function() {
+        var carreraSeleccionada = this.value;
+        var alumnosSelect = document.getElementById('alumnos');
+        alumnosSelect.innerHTML = '<option value="">Seleccionar estudiante</option>';
 
-            // Filtrar los usuarios según la carrera seleccionada
-            var usuarios = <?php echo json_encode($usuarios); ?>;
+        // Obtener los usuarios desde PHP (asegúrate de que esté pasando correctamente desde PHP)
+        var usuarios = <?php echo json_encode($usuariosArray); ?>;
+
+        // console.log(typeof usuarios);
+
+        // Verificar si usuarios es un array antes de filtrar
+        if (Array.isArray(usuarios)) {
             var usuariosFiltrados = usuarios.filter(function(usuario) {
                 return usuario.carrera === carreraSeleccionada;
             });
+            // console.log(usuariosFiltrados);
 
-            // Agregar las opciones filtradas al select de alumnos
+            // Ahora puedes proceder con la lógica para agregar las opciones al select de alumnos
             usuariosFiltrados.forEach(function(usuario) {
                 var option = document.createElement('option');
-                option.value = usuario.id;
-                option.text = usuario.matricula + ' - ' + usuario.nombre + ' ' + usuario.app + ' ' + usuario
-                    .apm;
+                option.value = usuario.id; // Asigna el valor que necesites para cada usuario
+                option.text = usuario.nombre; // Asigna el texto que quieres mostrar para cada usuario
                 alumnosSelect.appendChild(option);
             });
-        });
-    </script>
+        } else {
+            console.error("La variable 'usuarios' no es un array.");
+        }
+    });
 
-    <script>
+////////////////////LIBROS SELECT///////////////////
         document.getElementById('carreras-libro').addEventListener('change', function() {
             var carreraSeleccionada = this.value;
             var alumnosSelect = document.getElementById('alumnos-libro');
             alumnosSelect.innerHTML = '<option value="">Seleccionar estudiante</option>';
 
+            <?php
+    $usuariosArray = [];
+    foreach ($usuarios as $usuario) {
+        $usuariosArray[] = $usuario->toArray();
+    }
+    ?>
             // Filtrar los usuarios según la carrera seleccionada
-            var usuarios = <?php echo json_encode($usuarios); ?>;
+            var usuarios = <?php echo json_encode($usuariosArray); ?>;
             var usuariosFiltrados = usuarios.filter(function(usuario) {
                 return usuario.carrera === carreraSeleccionada;
             });

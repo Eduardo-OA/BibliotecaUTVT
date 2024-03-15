@@ -58,12 +58,6 @@ class UsersSeeder extends Seeder
                 $x++; // Incrementamos $x aquí
             }
         }
-
-
-    }
-}
-
-
         // Insertar datos de prueba en la tabla 'users'
 
         //intyeccion
@@ -123,3 +117,5 @@ class UsersSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+    }
+}
