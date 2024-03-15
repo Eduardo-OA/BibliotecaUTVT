@@ -369,27 +369,6 @@
 
 <script src="{{ asset('js/plugins/tooltip.min.js') }}"></script>
 <script src="{{ asset('js/plugins/virtual-select.min.js') }}"></script>
-<script>
-    $(document).ready(function(){
-        VirtualSelect.init({ 
-            ele: '#usuariosMaquina',
-            search: true,
-            dropboxWidth: '500px',
-        });
-
-        VirtualSelect.init({
-            ele: '#libros_id',
-            search: true,
-            dropboxWidth: '500px',
-        });
-
-        VirtualSelect.init({
-            ele: '#usuario_id',
-            search: true,
-            dropboxWidth: '500px',
-        });
-    });
-</script>
 @endsection
 
 @section('modals')

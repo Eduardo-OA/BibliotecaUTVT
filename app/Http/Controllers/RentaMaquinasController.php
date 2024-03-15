@@ -21,7 +21,7 @@ class RentaMaquinasController extends Controller
     {
 /////////////////////SELECTS//////////////////
    // Obtener la lista de carreras disponibles
-   $carreras = User::select('carrera')->distinct()->get();
+   $carreras = User::select('carrera')->where('carrera', '!=', 'UTVT')->where('carrera', '!=', '')->distinct()->get();
 
 
 //////////////////END SELECTS/////////////////
@@ -30,7 +30,7 @@ class RentaMaquinasController extends Controller
         //  Logica para mostrar maquinas por isla
         $islas = \DB::SELECT('SELECT isla FROM maquinas GROUP BY isla');
         // $libros = Libros::all();
-        $usuarios = User::all();
+        // $usuarios = User::all();
         $maquinas = Maquinas::all();
         $rentas = RentaMaquinas::all();
         $usuarios = User::all()->where('rol_id', 3);
@@ -81,9 +81,6 @@ class RentaMaquinasController extends Controller
             'rentaTable',
             'cantidadMaquinasRenta',
             'cantidadLibrosRenta',
-            'islas',
-            'maquinas',
-            'usuarios',
             'librosDevolver',
             'librosDisponibles',
             'librosAlquilados',
@@ -97,17 +94,17 @@ class RentaMaquinasController extends Controller
 
         //  Validaciones
         $messages = [
-            'usuario_id.required' => 'Es necesario seleccionar un usuario.',
+            'alumnos.required' => 'Es necesario seleccionar un usuario.',
             'maquina_id.required' => 'Es necesario seleccionar una maquina.',
         ];
 
         $request->validate([
-            'usuario_id' => ['required', 'string'],
+            'alumnos' => ['required', 'string'],
             'maquina_id' => ['required', 'string'],
         ], $messages);
 
         RentaMaquinas::create(array(
-            'usuario_id' => $request->input('usuario_id'),
+            'usuario_id' => $request->input('alumnos'),
             'maquina_id' => $request->input('maquina_id'),
             'hora_inicio' => date("H:i"),
         ));
