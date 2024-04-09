@@ -35,6 +35,8 @@
         </div>
     </div>
 </div>
+<!-- Prestamo de libros comentada (descomentar en caso de ser solicitado) -->
+{{--
 <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="card card-stats">
         <div class="card-body ">
@@ -62,6 +64,7 @@
         </div>
     </div>
 </div>
+--}}
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
@@ -124,6 +127,8 @@
         </div>
     </div>
 </div>
+<!-- Prestamo de libros comentada (descomentar solo en caso de ser solicitado) -->
+<!-- 
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
@@ -212,7 +217,10 @@
             </div>
         </div>
     </div>
-</div>
+</div> 
+-->
+<!-- Prestamo de libro comentado END -->
+
 @endsection
 <!-- Contenido de la página END -->
 
@@ -317,37 +325,10 @@
         @endif
     });
 </script>
-<script>
-    function valoresRenta(isla, maquina) {
-        const inputMaquinaVista = document.querySelector('#maquinaVista');
-        const inputMaquinaForm = document.querySelector('#maquinaForm');
-        inputMaquinaForm.value = maquina;
-        inputMaquinaVista.value = `Isla ${isla} - Maquina ${maquina}`;
-    }
-</script>
-
-<script>
-    //  Mostrar hora final en tiempo real
-    function actualizarReloj() {
-        const relojElemento = document.getElementById('reloj');
-        const horaElemento = document.getElementById('hora');
-        const minutosElemento = document.getElementById('minutos');
-
-        if (horaElemento) {
-            const ahora = new Date();
-            const hora = ahora.getHours();
-            const minutos = ahora.getMinutes();
-
-            horaElemento.textContent = hora < 10 ? '0' + hora : hora;
-            minutosElemento.textContent = minutos < 10 ? '0' + minutos : minutos;
-        }
-
-        return
-    }
-    setInterval(actualizarReloj, 1000);
-</script>
 
 {{-- MARCAR LA DEVOLUCION A DB  --}}
+<!-- 
+    script sobre el prestamo de libros (descomentar en caso de ser solicitado)
 <script>
     function devolverPrestamo(prestamoId) {
         // Confirmar si el usuario realmente quiere devolver el préstamo
@@ -365,7 +346,8 @@
                 });
         }
     }
-</script>
+</script> 
+-->
 
 <script src="{{ asset('js/plugins/tooltip.min.js') }}"></script>
 <script src="{{ asset('js/plugins/virtual-select.min.js') }}"></script>

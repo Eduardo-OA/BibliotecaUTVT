@@ -79,12 +79,15 @@ Coded by www.creative-tim.com
                             <p>Maquinas</p>
                         </a>
                     </li>
-                    <li id="libros">
-                        <a href="/libros">
-                            <i class="bi bi-journal-bookmark-fill"></i>
-                            <p>Libros</p>
-                        </a>
-                    </li>
+                    <!-- Renta de libros comentada (descomentar solo en caso de haber sido solicitado) -->
+                    {{--
+                        <li id="libros">
+                            <a href="/libros">
+                                <i class="bi bi-journal-bookmark-fill"></i>
+                                <p>Libros</p>
+                            </a>
+                        </li>
+                    --}}
                     @endif
                 </ul>
             </div>
