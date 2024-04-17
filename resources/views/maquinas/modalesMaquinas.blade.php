@@ -13,20 +13,20 @@
                     <form action="{{ route('maquinas.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
-                            <label for="isla" class="col-sm-6 col-form-label"><strong style="color: red;">*</strong> Isla a la que pertenece la maquina:</label>
-                            <div class="col-sm-6">
-                                <input type="number" class="form-control" id="isla" name="isla" class="isla" required>
-                            </div>
-                            @error('isla')
-                            <small class="form-text text-danger px-4">{{$message}}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group row">
                             <label for="alias" class="col-sm-6 col-form-label"><strong style="color: red;">*</strong> Nuevo alias de la maquina:</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="alias" name="alias" class="alias" required>
                             </div>
                             @error('alias')
+                            <small class="form-text text-danger px-4">{{$message}}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group row">
+                            <label for="isla" class="col-sm-6 col-form-label"><strong style="color: red;">*</strong> Isla a la que pertenece la maquina:</label>
+                            <div class="col-sm-6">
+                                <input type="number" class="form-control" id="isla" name="isla" class="isla" required>
+                            </div>
+                            @error('isla')
                             <small class="form-text text-danger px-4">{{$message}}</small>
                             @enderror
                         </div>
