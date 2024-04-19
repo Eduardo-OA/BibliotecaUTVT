@@ -22,8 +22,28 @@
                         <button onclick="mostrarContenido('contenido1')" class="btn btn-success">Prestamo Semanal.</button>
                         <button onclick="mostrarContenido('contenido2')" class="btn btn-success">Prestamo Mensual.</button>
                         <button onclick="mostrarContenido('contenido3')" class="btn btn-success">Prestamo Cuatrimestral.</button>
-                        <button onclick="mostrarContenido('contenido4')" class="btn btn-success">Carrera que mas viene.</button>
+                        <button onclick="mostrarContenido('contenido4')" class="btn btn-success">Por carrera.</button>
                         <button onclick="location.reload()" class="btn btn-success">Cerrar</button>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12" id="">
+                            <h4>Prestamo por fecha</h4>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
+                                <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
+                                <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
+                                <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
+                                <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
+                            </div>
+                        </div>
                     </div>
 
                     <div id="contenido1" style="display:none;">
@@ -68,6 +88,17 @@
         // Mostrar el contenido correspondiente al botón presionado
         document.getElementById(id).style.display = 'block';
     }
+</script>
+
+<script>
+    // Obtener el elemento de entrada de fecha
+    var inputFecha = document.getElementById('fecha_final');
+
+    // Obtener la fecha actual y formatearla como YYYY-MM-DD
+    var fechaActual = new Date().toISOString().split('T')[0];
+
+    // Establecer la fecha actual como el valor máximo
+    inputFecha.setAttribute('max', fechaActual);
 </script>
 
 <!-- -------------------------------Prestamos semanales de computadoras----------------------------------------- -->
