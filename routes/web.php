@@ -7,6 +7,7 @@ use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\MaquinasController;
 use App\Http\Controllers\RentaMaquinasController;
 use App\Http\Controllers\RentaLibroController;
+use App\Models\Maquinas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,20 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Buscar en graficos
+Route::name('buscar')->post('buscar',[MaquinasController::class, 'buscar']);
+Route::name('buscarmensual')->post('buscarmensual',[MaquinasController::class, 'buscarmensual']);
+Route::name('buscaranual')->post('buscaranual',[MaquinasController::class, 'buscaranual']);
+Route::name('buscarcarrera')->post('buscarcarrera',[MaquinasController::class, 'buscarcarrera']);
+
+
+//Exportaciones de Excel 
+Route::controller(MaquinasController::class)->group(function(){
+    Route::get('Semanal', 'index');
+    Route::get('Semanal-export', 'export')->name('Semanal.export');
+ 
+});
+
 
 //  Primer Pagina
 Route::get('/', function () {
