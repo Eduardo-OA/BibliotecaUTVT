@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('apm', 50);
             $table->string('carrera')->nullable();
             $table->integer('matricula')->nullable();
+            $table->string('tipo_estudiante')->nullable();
             $table->string('direccion')->nullable();
             $table->string('genero');
             $table->string('email')->unique() -> nullable();

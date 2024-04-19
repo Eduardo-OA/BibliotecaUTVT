@@ -13,8 +13,11 @@ class UsuariosController extends Controller
     {
         // Lógica para mostrar todos los usuarios
         $usuarios = User::all();
+        $estudiantes = User::all()->where('rol_id', '3');
+        $docentes = User::all()->where('rol_id', '4');
+        $biblioteca = \DB::table('users')->where('rol_id', '1')->orWhere('rol_id', '2')->get();
         $roles = Roles::all();
-        return view('usuarios.index', compact('usuarios', 'roles'));
+        return view('usuarios.index', compact('usuarios', 'estudiantes', 'docentes', 'biblioteca', 'roles'));
     }
 
     public function create()
@@ -25,7 +28,6 @@ class UsuariosController extends Controller
 
     public function store(Request $request)
     {
-
         //  Validaciones
         $messages = [
             'nombre.required' => 'Es necesario colocar un nombre.',
@@ -67,6 +69,7 @@ class UsuariosController extends Controller
                 'genero' => ['required', 'string'],
                 'carrera' => ['required', 'string'],
                 'matricula' => ['required', 'string'],
+                'tipo_estudiante' => ['required', 'string'],
                 'direccion' => ['required', 'string'],
                 'celular' => ['required', 'string']
             ], $messages);
@@ -78,15 +81,32 @@ class UsuariosController extends Controller
                 'rol_id' => $request->input('rol_id'),
                 'carrera' => $request->input('carrera'),
                 'matricula' => $request->input('matricula'),
+                'tipo_estudiante' => $request->input('tipo_estudiante'),
                 'direccion' => $request->input('direccion'),
                 'celular' => $request->input('celular'),
                 'email' => $request->input('email'),
                 'pasword' => $request->input('pasword'),
             ]);
-    
+        }else if($request->input('rol_id') == 4){
+            $request->validate([
+                'nombre' => ['required', 'string', 'max:255'],
+                'app' => ['required', 'string', 'max:255'],
+                'apm' => ['required', 'string', 'max:255'],
+                'genero' => ['required', 'string'],
+                'direccion' => ['required', 'string'],
+                'email' => ['required', 'string', 'email', 'unique:' . User::class]
+            ], $messages);
+            $usuario = new User([
+                'nombre' => $request->input('nombre'),
+                'app' => $request->input('app'),
+                'apm' => $request->input('apm'),
+                'genero' => $request->input('genero'),
+                'rol_id' => $request->input('rol_id'),
+                'direccion' => $request->input('direccion'),
+                'email' => $request->input('email'),
+            ]);
         }
 
-        
         $usuario->save();
         return redirect()->route('usuarios.index')->with('success', 'Usuario creado exitosamente');
     }
@@ -101,6 +121,7 @@ class UsuariosController extends Controller
             'genero.required' => 'Es necesario seleccionar una opción.',
             'carrera.required' => 'Es necesario seleccionar una opción.',
             'matricula.required' => 'Es necesario colocar la matricula.',
+            'tipo_estudiante' => 'Es necesario colocar un tipo de estudiante.',
             'direccion.required' => 'Es necesario colocar una dirección.',
             'celular.required' => 'Es necesario proporcionar este contacto.',
             'email.required' => 'Es necesario colocar un correo.',
@@ -126,8 +147,18 @@ class UsuariosController extends Controller
                     'apm' => ['required', 'string', 'max:255'],
                     'genero' => ['required', 'string'],
                     'matricula' => ['required', 'string'],
+                    'tipo_estudiante' => ['required', 'string'],
                     'direccion' => ['required', 'string'],
                     'celular' => ['required', 'string'],
+                ], $messages);
+            } elseif ($user->rol_id == 4) {
+                $request->validate([
+                    'nombre' => ['required', 'string', 'max:255'],
+                    'app' => ['required', 'string', 'max:255'],
+                    'apm' => ['required', 'string', 'max:255'],
+                    'genero' => ['required', 'string'],
+                    'direccion' => ['required', 'string'],
+                    'email' => ['required', 'email'],
                 ], $messages);
             }
 
@@ -139,15 +170,16 @@ class UsuariosController extends Controller
 
             // Actualiza campos específicos según el rol
             if ($user->rol_id == 1 || $user->rol_id == 2) { // Admin y auxiliar
-                // dd("Registro de tipo Auxiliar o admin", $user->rol_id);
                 $user->email = $request->input('email');
                 $user->password = Hash::make($request->input('password'));
             } elseif ($user->rol_id == 3) { // Estudiante
-                // dd("Registro de tipo estudiante", $user->rol_id);
-                // $user->carrera = $request->input('carrera');
                 $user->matricula = $request->input('matricula');
+                $user->tipo_estudiante = $request->input('tipo_estudiante');
                 $user->direccion = $request->input('direccion');
                 $user->celular = $request->input('celular');
+            } elseif($user->rol_id == 4) {
+                $user->direccion = $request->input('direccion');
+                $user->email = $request->input('email');
             }
 
             $user->save();

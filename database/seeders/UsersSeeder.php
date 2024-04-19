@@ -17,25 +17,32 @@ class UsersSeeder extends Seeder
     {
         // Carreras disponibles
         $carreras = [
-            "T.S.U Mantenimiento, Área industrial",
-            "T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.",
-            "T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.",
-            "T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.",
-            "T.S.U Procesos Industriales, Área Manufactura.",
-            "T.S.U Química, Área Tecnología Ambiental.",
-            "T.S.U Paramédico.",
-            "T.S.U Desarrollo de Negocios, Área Ventas.",
-            "T.S.U Desarrollo de Negocios, Área Mercadotecnica.",
-            "ING. Mantenimiento Industrial.",
+            "T.S.U Mantenimiento, Área Industrial",
+            "T.S.U Mecatrónica, Área Sistermas Manufactura Flexible",
+            "T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma",
+            "T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales",
+            "T.S.U Procesos Industriales, Área Manufactura",
+            "T.S.U Química, Área Tecnología Ambiental",
+            "T.S.U Química, Área Biotecnología",
+            "T.S.U Procesos Alimentarios",
+            "T.S.U Paramédico",
+            "T.S.U Desarrollo de Negocios, Área Ventas",
+            "T.S.U Desarrollo de Negocios, Área Mercadotecnica",
+            //  Ingenierias
+            "ING. Mantenimiento Industrial",
             "ING. Mecatrónica",
-            "ING. Desarrollo y Gestión de Software.",
+            "ING. Desarrollo y Gestión de Software",
             "ING. Redes Inteligentes y Ciberseguridad",
-            "ING. Sistemas Productivos.",
-            "ING. Tecnología Ambiental.",
-            "LIC. Protección Civil y Emergencias.",
-            "LIC. Innovación de Negocios y Mercadotecnica.",
+            "ING. Sistemas Productivos",
+            "ING. Tecnología Ambiental",
+            "ING. Biotecnología",
+            "ING. Procesos Bioalimentarios",
+            "LIC. Protección Civil y Emergencias",
+            "LIC. Innovación de Negocios y Mercadotecnica",
             "LIC. Enfermería"
         ];
+
+        $tipo_estudiante = ['E', 'EG'];
 
         $x = 1; // Inicializamos $x aquí
         foreach ($carreras as $carrera) {
@@ -47,6 +54,7 @@ class UsersSeeder extends Seeder
                     'apm' => 'Apellido',
                     'carrera' => $carrera,
                     'matricula' => rand(100000, 999999), // Generar una matrícula aleatoria
+                    'tipo_estudiante' => $tipo_estudiante[rand(0,1)],
                     'direccion' => 'Dirección de prueba',
                     'genero' => 'M', // O ajusta según corresponda
                     'email' => 'usuario' . $x . '@biblioteca.com', // Cambiar el dominio si es necesario
@@ -84,36 +92,6 @@ class UsersSeeder extends Seeder
             'email' => 'auxiliar@biblioteca.com',
             'password' => Hash::make('auxiliar'),
             'rol_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        DB::table('users')->insert([
-            'nombre' => 'Miguel Emanuel',
-            'app' => 'Arriola',
-            'apm' => 'Ortega',
-            'carrera' => 'UTVT',
-            'matricula' => 123456,
-            'direccion' => 'Xonacatlan, Edo. de México',
-            'genero' => 'H',
-            'email' => 'mike@biblioteca.com',
-            'password' => Hash::make('mike'),
-            'rol_id' => 3,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        DB::table('users')->insert([
-            'nombre' => 'Jimena',
-            'app' => 'Diaz',
-            'apm' => 'de los Santos',
-            'carrera' => 'UTVT',
-            'matricula' => 123456,
-            'direccion' => 'Xonacatlan, Edo. de México',
-            'genero' => 'H',
-            'email' => 'jime@biblioteca.com',
-            'password' => Hash::make('jime'),
-            'rol_id' => 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
