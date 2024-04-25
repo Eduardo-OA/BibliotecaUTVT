@@ -19,7 +19,7 @@
             <div class="card-body">
                 <div class="container">
                     <div id="my-div">
-                        <button onclick="mostrarContenido('contenido1')" class="btn btn-success">Prestamos Computadoras.</button>
+                        <button onclick="mostrarContenido('contenido1')" class="btn btn-success">Prestamo Semanal.</button>
                         <button onclick="mostrarContenido('contenido2')" class="btn btn-success">Prestamo Mensual.</button>
                         <button onclick="mostrarContenido('contenido3')" class="btn btn-success">Prestamo Cuatrimestral.</button>
                         <button onclick="mostrarContenido('contenido4')" class="btn btn-success">Prestamos  Por carrera.</button>
@@ -69,6 +69,8 @@
                     <div id="contenido2" style="display:none;">
                        
                         <canvas id="GraficoMensual"></canvas>
+                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Mensual.export') }}">Excel</a></button>
+
                         <form action="{{route('buscarmensual')}}" method="POST">
   @csrf
                         <div class="row">
@@ -100,6 +102,7 @@
                     <div id="contenido3" style="display:none;">
                         
                         <canvas id="GraficoCuatrimestral"></canvas>
+                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Anual.export') }}">Excel</a></button>
 
                         <form action="{{route('buscaranual')}}" method="POST">
   @csrf
@@ -134,6 +137,8 @@
                     <div id="contenido4" style="display:none;">
                         <!-- Aquí va el contenido 1 -->
                         <canvas id="GraficoCarrera"></canvas>
+                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Carrera.export') }}">Excel</a></button>
+
                         <form action="{{route('buscarcarrera')}}" method="POST">
   @csrf
                         <div class="row">

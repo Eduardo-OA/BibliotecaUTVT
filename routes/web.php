@@ -35,6 +35,22 @@ Route::controller(MaquinasController::class)->group(function(){
     Route::get('Semanal-export', 'export')->name('Semanal.export');
  
 });
+Route::controller(MaquinasController::class)->group(function(){
+    Route::get('Mensual', 'index');
+    Route::get('Mensual-export', 'exportm')->name('Mensual.export');
+ 
+});
+Route::controller(MaquinasController::class)->group(function(){
+    Route::get('Anual', 'index');
+    Route::get('Anual-export', 'exporta')->name('Anual.export');
+ 
+});
+Route::controller(MaquinasController::class)->group(function(){
+    Route::get('Carrera', 'index');
+    Route::get('Carrera-export', 'exportc')->name('Carrera.export');
+ 
+});
+
 
 
 //  Primer Pagina

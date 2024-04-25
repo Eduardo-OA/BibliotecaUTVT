@@ -7,6 +7,9 @@ use App\Models\Maquinas;
 use App\Models\MantenimientoMaquina;
 use Illuminate\Support\Facades\DB;
 use App\Exports\SemanalExport;
+use App\Exports\MensualExport;
+use App\Exports\AnualExport;
+use App\Exports\CarreraExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -280,6 +283,18 @@ class MaquinasController extends Controller
 
     public function export() 
     {
-        return Excel::download(new SemanalExport, 'users.xlsx');
+        return Excel::download(new SemanalExport, 'Semanal.xlsx');
+    }
+    public function exportm() 
+    {
+        return Excel::download(new MensualExport, 'Mensual.xlsx');
+    }
+    public function exporta() 
+    {
+        return Excel::download(new AnualExport, 'Cuatrimestral.xlsx');
+    }
+    public function exportc() 
+    {
+        return Excel::download(new CarreraExport, 'Carreras.xlsx');
     }
 }
