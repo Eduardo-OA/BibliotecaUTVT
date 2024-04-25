@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Maquinas;
 use App\Models\MantenimientoMaquina;
+use Illuminate\Support\Facades\DB;
+use App\Exports\SemanalExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 
@@ -45,14 +48,14 @@ class MaquinasController extends Controller
         $nmaquinas = Maquinas::count();
         $estado = $request->input('estatus');
 
-        if($estado == 'M'){
+        if ($estado == 'M') {
             $mdetalles = new MantenimientoMaquina([
                 'maquina_id' => $nmaquinas,
                 'detalle' => $request->input('detalle_mantenimiento')
             ]);
             $mdetalles->save();
         }
-        
+
         return redirect()->route('maquinas.index')->with('success', 'Maquina añadida exitosamente');
     }
 
@@ -78,12 +81,12 @@ class MaquinasController extends Controller
 
         $estado = $request->input('estatus');
 
-        if($estado == 'M'){
+        if ($estado == 'M') {
             $mdetalles = new MantenimientoMaquina([
                 'maquina_id' => $maquina->id,
                 'detalle' => $request->input('detalle_mantenimiento')
             ]);
-            
+
             $mdetalles->save();
         }
 
@@ -108,35 +111,175 @@ class MaquinasController extends Controller
     {
         //
         $maquinas = Maquinas::all();
-            $semanal = \DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+        $semanal = \DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
             COUNT(*) AS total_rentas
             FROM rentamaquinas
             JOIN users ON rentamaquinas.usuario_id = users.id
             WHERE users.rol_id = 3
             AND WEEK(rentamaquinas.created_at) = WEEK(CURDATE()) -- Selecciona las rentas de la semana actual
             GROUP BY dia_renta;');
-        $mensual =\DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+        $mensual = \DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
         COUNT(*) AS total_rentas
         FROM rentamaquinas
         JOIN users ON rentamaquinas.usuario_id = users.id
         WHERE users.rol_id = 3
         AND MONTH(rentamaquinas.created_at) = MONTH(CURDATE()) -- Selecciona las rentas del mes actual
         GROUP BY dia_renta');
-        $cuatrimestral=\DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+        $cuatrimestral = \DB::select('SELECT DATE(rentamaquinas.created_at) AS dia_renta,
         COUNT(*) AS total_rentas
         FROM rentamaquinas
         JOIN users ON rentamaquinas.usuario_id = users.id
         WHERE users.rol_id = 3
         AND rentamaquinas.created_at >= DATE_SUB(CURDATE(), INTERVAL 4 MONTH) -- Selecciona las rentas de los últimos 4 meses
         GROUP BY dia_renta;');
-        $carreras=\DB::select('SELECT users.carrera, COUNT(*) AS total_rentas
+        $carreras = \DB::select('SELECT users.carrera, COUNT(*) AS total_rentas
         FROM rentamaquinas
         JOIN users ON rentamaquinas.usuario_id = users.id
         GROUP BY users.carrera;');
         return view('maquinas.reportes')
             ->with(['semanal' => $semanal])
-            ->with(['mensual'=>$mensual])
-            ->with(['carreras'=>$carreras])
-            ->with(['cuatrimestral'=>$cuatrimestral]);
+            ->with(['mensual' => $mensual])
+            ->with(['carreras' => $carreras])
+            ->with(['cuatrimestral' => $cuatrimestral]);
+    }
+
+
+
+    public function buscar(Request $request)
+    {
+        //dd($request->all());
+
+
+        $parametro1 =  $request->input('fecha_inicial');
+        $parametro2 =  $request->input('fecha_final');
+
+        $maquinas = 'SELECT DATE(rentamaquinas.created_at) AS dia_renta,
+        COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        WHERE users.rol_id = 3 AND rentamaquinas.created_at >= ? AND rentamaquinas.created_at < ?
+        GROUP BY dia_renta;';
+
+        $resultados = DB::select($maquinas, [$parametro1, $parametro2]);
+
+        //dd($resultados);
+        // Procesar los resultados obtenidos
+        // foreach ($resultados as $resultado) {
+        //     $conteo = $resultado->conteo; // Acceder a la propiedad 'conteo'
+        //     $mes = $resultado->mes;
+        //      // Acceder a la propiedad 'mes'
+
+        //     echo " $mes,  $conteo <br>";
+        // }
+
+
+        return view("maquinas.buscarsemanal")
+            ->with(['resultados' => $resultados]);
+    }
+
+
+
+    public function buscarmensual(Request $request)
+    {
+        //dd($request->all());
+
+
+        $parametro1 =  $request->input('fecha_inicial');
+        $parametro2 =  $request->input('fecha_final');
+
+        $maquinas = 'SELECT DATE(rentamaquinas.created_at) AS mes_renta,
+        COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        WHERE users.rol_id = 3 AND rentamaquinas.created_at >= ? AND rentamaquinas.created_at < ?
+        GROUP BY mes_renta;';
+
+        $resultado = DB::select($maquinas, [$parametro1, $parametro2]);
+
+        //dd($resultados);
+        // Procesar los resultados obtenidos
+        // foreach ($resultados as $resultado) {
+        //     $conteo = $resultado->conteo; // Acceder a la propiedad 'conteo'
+        //     $mes = $resultado->mes;
+        //      // Acceder a la propiedad 'mes'
+
+        //     echo " $mes,  $conteo <br>";
+        // }
+
+
+        return view("maquinas.buscarmensual")
+            ->with(['resultado' => $resultado]);
+    }
+
+
+
+    public function buscaranual(Request $request)
+    {
+        //dd($request->all());
+
+
+        $parametro1 =  $request->input('fecha_inicial');
+        $parametro2 =  $request->input('fecha_final');
+
+        $maquinas = 'SELECT DATE(rentamaquinas.created_at) AS cuatri_renta,
+        COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        WHERE users.rol_id = 3 AND rentamaquinas.created_at >= ? AND rentamaquinas.created_at < ?
+        GROUP BY cuatri_renta;';
+
+        $resultado = DB::select($maquinas, [$parametro1, $parametro2]);
+
+        //dd($resultados);
+        // Procesar los resultados obtenidos
+        // foreach ($resultados as $resultado) {
+        //     $conteo = $resultado->conteo; // Acceder a la propiedad 'conteo'
+        //     $mes = $resultado->mes;
+        //      // Acceder a la propiedad 'mes'
+
+        //     echo " $mes,  $conteo <br>";
+        // }
+
+
+        return view("maquinas.buscaranual")
+            ->with(['resultado' => $resultado]);
+    }
+
+
+
+    public function buscarcarrera(Request $request)
+    {
+        //dd($request->all());
+
+
+        $parametro1 =  $request->input('fecha_inicial');
+        $parametro2 =  $request->input('fecha_final');
+
+        $maquinas =  'SELECT users.carrera as carrera, COUNT(*) AS total_rentas
+        FROM rentamaquinas
+        JOIN users ON rentamaquinas.usuario_id = users.id
+        WHERE rentamaquinas.created_at >= ? AND rentamaquinas.created_at < ?
+        GROUP BY users.carrera;';
+
+        $resultado = DB::select($maquinas, [$parametro1, $parametro2]);
+
+        //dd($resultados);
+        // Procesar los resultados obtenidos
+        // foreach ($resultados as $resultado) {
+        //     $conteo = $resultado->conteo; // Acceder a la propiedad 'conteo'
+        //     $mes = $resultado->mes;
+        //      // Acceder a la propiedad 'mes'
+
+        //     echo " $mes,  $conteo <br>";
+        // }
+
+
+        return view("maquinas.buscarcarrera")
+            ->with(['resultado' => $resultado]);
+    }
+
+    public function export() 
+    {
+        return Excel::download(new SemanalExport, 'users.xlsx');
     }
 }
