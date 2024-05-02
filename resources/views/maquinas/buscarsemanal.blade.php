@@ -23,26 +23,12 @@
                 <div class="container">
                     <div id="my-div">
                         <button onclick="mostrarContenido('contenido1')" class="btn btn-success">Prestamos Computadoras.</button>
-                        <button onclick="location.reload()" class="btn btn-success">Cerrar</button>
+                        <a href="{{ route('personal.export', ['parametro1' => $parametro1, 'parametro2' => $parametro2]) }}" class="btn btn-success">Excel</a>
                     </div>
-
-
-
                     <div id="contenido1" style="display:none;">
                         <!-- Aquí va el contenido 1 -->
                         <canvas id="GraficoSemanal"></canvas>
-                        <div class="col p-4 d-flex justify-content-end">
-                            <a class="btn btn-info" href="/reportes">
-                                Regresar
-                            </a>
-                        </div>
-                        <a href="{{ route('personal.export', ['parametro1' => $parametro1, 'parametro2' => $parametro2]) }}" class="btn btn-success"><i class="bi bi-file-excel"></i> Excel</a>
-
-
-                        <div id="my-cerrar">
-                        </div>
                     </div>
-
                 </div>
             </div>
         </div>

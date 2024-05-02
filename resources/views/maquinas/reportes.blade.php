@@ -18,80 +18,69 @@
         <div class="card-body">
             <div class="card-body">
                 <div class="container">
+                    <form action="{{route('buscar')}}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Buscar por fecha</h4>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
+                                    <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
+                                    <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
+                                    <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
+                                    <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Buscar</button>
+                    </form>
                     <div id="my-div">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Filtros</h4>
+                            </div>
+                        </div>
                         <button onclick="mostrarContenido('contenido1')" class="btn btn-success">Prestamo Semanal.</button>
                         <button onclick="mostrarContenido('contenido2')" class="btn btn-success">Prestamo Mensual.</button>
                         <button onclick="mostrarContenido('contenido3')" class="btn btn-success">Prestamo Cuatrimestral.</button>
-                        <button onclick="mostrarContenido('contenido4')" class="btn btn-success">Prestamos  Por carrera.</button>
+                        <button onclick="mostrarContenido('contenido4')" class="btn btn-success">Prestamos Por carrera.</button>
                         <button onclick="location.reload()" class="btn btn-success">Cerrar</button>
                     </div>
-
-
-                    <form action="{{route('buscar')}}" method="POST">
-  @csrf
-                        <div class="row">
-                        <div class="col-12" id="">
-                            <h4>Buscar por fecha</h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
-                                <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
-                                <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
-                                <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
-                                <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Buscar</button>
-                    </form>
-
                     <div id="contenido1" style="display:none;">
                         <!-- Aquí va el contenido 1 -->
                         <canvas id="GraficoSemanal"></canvas>
-                        
-                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Semanal.export') }}">Excel</a></button>
-                            <div id="my-cerrar">
+
+                        <a href="{{ route('Semanal.export') }}" class="btn btn-success">Excel</a>
+                        <div id="my-cerrar">
                         </div>
                     </div>
-
-
-
-
-
                     <div id="contenido2" style="display:none;">
-                       
+                        <!-- Aquí va el contenido 2 -->
                         <canvas id="GraficoMensual"></canvas>
-                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Mensual.export') }}">Excel</a></button>
+                        <a href="{{ route('Mensual.export') }}" class="btn btn-success">Excel</a>
                         <div id="my-cerrar">
                         </div>
                     </div>
-
-
-
-
                     <div id="contenido3" style="display:none;">
-                        
+                        <!-- Aquí va el contenido 3 -->
                         <canvas id="GraficoCuatrimestral"></canvas>
-                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Anual.export') }}">Excel</a></button>
+                        <a href="{{ route('Anual.export') }}" class="btn btn-success">Excel</a>
                         <div id="my-cerrar">
                         </div>
                     </div>
-
-
-
-
                     <div id="contenido4" style="display:none;">
-                        <!-- Aquí va el contenido 1 -->
+                        <!-- Aquí va el contenido 4 -->
                         <canvas id="GraficoCarrera"></canvas>
-                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Carrera.export') }}">Excel</a></button>
+                        <a href="{{ route('Carrera.export') }}" class="btn btn-success">Excel</a>
 
-                      
+
                         <div id="my-cerrar">
                         </div>
                     </div>
@@ -319,7 +308,7 @@
         plugins: [bgRCColor],
 
     });
-</script> 
+</script>
 
 
 <!-- -------------------------------Carreras que mas rentan computadoras----------------------------------------- -->
