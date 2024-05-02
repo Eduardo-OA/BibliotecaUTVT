@@ -27,18 +27,11 @@
                     </div>
 
 
-
-                    <div id="contenido1" style="display:none;">
-                        <!-- Aquí va el contenido 1 -->
-                        <canvas id="GraficoSemanal"></canvas>
-                        
-                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Semanal.export') }}">Excel</a></button>
-
-                        <form action="{{route('buscar')}}" method="POST">
+                    <form action="{{route('buscar')}}" method="POST">
   @csrf
                         <div class="row">
                         <div class="col-12" id="">
-                            <h4>Prestamo por fecha</h4>
+                            <h4>Buscar por fecha</h4>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
@@ -57,8 +50,13 @@
                     </div>
                     <button type="submit" class="btn btn-success">Buscar</button>
                     </form>
+
+                    <div id="contenido1" style="display:none;">
+                        <!-- Aquí va el contenido 1 -->
+                        <canvas id="GraficoSemanal"></canvas>
                         
-                        <div id="my-cerrar">
+                        <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Semanal.export') }}">Excel</a></button>
+                            <div id="my-cerrar">
                         </div>
                     </div>
 
@@ -70,68 +68,22 @@
                        
                         <canvas id="GraficoMensual"></canvas>
                         <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Mensual.export') }}">Excel</a></button>
-
-                        <form action="{{route('buscarmensual')}}" method="POST">
-  @csrf
-                        <div class="row">
-                        <div class="col-12" id="">
-                            <h4>Prestamo por fecha</h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
-                                <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
-                                <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
-                                <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
-                                <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Buscar</button>
-                    </form>
                         <div id="my-cerrar">
                         </div>
                     </div>
+
+
 
 
                     <div id="contenido3" style="display:none;">
                         
                         <canvas id="GraficoCuatrimestral"></canvas>
                         <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Anual.export') }}">Excel</a></button>
-
-                        <form action="{{route('buscaranual')}}" method="POST">
-  @csrf
-                        <div class="row">
-                        <div class="col-12" id="">
-                            <h4>Prestamo por fecha</h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
-                                <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
-                                <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
-                                <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
-                                <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Buscar</button>
-                    </form>
-
-
                         <div id="my-cerrar">
                         </div>
                     </div>
+
+
 
 
                     <div id="contenido4" style="display:none;">
@@ -139,29 +91,7 @@
                         <canvas id="GraficoCarrera"></canvas>
                         <button type="button" class="btn btn-success"><i class="bi bi-file-excel"></i> <a href="{{ route('Carrera.export') }}">Excel</a></button>
 
-                        <form action="{{route('buscarcarrera')}}" method="POST">
-  @csrf
-                        <div class="row">
-                        <div class="col-12" id="">
-                            <h4>Prestamo por fecha</h4>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
-                                <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
-                                <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
-                                <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
-                                <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-success">Buscar</button>
-                    </form>
+                      
                         <div id="my-cerrar">
                         </div>
                     </div>

@@ -1,6 +1,8 @@
 @extends('layout.layout')
 
 @section('content')
+
+
 <div class="col-md-12">
     <div class="card">
         <div class="card-header row mt-3">
@@ -17,6 +19,7 @@
         </div>
         <div class="card-body">
             <div class="card-body">
+    
                 <div class="container">
                     <div id="my-div">
                         <button onclick="mostrarContenido('contenido1')" class="btn btn-success">Prestamos Computadoras.</button>
@@ -33,29 +36,8 @@
                                 Regresar
                             </a>
                         </div>
-                        <form action="{{route('buscar')}}" method="POST">
-                            @csrf
-                            <div class="row">
-                                <div class="col-12" id="">
-                                    <h4>Prestamo por fecha</h4>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fecha_inicial"><strong style="color: red;">*</strong> Fecha inicial:</label>
-                                        <input type="date" max="2024-12-31" class="form-control" id="fecha_inicial" name="fecha_inicial" aria-describedby="dateStart">
-                                        <small id="dateStart" class="form-text text-muted">Ingrese la fecha de inicio de los reportes.</small>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="fecha_final"><strong style="color: red;">*</strong> Fecha final:</label>
-                                        <input type="date" class="form-control" id="fecha_final" name="fecha_final" aria-describedby="dateEnd">
-                                        <small id="dateEnd" class="form-text text-muted">Ingrese la fecha de termino de los reportes.</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-success">Buscar</button>
-                        </form>
+                        <a href="{{ route('personal.export', ['parametro1' => $parametro1, 'parametro2' => $parametro2]) }}" class="btn btn-success"><i class="bi bi-file-excel"></i> Excel</a>
+
 
                         <div id="my-cerrar">
                         </div>

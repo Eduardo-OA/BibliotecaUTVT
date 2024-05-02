@@ -24,9 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 //Buscar en graficos
 Route::name('buscar')->post('buscar',[MaquinasController::class, 'buscar']);
-Route::name('buscarmensual')->post('buscarmensual',[MaquinasController::class, 'buscarmensual']);
-Route::name('buscaranual')->post('buscaranual',[MaquinasController::class, 'buscaranual']);
-Route::name('buscarcarrera')->post('buscarcarrera',[MaquinasController::class, 'buscarcarrera']);
+// Route::name('buscarmensual')->post('buscarmensual',[MaquinasController::class, 'buscarmensual']);
+// Route::name('buscaranual')->post('buscaranual',[MaquinasController::class, 'buscaranual']);
+// Route::name('buscarcarrera')->post('buscarcarrera',[MaquinasController::class, 'buscarcarrera']);
 
 
 //Exportaciones de Excel 
@@ -35,6 +35,11 @@ Route::controller(MaquinasController::class)->group(function(){
     Route::get('Semanal-export', 'export')->name('Semanal.export');
  
 });
+Route::controller(MaquinasController::class)->group(function(){
+    Route::get('personal', 'index');
+    Route::get('personal-export/{parametro1}/{parametro2}', 'exportper')->name('personal.export');
+});
+
 Route::controller(MaquinasController::class)->group(function(){
     Route::get('Mensual', 'index');
     Route::get('Mensual-export', 'exportm')->name('Mensual.export');
