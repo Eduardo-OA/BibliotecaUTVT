@@ -92,28 +92,9 @@
 							<div class="form-group">
 								<label for="carrera"><strong style="color: red;">*</strong> Seleccione la carrera del estudiante:</label>
 								<select class="form-control" id="carrera" name="carrera">
-									<option value="T.S.U Mantenimiento, Área industrial">T.S.U Mantenimiento, Área industrial.</option>
-									<option value="T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.">T.S.U Mecatrónica, Área Sistermas Manufactura Flexible.</option>
-									<option value="T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.">T.S.U Tecnologías de la información, Área Desarrollo de Software Multiplataforma.</option>
-									<option value="T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.">T.S.U Tecnologías de la información, Área infraestructura de Redes Digitales.</option>
-									<option value="T.S.U Procesos Industriales, Área Manufactura.">T.S.U Procesos Industriales, Área Manufactura.</option>
-									<option value="T.S.U Química, Área Tecnología Ambiental.">T.S.U Química, Área Tecnología Ambiental.</option>
-									<option value="T.S.U Química, Área Biotecnología">T.S.U Química, Área Biotecnología.</option>
-									<option value="T.S.U Procesos Alimentarios">T.S.U Procesos Alimentarios.</option>
-									<option value="T.S.U Paramédico.">T.S.U Paramédico.</option>
-									<option value="T.S.U Desarrollo de Negocios, Área Ventas.">T.S.U Desarrollo de Negocios, Área Ventas.</option>
-									<option value="T.S.U Desarrollo de Negocios, Área Mercadotecnica.">T.S.U Desarrollo de Negocios, Área Mercadotecnica.</option>
-									<option value="ING. Mantenimiento Industrial.">ING. Mantenimiento Industrial.</option>
-									<option value="ING. Mecatrónica">ING. Mecatrónica.</option>
-									<option value="ING. Desarrollo y Gestión de Software.">ING. Desarrollo y Gestión de Software.</option>
-									<option value="ING. Redes Inteligentes y Ciberseguridad">ING. Redes Inteligentes y Ciberseguridad.</option>
-									<option value="ING. Sistemas Productivos.">ING. Sistemas Productivos.</option>
-									<option value="ING. Tecnología Ambiental.">ING. Tecnología Ambiental.</option>
-									<option value="ING. Biotecnología">ING. Biotecnología.</option>
-									<option value="ING. Procesos Bioalimentarios">ING. Procesos Bioalimentarios.</option>
-									<option value="LIC. Protección Civil y Emergencias.">LIC. Protección Civil y Emergencias.</option>
-									<option value="LIC. Innovación de Negocios y Mercadotecnica.">LIC. Innovación de Negocios y Mercadotecnica.</option>
-									<option value="LIC. Enfermería">LIC. Enfermería</option>
+									@foreach($carreras as $carrera)
+									<option value="{{ $carrera->nombre }}">{{ $carrera->nombre }}</option>
+									@endforeach
 								</select>
 								@error('carrera')
 								<small class="form-text text-danger">{{$message}}</small>
@@ -164,17 +145,18 @@
 								<p>Ingrese datos adicionales para registrar un nuevo docente.</p>
 							</div>
 							<div class="form-group">
-								<label for="direccion"><strong style="color: red;">*</strong> Dirección del docente:</label>
-								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{old('direccion')}}">
-								@error('direccion')
-								<small class="form-text text-danger">{{$message}}</small>
-								@enderror
-							</div>
-							<div class="form-group">
 								<label for="email"><strong style="color: red;">*</strong> Correo electrónico:</label>
 								<input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
 								<small id="emailHelp" class="form-text text-muted">Ingrese el correo del docente.</small>
 								@error('email')
+								<small class="form-text text-danger">{{$message}}</small>
+								@enderror
+							</div>
+							<div class="form-group">
+								<label for="direccion">Dirección del docente:</label>
+								<input type="text" class="form-control" id="direccion" name="direccion" placeholder="Calle, colonia, no. postal, etc..." value="{{old('direccion')}}">
+								<small id="emailHelp" class="form-text text-muted">Opcional.</small>
+								@error('direccion')
 								<small class="form-text text-danger">{{$message}}</small>
 								@enderror
 							</div>

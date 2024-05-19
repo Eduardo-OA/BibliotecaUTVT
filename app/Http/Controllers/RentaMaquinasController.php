@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carreras;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
@@ -21,7 +22,7 @@ class RentaMaquinasController extends Controller
     {
 /////////////////////SELECTS//////////////////
    // Obtener la lista de carreras disponibles
-   $carreras = User::select('carrera')->where('carrera', '!=', 'UTVT')->where('carrera', '!=', '')->distinct()->get();
+   $carreras = Carreras::all();
 
 
 //////////////////END SELECTS/////////////////

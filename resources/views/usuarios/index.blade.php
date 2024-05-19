@@ -32,6 +32,15 @@
 			</div>
 			<div class="tab-content" id="pills-tabContent">
 				<div class="tab-pane fade show active" id="pills-estudiante" role="tabpanel" aria-labelledby="pills-estudiante-tab">
+					<div class="row">
+						<div class="col">
+						</div>
+						<div class="col p-4 d-flex justify-content-end">
+							<a href="{{ route('carreras.index') }}" class="btn btn-primary">
+								Carreras
+							</a>
+						</div>
+					</div>
 					<div class="table-responsive">
 						<table id="userTable" class="table">
 							<thead class="text-center text-primary">

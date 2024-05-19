@@ -78,7 +78,7 @@
                                         <select class="form-control" id="carreras" name="carreras">
                                             <option value="">Seleccionar carrera...</option>
                                             @foreach ($carreras as $carrera)
-                                            <option value="{{ $carrera->carrera }}">{{ $carrera->carrera }}</option>
+                                            <option value="{{ $carrera->nombre }}">{{ $carrera->nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>

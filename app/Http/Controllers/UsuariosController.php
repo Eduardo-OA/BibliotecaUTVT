@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carreras;
 use App\Models\Roles;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class UsuariosController extends Controller
         $docentes = User::all()->where('rol_id', '4');
         $biblioteca = \DB::table('users')->where('rol_id', '1')->orWhere('rol_id', '2')->get();
         $roles = Roles::all();
-        return view('usuarios.index', compact('usuarios', 'estudiantes', 'docentes', 'biblioteca', 'roles'));
+        $carreras = Carreras::all();
+        return view('usuarios.index', compact('usuarios', 'estudiantes', 'docentes', 'biblioteca', 'roles', 'carreras'));
     }
 
     public function create()
@@ -93,7 +95,7 @@ class UsuariosController extends Controller
                 'app' => ['required', 'string', 'max:255'],
                 'apm' => ['required', 'string', 'max:255'],
                 'genero' => ['required', 'string'],
-                'direccion' => ['required', 'string'],
+                // 'direccion' => ['string'],
                 'email' => ['required', 'string', 'email', 'unique:' . User::class]
             ], $messages);
             $usuario = new User([

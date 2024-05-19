@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\CarrerasController;
 use App\Http\Controllers\LibrosController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\MaquinasController;
@@ -103,4 +104,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('renta-libros', RentaLibroController::class);
     Route::get('/mostrar-aviso-devolucion', [RentaMaquinasController::class, 'mostrarAvisoDevolucion'])->name('mostrar.aviso.devolucion');
 
+    //  Carreras
+    Route::resource('carreras', CarrerasController::class);
+    Route::POST('/carreras/store', [CarrerasController::class, 'create'])->name('carreras.create')->middleware('role:1');
+    Route::put('/carreras/{id}', 'CarrerasController@update')->name('carreras.update')->middleware('role:1');
+    Route::DELETE('/carreras/{id}', 'CarrerasController@destroy')->name('carreras.destroy')->middleware('role:1');
 });
