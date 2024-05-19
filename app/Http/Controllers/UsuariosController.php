@@ -18,7 +18,7 @@ class UsuariosController extends Controller
         $docentes = User::all()->where('rol_id', '4');
         $biblioteca = \DB::table('users')->where('rol_id', '1')->orWhere('rol_id', '2')->get();
         $roles = Roles::all();
-        $carreras = Carreras::all();
+        $carreras = Carreras::all()->where('activo', '=', 1);
         return view('usuarios.index', compact('usuarios', 'estudiantes', 'docentes', 'biblioteca', 'roles', 'carreras'));
     }
 
